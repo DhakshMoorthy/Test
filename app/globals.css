@@ -50,11 +50,16 @@ body {
   font-family: var(--font-dm-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 ::selection {
   background: var(--ocean-pale);
   color: var(--ocean);
+}
+
+.font-display {
+  font-family: var(--font-playfair), Georgia, serif;
 }
 
 .glass-card {
@@ -64,58 +69,101 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.swiper-pagination-bullet {
-  width: 10px !important;
-  height: 10px !important;
-  background: rgba(255, 255, 255, 0.5) !important;
-  opacity: 1 !important;
-  transition: all 0.3s ease;
-}
-
-.swiper-pagination-bullet-active {
-  background: #ffffff !important;
-  width: 28px !important;
-  border-radius: 5px !important;
-}
-
-.featured-swiper .swiper-pagination-bullet {
-  background: rgba(27, 107, 147, 0.3) !important;
-}
-
-.featured-swiper .swiper-pagination-bullet-active {
-  background: var(--ocean) !important;
-}
-
+/* Hero angular content panel */
 .hero-panel {
-  background: linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
-  clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+  background: linear-gradient(
+    145deg,
+    rgba(8, 8, 8, 0.96) 0%,
+    rgba(20, 20, 20, 0.92) 100%
+  );
+  border-radius: 24px;
 }
 
 @media (min-width: 640px) {
   .hero-panel {
-    clip-path: polygon(0 0, 92% 0, 78% 100%, 0 100%);
+    border-radius: 0;
+    clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
   }
 }
 
 .hero-topo {
-  opacity: 0.35;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cpath d='M0 200 Q100 150 200 200 T400 200 M0 250 Q100 200 200 250 T400 250 M0 150 Q100 100 200 150 T400 150 M0 300 Q100 250 200 300 T400 300' fill='none' stroke='%23ffffff' stroke-width='0.5' opacity='0.15'/%3E%3C/svg%3E");
-  background-size: 400px 400px;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cpath d='M0 200 Q100 150 200 200 T400 200 M0 250 Q100 200 200 250 T400 250 M0 150 Q100 100 200 150 T400 150 M0 300 Q100 250 200 300 T400 300 M0 100 Q100 50 200 100 T400 100' fill='none' stroke='%23ffffff' stroke-width='0.5' opacity='0.12'/%3E%3C/svg%3E");
+  background-size: 360px 360px;
+}
+
+.hero-nav-btn {
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.hero-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(1.05);
+}
+
+/* Hero swiper pagination — bottom right gold dots */
+.hero-swiper .swiper-pagination {
+  bottom: 9.5rem !important;
+  right: 1.5rem !important;
+  left: auto !important;
+  width: auto !important;
+  text-align: right;
+}
+
+@media (min-width: 640px) {
+  .hero-swiper .swiper-pagination {
+    bottom: 10.5rem !important;
+    right: 3rem !important;
+  }
 }
 
 .hero-swiper .swiper-pagination-bullet {
-  width: 10px !important;
-  height: 10px !important;
+  width: 9px !important;
+  height: 9px !important;
   background: rgba(255, 255, 255, 0.45) !important;
   opacity: 1 !important;
-  margin: 0 4px !important;
+  margin: 0 5px !important;
   transition: all 0.35s ease;
 }
 
 .hero-swiper .swiper-pagination-bullet-active {
   background: var(--gold) !important;
+  transform: scale(1.15);
+}
+
+/* General swiper pagination */
+.swiper-pagination-bullet {
   width: 10px !important;
-  border-radius: 50% !important;
+  height: 10px !important;
+  background: rgba(27, 107, 147, 0.25) !important;
+  opacity: 1 !important;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--ocean) !important;
+  width: 28px !important;
+  border-radius: 5px !important;
+}
+
+.premium-card {
+  border-radius: var(--card-radius);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.premium-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px -12px rgba(27, 107, 147, 0.12);
 }
 
 .sr-only {

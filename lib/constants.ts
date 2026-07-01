@@ -19,34 +19,52 @@ export const HERO_STATS = [
 
 export const HERO_SLIDES = [
   {
-    id: "retreats",
-    eyebrow: "Wellness Retreats",
-    title: "RETREAT. RELAX. RESULTS.",
+    id: "intro",
+    eyebrow: "Turks & Caicos",
+    title: "Fitness Beyond the Gym.",
     description:
-      "Immersive wellness retreats to reset your body, mind, and spirit in a beautiful island setting.",
-    cta: "Explore Retreats",
-    href: "#retreats",
-    image: `${CDN}/44a0dfb9-d79b-4a26-ac14-e59cf40d3bbb/AdobeStock_657869411.jpeg?format=2500w`,
+      "Personal training, luxury wellness retreats, and premium wellness products in Turks & Caicos.",
+    cta: "Book a Session",
+    ctaHref: "#contact",
+    ctaSecondary: "Explore Retreats",
+    ctaSecondaryHref: "#retreats",
+    image: "/assets/hero/gym.jpg",
   },
   {
     id: "gym",
     eyebrow: "Grace Bay Gym",
-    title: "TRAIN IN PARADISE.",
+    title: "Train at Wrightfully Fit",
     description:
-      "Personal training, group classes, functional fitness, strength training, and nutrition coaching at Saltmills Plaza.",
+      "Personal training, group classes, functional fitness, strength training, and nutrition coaching — all in our state-of-the-art Grace Bay gym at Saltmills Plaza.",
     cta: "Explore the Gym",
-    href: "#gym",
-    image: `${CDN}/573069e2-5e31-46aa-b4ad-adc11611dd44/_MG_6085-Edit.jpg?format=2500w`,
+    ctaHref: "#gym",
+    ctaSecondary: null,
+    ctaSecondaryHref: null,
+    image: "/assets/hero/gym.jpg",
+  },
+  {
+    id: "retreats",
+    eyebrow: "Wellness Retreats",
+    title: "RETREAT. RELAX. RESULTS.",
+    description:
+      "Fitness, yoga, recovery, beach workouts, healthy cuisine, island adventures, and luxury accommodations — immersive 4-day experiences in Turks & Caicos.",
+    cta: "Discover Retreats",
+    ctaHref: "#retreats",
+    ctaSecondary: null,
+    ctaSecondaryHref: null,
+    image: "/assets/hero/retreats.jpg",
   },
   {
     id: "shop",
-    eyebrow: "Wrightfully Fit Merch",
-    title: "GEAR UP. SHOW UP.",
+    eyebrow: "Premium Shop",
+    title: "Shop Wrightfully Fit",
     description:
-      "Branded athletic apparel, accessories, gym passes, and wellness products — crafted for island life.",
-    cta: "Shop Merch",
-    href: "#shop",
-    image: `${CDN}/1708352746252-EQNN3R97ERSSRI0XJWW3/classic-dad-hat-green-camo-front-65d364e11192c.jpg?format=1500w`,
+      "Premium apparel, accessories, supplements, and branded wellness products — crafted for those who demand excellence in every detail.",
+    cta: "Visit the Shop",
+    ctaHref: "#shop",
+    ctaSecondary: null,
+    ctaSecondaryHref: null,
+    image: "/assets/hero/shop.jpg",
   },
 ] as const;
 
@@ -54,22 +72,22 @@ export const MERCH_PRODUCTS = [
   {
     name: "Classic Dad Hat — Green Camo",
     price: "From $28",
-    image: `${CDN}/1708352746252-EQNN3R97ERSSRI0XJWW3/classic-dad-hat-green-camo-front-65d364e11192c.jpg?format=1000w`,
+    image: "/assets/merch/hat.jpg",
   },
   {
     name: "Wrightfully Fit Apparel",
     price: "From $35",
-    image: `${CDN}/1a5a41ad-91aa-49ed-87f9-4b5665840f14/image0.jpeg?format=1000w`,
+    image: "/assets/merch/apparel.jpeg",
   },
   {
     name: "Branded Athletic Wear",
     price: "From $40",
-    image: `${CDN}/0280f3e4-d5c3-4c20-956a-055a2b839aec/group2.jpg?format=1000w`,
+    image: "/assets/merch/group.jpg",
   },
   {
     name: "Wellness Essentials",
     price: "From $22",
-    image: `${CDN}/1710939558688-SVB1S64CUGEF7XK4SWKB/image-asset.jpeg?format=1000w`,
+    image: "/assets/merch/essentials.jpeg",
   },
 ] as const;
 
@@ -259,7 +277,8 @@ export const SITE_CONFIG = {
   tagline: "Fitness Beyond the Gym.",
   description:
     "Personal training, luxury wellness retreats, and premium wellness products in Turks & Caicos.",
-  logo: "/assets/logo.png",
+  logo: "/assets/logo.webp",
+  logoAlt: "/assets/logo.png",
   instagram: "https://www.instagram.com/wrightfullyfit_tci/",
   shopUrl: "https://www.wrightfullyfit.com/shop",
   email: "info@wrightfullyfit.com",

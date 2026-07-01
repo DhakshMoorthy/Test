@@ -1,56 +1,41 @@
 # Wrightfully Fit — Premium Website
 
-A luxury wellness website for [Wrightfully Fit](https://www.wrightfullyfit.com/), built with Next.js 15, TypeScript, Tailwind CSS, Framer Motion, and Swiper.js.
+Luxury wellness website for [Wrightfully Fit](https://www.wrightfullyfit.com/).
 
-## Tech Stack
-
-- **Next.js 15** (App Router)
-- **React 19** + **TypeScript**
-- **Tailwind CSS v4**
-- **Framer Motion** — scroll reveals, hover animations, counters
-- **Swiper.js** — featured carousel & transformations slider
-- **Lucide React** — UI icons
-
-## Getting Started
+## Quick start
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open **http://localhost:3000**
 
-## Build
+If port 3000 is busy:
+
+```bash
+pkill -f "next"
+rm -rf .next
+npm run dev
+```
+
+## Production
 
 ```bash
 npm run build
 npm start
 ```
 
-## Project Structure
+## Features
 
-```
-components/
-  Navbar.tsx
-  Hero.tsx
-  FeaturedCarousel.tsx
-  WhyChooseUs.tsx
-  Founder.tsx
-  Programs.tsx
-  Transformations.tsx
-  Testimonials.tsx
-  InstagramFeed.tsx
-  BlogPreview.tsx
-  Newsletter.tsx
-  ContactBanner.tsx
-  Footer.tsx
-  FloatingInstagramButton.tsx
-  ui/
-lib/
-  constants.ts
-  utils.ts
-```
+- Full-screen hero slider (4 slides) with brand banner design
+- Sticky transparent navbar → solid white on scroll
+- Official logo & merch from wrightfullyfit.com
+- All homepage sections with Framer Motion animations
+- Swiper carousels, glassmorphism, animated counters
+- Instagram edge tab (peeks from right, slides open)
+- Mobile-first, SEO-friendly, accessible
 
-## Design
+## Stack
 
-Premium luxury aesthetic inspired by Apple, Lululemon, Equinox, and Aman Resorts — white backgrounds, soft grey sections, ocean blue accents, emerald green highlights, 24px rounded cards, and generous whitespace.
+Next.js 15 · React 19 · TypeScript · Tailwind CSS v4 · Framer Motion · Swiper.js
