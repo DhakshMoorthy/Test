@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -63,6 +63,7 @@ function SlideContent({
 
 export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const paginationRef = useRef<HTMLDivElement>(null);
 
   return (
     <section
@@ -71,13 +72,28 @@ export default function Hero() {
       aria-label="Hero"
       aria-roledescription="carousel"
     >
+      <div
+        ref={paginationRef}
+        className="hero-pagination absolute bottom-28 right-6 z-20 flex gap-2 sm:bottom-32 sm:right-10 lg:bottom-36"
+        role="tablist"
+        aria-label="Hero slides"
+      />
+
       <Swiper
         modules={[Pagination, Autoplay, EffectFade]}
         effect="fade"
         fadeEffect={{ crossFade: true }}
         speed={900}
         autoplay={{ delay: 7000, disableOnInteraction: false }}
-        pagination={{ clickable: true, el: ".hero-pagination" }}
+        pagination={{ clickable: true, el: paginationRef.current }}
+        onBeforeInit={(swiper) => {
+          if (
+            swiper.params.pagination &&
+            typeof swiper.params.pagination !== "boolean"
+          ) {
+            swiper.params.pagination.el = paginationRef.current;
+          }
+        }}
         loop
         onSlideChange={(swiper: SwiperType) =>
           setActiveIndex(swiper.realIndex)
@@ -107,12 +123,6 @@ export default function Hero() {
           </SwiperSlide>
         ))}
       </Swiper>
-
-      <div
-        className="hero-pagination absolute bottom-28 right-6 z-20 flex gap-2 sm:bottom-32 sm:right-10 lg:bottom-36"
-        role="tablist"
-        aria-label="Hero slides"
-      />
 
       <div className="absolute bottom-0 left-0 right-0 z-20 mx-auto w-full max-w-7xl px-6 pb-6 lg:px-8">
         <motion.div
