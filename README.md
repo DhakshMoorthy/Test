@@ -6,17 +6,26 @@ Luxury wellness website for [Wrightfully Fit](https://www.wrightfullyfit.com/).
 
 ```bash
 npm install
-npm run dev
+npm run dev:clean
 ```
 
 Open **http://localhost:3000**
 
-If port 3000 is busy:
+### If you see "Internal Server Error"
+
+This is almost always a stale build cache. Run:
 
 ```bash
 pkill -f "next"
-rm -rf .next
-npm run dev
+npm run dev:clean
+```
+
+Or for production:
+
+```bash
+pkill -f "next"
+npm run build:clean
+npm start
 ```
 
 ## Production
