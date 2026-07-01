@@ -1,9 +1,9 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import FeaturedCarousel from "@/components/FeaturedCarousel";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Founder from "@/components/Founder";
 import Programs from "@/components/Programs";
+import ShopMerch from "@/components/ShopMerch";
 import Transformations from "@/components/Transformations";
 import Testimonials from "@/components/Testimonials";
 import InstagramFeed from "@/components/InstagramFeed";
@@ -19,10 +19,10 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <FeaturedCarousel />
         <WhyChooseUs />
         <Founder />
         <Programs />
+        <ShopMerch />
         <Transformations />
         <Testimonials />
         <InstagramFeed />

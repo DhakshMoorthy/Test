@@ -16,6 +16,8 @@
   --emerald: #0d9488;
   --emerald-light: #14b8a6;
   --emerald-pale: #ecfdf5;
+  --gold: #f5c518;
+  --gold-light: #ffd84d;
   --card-radius: 24px;
 }
 
@@ -31,6 +33,8 @@
   --color-emerald: var(--emerald);
   --color-emerald-light: var(--emerald-light);
   --color-emerald-pale: var(--emerald-pale);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
   --font-sans: var(--font-dm-sans);
   --font-display: var(--font-playfair);
   --radius-card: var(--card-radius);
@@ -80,6 +84,38 @@ body {
 
 .featured-swiper .swiper-pagination-bullet-active {
   background: var(--ocean) !important;
+}
+
+.hero-panel {
+  background: linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
+  clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+}
+
+@media (min-width: 640px) {
+  .hero-panel {
+    clip-path: polygon(0 0, 92% 0, 78% 100%, 0 100%);
+  }
+}
+
+.hero-topo {
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cpath d='M0 200 Q100 150 200 200 T400 200 M0 250 Q100 200 200 250 T400 250 M0 150 Q100 100 200 150 T400 150 M0 300 Q100 250 200 300 T400 300' fill='none' stroke='%23ffffff' stroke-width='0.5' opacity='0.15'/%3E%3C/svg%3E");
+  background-size: 400px 400px;
+}
+
+.hero-swiper .swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
+  background: rgba(255, 255, 255, 0.45) !important;
+  opacity: 1 !important;
+  margin: 0 4px !important;
+  transition: all 0.35s ease;
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+  background: var(--gold) !important;
+  width: 10px !important;
+  border-radius: 50% !important;
 }
 
 .sr-only {

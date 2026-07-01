@@ -1,3 +1,6 @@
+const CDN =
+  "https://images.squarespace-cdn.com/content/v1/65a693f6b63149536bd675b4";
+
 export const NAV_LINKS = [
   { label: "Home", href: "#home" },
   { label: "Gym", href: "#gym" },
@@ -14,39 +17,59 @@ export const HERO_STATS = [
   { label: "Expert Coaches", value: "10", suffix: "+" },
 ] as const;
 
-export const FEATURED_SLIDES = [
-  {
-    id: "gym",
-    title: "Train at Wrightfully Fit",
-    description:
-      "Personal training, group classes, functional fitness, strength training, and nutrition coaching — all in our state-of-the-art Grace Bay gym at Saltmills Plaza.",
-    cta: "Explore the Gym",
-    href: "#gym",
-    image:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80",
-    accent: "ocean",
-  },
+export const HERO_SLIDES = [
   {
     id: "retreats",
-    title: "Luxury Wellness Retreats",
+    eyebrow: "Wellness Retreats",
+    title: "RETREAT. RELAX. RESULTS.",
     description:
-      "Fitness, yoga, recovery, beach workouts, healthy cuisine, island adventures, and luxury accommodations — immersive 4-day experiences in Turks & Caicos.",
-    cta: "Discover Retreats",
+      "Immersive wellness retreats to reset your body, mind, and spirit in a beautiful island setting.",
+    cta: "Explore Retreats",
     href: "#retreats",
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=80",
-    accent: "emerald",
+    image: `${CDN}/44a0dfb9-d79b-4a26-ac14-e59cf40d3bbb/AdobeStock_657869411.jpeg?format=2500w`,
+  },
+  {
+    id: "gym",
+    eyebrow: "Grace Bay Gym",
+    title: "TRAIN IN PARADISE.",
+    description:
+      "Personal training, group classes, functional fitness, strength training, and nutrition coaching at Saltmills Plaza.",
+    cta: "Explore the Gym",
+    href: "#gym",
+    image: `${CDN}/573069e2-5e31-46aa-b4ad-adc11611dd44/_MG_6085-Edit.jpg?format=2500w`,
   },
   {
     id: "shop",
-    title: "Shop Wrightfully Fit",
+    eyebrow: "Wrightfully Fit Merch",
+    title: "GEAR UP. SHOW UP.",
     description:
-      "Premium apparel, accessories, supplements, and branded wellness products — crafted for those who demand excellence in every detail.",
-    cta: "Visit the Shop",
+      "Branded athletic apparel, accessories, gym passes, and wellness products — crafted for island life.",
+    cta: "Shop Merch",
     href: "#shop",
-    image:
-      "https://images.unsplash.com/photo-1556906781-9a412961c28c?w=1600&q=80",
-    accent: "ocean",
+    image: `${CDN}/1708352746252-EQNN3R97ERSSRI0XJWW3/classic-dad-hat-green-camo-front-65d364e11192c.jpg?format=1500w`,
+  },
+] as const;
+
+export const MERCH_PRODUCTS = [
+  {
+    name: "Classic Dad Hat — Green Camo",
+    price: "From $28",
+    image: `${CDN}/1708352746252-EQNN3R97ERSSRI0XJWW3/classic-dad-hat-green-camo-front-65d364e11192c.jpg?format=1000w`,
+  },
+  {
+    name: "Wrightfully Fit Apparel",
+    price: "From $35",
+    image: `${CDN}/1a5a41ad-91aa-49ed-87f9-4b5665840f14/image0.jpeg?format=1000w`,
+  },
+  {
+    name: "Branded Athletic Wear",
+    price: "From $40",
+    image: `${CDN}/0280f3e4-d5c3-4c20-956a-055a2b839aec/group2.jpg?format=1000w`,
+  },
+  {
+    name: "Wellness Essentials",
+    price: "From $22",
+    image: `${CDN}/1710939558688-SVB1S64CUGEF7XK4SWKB/image-asset.jpeg?format=1000w`,
   },
 ] as const;
 
@@ -82,32 +105,28 @@ export const PROGRAMS = [
     title: "Personal Training",
     description:
       "One-on-one sessions with expert coaches who build your perfect workout — strength, mobility, and results.",
-    image:
-      "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50e?w=800&q=80",
+    image: `${CDN}/81b3d0cb-d4e9-4af5-856d-83cdb435f9e6/_MG_6124-Edit.jpg?format=1000w`,
     tag: "Most Popular",
   },
   {
     title: "Group Fitness",
     description:
       "High-energy group classes that keep you motivated, accountable, and progressing alongside a supportive community.",
-    image:
-      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80",
+    image: `${CDN}/0280f3e4-d5c3-4c20-956a-055a2b839aec/group2.jpg?format=1000w`,
     tag: null,
   },
   {
     title: "Cardio & Conditioning",
     description:
       "Custom cardio programs designed by our trainers to boost endurance, burn fat, and elevate your performance.",
-    image:
-      "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&q=80",
+    image: `${CDN}/1705495320927-0AOWWC3W8VJN1VN9XQX1/image-asset.jpeg?format=1000w`,
     tag: null,
   },
   {
     title: "Wellness Retreats",
     description:
       "Four-day immersive experiences blending fitness, yoga, recovery, beach workouts, and island adventures.",
-    image:
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80",
+    image: `${CDN}/1724156555197-FZXT0RBYNRL4XVMYFGT9/unsplash-image-li4dxZ0KYRw.jpg?format=1000w`,
     tag: "Signature",
   },
 ] as const;
@@ -118,24 +137,21 @@ export const TRANSFORMATIONS = [
     result: "Lost 18 lbs in 12 weeks",
     quote:
       "Training at Wrightfully Fit completely changed my relationship with fitness. The coaches pushed me beyond what I thought possible.",
-    image:
-      "https://images.unsplash.com/photo-1594381898411-8465977f4b0f?w=600&q=80",
+    image: `${CDN}/d9d7c4cc-fb8d-4f0a-9f89-6786f93f2692/_MG_6076-Edit.jpg?format=800w`,
   },
   {
     name: "James T.",
     result: "Completed first wellness retreat",
     quote:
       "The retreat was life-changing. Beach workouts at sunrise, incredible food, and a team that genuinely cares about your wellbeing.",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+    image: `${CDN}/8618a1e0-62e1-4d02-af72-ad7177c399bc/_MG_6016-Edit.jpg?format=800w`,
   },
   {
     name: "Elena R.",
     result: "Gained strength & confidence",
     quote:
       "From my first session to now, I've never felt stronger. The Grace Bay gym is world-class and the community is incredible.",
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&q=80",
+    image: `${CDN}/8bf41b37-3f81-4a08-9f20-0643acdd3a02/_MG_5941-Edit.jpg?format=800w`,
   },
 ] as const;
 
@@ -166,39 +182,33 @@ export const TESTIMONIALS = [
 export const INSTAGRAM_POSTS = [
   {
     id: 1,
-    image:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80",
-    alt: "Morning workout at Grace Bay",
+    image: `${CDN}/573069e2-5e31-46aa-b4ad-adc11611dd44/_MG_6085-Edit.jpg?format=600w`,
+    alt: "Training at Wrightfully Fit gym",
   },
   {
     id: 2,
-    image:
-      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80",
-    alt: "Beach yoga session",
+    image: `${CDN}/1724156555197-FZXT0RBYNRL4XVMYFGT9/unsplash-image-li4dxZ0KYRw.jpg?format=600w`,
+    alt: "Beach wellness session",
   },
   {
     id: 3,
-    image:
-      "https://images.unsplash.com/photo-1576678927484-cc907957088c?w=600&q=80",
+    image: `${CDN}/0280f3e4-d5c3-4c20-956a-055a2b839aec/group2.jpg?format=600w`,
     alt: "Group fitness class",
   },
   {
     id: 4,
-    image:
-      "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80",
+    image: `${CDN}/44a0dfb9-d79b-4a26-ac14-e59cf40d3bbb/AdobeStock_657869411.jpeg?format=600w`,
     alt: "Wellness retreat experience",
   },
   {
     id: 5,
-    image:
-      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80",
+    image: `${CDN}/81b3d0cb-d4e9-4af5-856d-83cdb435f9e6/_MG_6124-Edit.jpg?format=600w`,
     alt: "Strength training session",
   },
   {
     id: 6,
-    image:
-      "https://images.unsplash.com/photo-1545205597-3d1d02acf9ed?w=600&q=80",
-    alt: "Recovery and relaxation",
+    image: `${CDN}/48beee9f-39b5-45f1-a213-995e16cf4541/PHOTO-2024-03-20-11-04-56.jpg?format=600w`,
+    alt: "Island fitness lifestyle",
   },
 ] as const;
 
@@ -208,8 +218,7 @@ export const BLOG_POSTS = [
     excerpt:
       "Discover why Grace Bay is the ultimate destination for fitness enthusiasts seeking sun, sand, and serious results.",
     date: "June 15, 2026",
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+    image: `${CDN}/1724156555197-FZXT0RBYNRL4XVMYFGT9/unsplash-image-li4dxZ0KYRw.jpg?format=800w`,
     category: "Travel & Fitness",
   },
   {
@@ -217,8 +226,7 @@ export const BLOG_POSTS = [
     excerpt:
       "A day-by-day look at what makes Wrightfully Fit retreats the most sought-after wellness experience in the Caribbean.",
     date: "June 8, 2026",
-    image:
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80",
+    image: `${CDN}/1706273908197-EZPSIPITKCIJ7WC203KA/image-asset.jpeg?format=800w`,
     category: "Wellness Retreats",
   },
   {
@@ -226,8 +234,7 @@ export const BLOG_POSTS = [
     excerpt:
       "Expert guidance on fueling your body for peak performance — whether you're training at the gym or on island time.",
     date: "May 28, 2026",
-    image:
-      "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80",
+    image: `${CDN}/1705495320927-0AOWWC3W8VJN1VN9XQX1/image-asset.jpeg?format=800w`,
     category: "Nutrition",
   },
 ] as const;
@@ -252,7 +259,9 @@ export const SITE_CONFIG = {
   tagline: "Fitness Beyond the Gym.",
   description:
     "Personal training, luxury wellness retreats, and premium wellness products in Turks & Caicos.",
-  instagram: "https://www.instagram.com/wrightfullyfit/",
+  logo: "/assets/logo.png",
+  instagram: "https://www.instagram.com/wrightfullyfit_tci/",
+  shopUrl: "https://www.wrightfullyfit.com/shop",
   email: "info@wrightfullyfit.com",
   phone: "+1 (649) 555-0142",
   address: "Saltmills Plaza, Grace Bay, Providenciales, Turks & Caicos",

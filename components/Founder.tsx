@@ -18,7 +18,7 @@ export default function Founder() {
             <div className="relative">
               <div className="overflow-hidden rounded-[24px]">
                 <Image
-                  src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50e?w=800&q=80"
+                  src="https://images.squarespace-cdn.com/content/v1/65a693f6b63149536bd675b4/48beee9f-39b5-45f1-a213-995e16cf4541/PHOTO-2024-03-20-11-04-56.jpg?format=1000w"
                   alt="Wrightfully Fit founder leading a training session"
                   width={600}
                   height={750}

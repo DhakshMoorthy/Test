@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { InstagramIcon, FacebookIcon } from "@/components/ui/SocialIcons";
 import { FOOTER_LINKS, SITE_CONFIG } from "@/lib/constants";
@@ -10,11 +11,14 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
-            <Link
-              href="#home"
-              className="font-display text-2xl font-semibold tracking-tight"
-            >
-              {SITE_CONFIG.name}
+            <Link href="#home" className="inline-block">
+              <Image
+                src={SITE_CONFIG.logo}
+                alt={SITE_CONFIG.name}
+                width={140}
+                height={56}
+                className="h-14 w-auto object-contain brightness-0 invert"
+              />
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/60">
               {SITE_CONFIG.description}

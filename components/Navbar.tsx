@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
@@ -39,14 +40,15 @@ export default function Navbar() {
           className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8"
           aria-label="Main navigation"
         >
-          <Link
-            href="#home"
-            className={cn(
-              "font-display text-xl font-semibold tracking-tight transition-colors duration-300 lg:text-2xl",
-              scrolled ? "text-foreground" : "text-white"
-            )}
-          >
-            {SITE_CONFIG.name}
+          <Link href="#home" className="relative flex shrink-0 items-center">
+            <Image
+              src={SITE_CONFIG.logo}
+              alt={SITE_CONFIG.name}
+              width={120}
+              height={48}
+              className="h-10 w-auto object-contain sm:h-12"
+              priority
+            />
           </Link>
 
           <ul className="hidden items-center gap-8 lg:flex">

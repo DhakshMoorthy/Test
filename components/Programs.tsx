@@ -80,7 +80,6 @@ export default function Programs() {
         </div>
 
         <div id="retreats" className="sr-only" aria-hidden="true" />
-        <div id="shop" className="sr-only" aria-hidden="true" />
       </div>
     </section>
   );
