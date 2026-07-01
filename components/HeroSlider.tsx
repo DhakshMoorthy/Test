@@ -73,6 +73,7 @@ export default function HeroSlider() {
                 alt={s.title}
                 fill
                 priority={index === 0}
+                quality={90}
                 className="object-cover"
                 sizes="100vw"
               />
@@ -127,14 +128,6 @@ export default function HeroSlider() {
                     className="transition-transform group-hover:translate-x-1"
                   />
                 </Link>
-                {slide.ctaSecondary && slide.ctaSecondaryHref && (
-                  <Link
-                    href={slide.ctaSecondaryHref}
-                    className="inline-flex items-center rounded-full border-2 border-white/35 px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white transition-all hover:border-white hover:bg-white/10 sm:text-sm"
-                  >
-                    {slide.ctaSecondary}
-                  </Link>
-                )}
               </div>
             </motion.div>
           </AnimatePresence>
@@ -172,14 +165,14 @@ export default function HeroSlider() {
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="glass-card grid grid-cols-2 gap-3 rounded-[24px] border-white/20 bg-white/10 p-4 sm:grid-cols-4 sm:gap-0 sm:divide-x sm:divide-white/15 sm:p-6"
+          className="hero-stats-bar grid grid-cols-2 gap-4 rounded-[24px] bg-white p-4 shadow-xl shadow-black/10 sm:grid-cols-4 sm:gap-0 sm:divide-x sm:divide-soft-grey-dark sm:p-6"
         >
           {HERO_STATS.map((stat) => (
             <div
               key={stat.label}
               className="flex flex-col items-center px-2 text-center sm:px-4"
             >
-              <p className="font-display text-lg font-medium text-white sm:text-2xl">
+              <p className="font-display text-lg font-semibold text-ocean sm:text-2xl">
                 {/^\d+$/.test(stat.value) ? (
                   <AnimatedCounter
                     value={parseInt(stat.value)}
@@ -188,11 +181,11 @@ export default function HeroSlider() {
                 ) : (
                   <>
                     {stat.value}
-                    <span className="text-sm">{stat.suffix}</span>
+                    <span className="text-sm text-foreground">{stat.suffix}</span>
                   </>
                 )}
               </p>
-              <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-wider text-white/60 sm:text-[11px]">
+              <p className="mt-1 text-[9px] font-semibold uppercase tracking-wider text-muted sm:text-[11px]">
                 {stat.label}
               </p>
             </div>
@@ -202,7 +195,7 @@ export default function HeroSlider() {
 
       <a
         href="#why"
-        className="absolute bottom-[10rem] left-1/2 z-20 -translate-x-1/2 text-white/40 hover:text-white sm:bottom-44"
+        className="absolute bottom-[10rem] left-1/2 z-20 -translate-x-1/2 text-white/50 hover:text-white sm:bottom-44"
         aria-label="Scroll to next section"
       >
         <ChevronDown className="animate-bounce" size={22} />

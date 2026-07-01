@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { InstagramIcon } from "@/components/ui/SocialIcons";
 import { SITE_CONFIG } from "@/lib/constants";
-import { cn } from "@/lib/utils";
 
 export default function FloatingInstagramButton() {
   const [open, setOpen] = useState(false);
@@ -22,11 +21,7 @@ export default function FloatingInstagramButton() {
         animate={{ x: open ? 0 : "calc(100% - 46px)" }}
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
         onClick={() => setOpen((v) => !v)}
-        className={cn(
-          "flex items-center gap-3 rounded-l-2xl py-3.5 pl-4 pr-5 text-white shadow-xl",
-          "bg-gradient-to-br from-ocean via-ocean-light to-emerald",
-          "border border-white/20 border-r-0"
-        )}
+        className="instagram-tab flex items-center gap-3 rounded-l-2xl py-3.5 pl-4 pr-5 text-white shadow-xl shadow-purple-500/25"
         aria-label="Follow Wrightfully Fit on Instagram"
         aria-expanded={open}
       >

@@ -19,40 +19,24 @@ export const HERO_STATS = [
 
 export const HERO_SLIDES = [
   {
-    id: "intro",
-    eyebrow: "Turks & Caicos",
-    title: "Fitness Beyond the Gym.",
-    description:
-      "Personal training, luxury wellness retreats, and premium wellness products in Turks & Caicos.",
-    cta: "Book a Session",
-    ctaHref: "#contact",
-    ctaSecondary: "Explore Retreats",
-    ctaSecondaryHref: "#retreats",
-    image: "/assets/hero/gym.jpg",
-  },
-  {
     id: "gym",
-    eyebrow: "Grace Bay Gym",
+    eyebrow: "Personal Training",
     title: "Train at Wrightfully Fit",
     description:
-      "Personal training, group classes, functional fitness, strength training, and nutrition coaching — all in our state-of-the-art Grace Bay gym at Saltmills Plaza.",
+      "One-on-one coaching with expert trainers who guide your form, push your limits, and help you reach your goals — in our state-of-the-art Grace Bay gym.",
     cta: "Explore the Gym",
     ctaHref: "#gym",
-    ctaSecondary: null,
-    ctaSecondaryHref: null,
-    image: "/assets/hero/gym.jpg",
+    image: "/assets/hero/trainer.jpg",
   },
   {
     id: "retreats",
     eyebrow: "Wellness Retreats",
     title: "RETREAT. RELAX. RESULTS.",
     description:
-      "Fitness, yoga, recovery, beach workouts, healthy cuisine, island adventures, and luxury accommodations — immersive 4-day experiences in Turks & Caicos.",
+      "Beach workouts, yoga, recovery, healthy cuisine, and island adventures — immersive outdoor wellness experiences in Turks & Caicos.",
     cta: "Discover Retreats",
     ctaHref: "#retreats",
-    ctaSecondary: null,
-    ctaSecondaryHref: null,
-    image: "/assets/hero/retreats.jpg",
+    image: "/assets/hero/wellness.jpg",
   },
   {
     id: "shop",
@@ -62,8 +46,6 @@ export const HERO_SLIDES = [
       "Premium apparel, accessories, supplements, and branded wellness products — crafted for those who demand excellence in every detail.",
     cta: "Visit the Shop",
     ctaHref: "#shop",
-    ctaSecondary: null,
-    ctaSecondaryHref: null,
     image: "/assets/hero/shop.jpg",
   },
 ] as const;

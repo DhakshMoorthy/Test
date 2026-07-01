@@ -140,6 +140,27 @@ body {
   transform: scale(1.15);
 }
 
+/* Instagram brand gradient tab */
+.instagram-tab {
+  background: linear-gradient(
+    135deg,
+    #833ab4 0%,
+    #c13584 35%,
+    #e1306c 65%,
+    #f77737 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-right: none;
+}
+
+.instagram-tab:hover {
+  filter: brightness(1.08);
+}
+
+.hero-stats-bar {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
 /* General swiper pagination */
 .swiper-pagination-bullet {
   width: 10px !important;
