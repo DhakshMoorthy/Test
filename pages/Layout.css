@@ -11,12 +11,12 @@ a {
   text-decoration: none;
 }
 
-/* Page Transition Animation */
+/* Page Transition Animation — never hide content on load */
 body.page-transition #main-content {
-  opacity: 0;
+  opacity: 1;
 }
 
 #main-content {
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
+  opacity: 1 !important;
+  visibility: visible !important;
 }

@@ -1,4 +1,34 @@
+/* White theme — override production dark :root from src_index.css */
+:root {
+  --gold: 40 100% 45% !important;
+  --gold-light: 43 100% 48% !important;
+  --background: 0 0% 100% !important;
+  --foreground: 220 18% 14% !important;
+  --primary: 40 100% 45% !important;
+  --primary-foreground: 0 0% 7% !important;
+  --card: 0 0% 100% !important;
+  --card-foreground: 220 18% 14% !important;
+  --secondary: 40 28% 96% !important;
+  --secondary-foreground: 220 18% 18% !important;
+  --muted: 40 20% 96% !important;
+  --muted-foreground: 220 10% 42% !important;
+  --border: 40 18% 90% !important;
+  --input: 40 18% 90% !important;
+}
+
+html,
+body,
+#root {
+  background-color: #ffffff !important;
+  color: #0a0a0a !important;
+}
+
 /* Force visible content — production HTML had Framer Motion opacity:0 locks */
+.kw-site-content,
+.kw-site-content * {
+  visibility: visible;
+}
+
 .kw-site-content [style*="opacity:0"],
 .kw-site-content [style*="opacity: 0"] {
   opacity: 1 !important;
@@ -259,6 +289,23 @@
 
 .kw-site-content [style*="background:#faf8f2"] {
   background: #faf8f2 !important;
+}
+
+/* Inactive step/phase tabs — keep readable on white */
+.kw-site-content .text-foreground\/50,
+.kw-site-content [class*="text-foreground/50"] {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.kw-site-content .text-muted-foreground\/50,
+.kw-site-content [class*="text-muted-foreground/50"] {
+  color: hsl(var(--muted-foreground) / 0.7) !important;
+}
+
+/* GROW card ghost numbers — visible on white */
+.kw-site-content [style*="color:rgba(255,255,255,.06)"],
+.kw-site-content [style*="color:rgba(255,255,255,.12)"] {
+  color: hsl(var(--border)) !important;
 }
 
 /* AI Joule demo panel */
