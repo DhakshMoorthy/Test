@@ -1,18 +1,26 @@
 import Hero from "../../components/home/Hero";
-import Stats from "../../components/home/Stats";
-import Solutions from "../../components/home/Solutions";
+import Metrics from "../../components/home/Metrics";
+import Expertise from "../../components/home/Expertise";
+import Approach from "../../components/home/Approach";
+import AIJoule from "../../components/home/AIJoule";
+import Delivery from "../../components/home/Delivery";
+import Grow from "../../components/home/Grow";
+import CFO from "../../components/home/CFO";
 import Industries from "../../components/home/Industries";
-import About from "../../components/home/About";
 import Contact from "../../components/home/Contact";
 
 export default function Page() {
   return (
     <main id="main-content">
       <Hero />
-      <Stats />
-      <Solutions />
+      <Expertise />
+      <Metrics />
+      <Approach />
+      <AIJoule />
+      <Delivery />
+      <Grow />
+      <CFO />
       <Industries />
-      <About />
       <Contact />
     </main>
   );

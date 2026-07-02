@@ -16,7 +16,7 @@ export default function SiteNav() {
               className="kw-logo-nav h-6 w-auto sm:h-7"
             />
             <span className="hidden rounded-full border border-[#E8A000]/30 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#0a0a0a] sm:inline">
-              AI · SAP
+              AI FIRST | SAP
             </span>
           </a>
 
