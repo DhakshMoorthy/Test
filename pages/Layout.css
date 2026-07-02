@@ -1,0 +1,22 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Page Transition Animation */
+body.page-transition #main-content {
+  opacity: 0;
+}
+
+#main-content {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}

@@ -1,50 +1,29 @@
-# Wrightfully Fit — Premium Website
+# Kannanware — India Site
 
-Luxury wellness website for [Wrightfully Fit](https://www.wrightfullyfit.com/).
+White-theme refresh for [kannanware.com/in](https://www.kannanware.com/in).
+
+## Changes in this branch
+
+- Full site converted to a clean white palette with **#E8A000** yellow as the brand accent
+- Logo bar: slightly smaller logo, compact **AI FIRST | SAP** badge, transparent floating sticky nav with backdrop blur
+- Content and typography preserved from production (Ubuntu / existing copy)
 
 ## Quick start
 
 ```bash
 npm install
-npm run dev:clean
+npm run dev
 ```
 
 Open **http://localhost:3000**
-
-### If you see "Internal Server Error"
-
-This is almost always a stale build cache. Run:
-
-```bash
-pkill -f "next"
-npm run dev:clean
-```
-
-Or for production:
-
-```bash
-pkill -f "next"
-npm run build:clean
-npm start
-```
 
 ## Production
 
 ```bash
 npm run build
-npm start
+npm run preview
 ```
-
-## Features
-
-- Full-screen hero slider (4 slides) with brand banner design
-- Sticky transparent navbar → solid white on scroll
-- Official logo & merch from wrightfullyfit.com
-- All homepage sections with Framer Motion animations
-- Swiper carousels, glassmorphism, animated counters
-- Instagram edge tab (peeks from right, slides open)
-- Mobile-first, SEO-friendly, accessible
 
 ## Stack
 
-Next.js 15 · React 19 · TypeScript · Tailwind CSS v4 · Framer Motion · Swiper.js
+Vike 0.4 · React 19 · TypeScript · Tailwind CSS v4 · Lucide React
