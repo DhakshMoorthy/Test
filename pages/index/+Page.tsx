@@ -1,11 +1,19 @@
-import mainHtml from "../../content/sections/main.html?raw";
-import footerHtml from "../../content/sections/footer.html?raw";
+import Hero from "../../components/home/Hero";
+import Stats from "../../components/home/Stats";
+import Solutions from "../../components/home/Solutions";
+import Industries from "../../components/home/Industries";
+import About from "../../components/home/About";
+import Contact from "../../components/home/Contact";
 
 export default function Page() {
   return (
-    <main id="main-content" className="kw-site-content">
-      <div dangerouslySetInnerHTML={{ __html: mainHtml }} />
-      <div dangerouslySetInnerHTML={{ __html: footerHtml }} />
+    <main id="main-content">
+      <Hero />
+      <Stats />
+      <Solutions />
+      <Industries />
+      <About />
+      <Contact />
     </main>
   );
 }
