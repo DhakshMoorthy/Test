@@ -16,7 +16,7 @@ export default function SiteNav() {
             <img
               src={SITE.logo}
               alt={SITE.name}
-              className="h-6 w-auto sm:h-7 lg:h-8"
+              className="kw-logo h-6 w-auto sm:h-7 lg:h-8"
             />
             <div className="hidden h-[28px] min-w-0 items-center gap-1.5 rounded-full border border-[#E8A000]/25 bg-white/80 px-2.5 sm:inline-flex lg:px-3">
               <img
@@ -106,7 +106,7 @@ export default function SiteNav() {
       {mobileOpen && (
         <div className="fixed inset-0 z-[999] bg-white/95 backdrop-blur-xl lg:hidden">
           <div className="flex h-full flex-col items-center justify-center gap-6 px-6 pt-20">
-            <img src={SITE.logo} alt={SITE.name} className="h-8 w-auto" />
+            <img src={SITE.logo} alt={SITE.name} className="kw-logo h-8 w-auto" />
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.label}

@@ -7,6 +7,11 @@ export default function Head() {
       <meta name="robots" content="index,follow" />
       <link rel="canonical" href="https://www.kannanware.com/in" />
       <link rel="icon" href="/assets/static/kw-logo.png" />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `document.documentElement.classList.add('hydrated');`,
+        }}
+      />
     </>
   );
 }

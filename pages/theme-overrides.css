@@ -1,8 +1,64 @@
-/* White-theme overrides for preserved production markup */
+/* Force visible content — production HTML had Framer Motion opacity:0 locks */
+.kw-site-content [style*="opacity:0"],
+.kw-site-content [style*="opacity: 0"] {
+  opacity: 1 !important;
+}
+
+.kw-site-content [style*="transform:translate"],
+.kw-site-content [style*="transform: translate"],
+.kw-site-content [style*="transform:scale"],
+.kw-site-content [style*="transform: scale"],
+.kw-site-content [style*="rotateX"] {
+  transform: none !important;
+}
+
+/* Black logo on white nav */
+.kw-logo,
+.kw-site-content img[alt="Kannanware"] {
+  filter: brightness(0);
+}
 
 .kw-site-content {
   background: hsl(var(--background));
   color: hsl(var(--foreground));
+}
+
+.kw-site-content section[id="metrics"],
+.kw-site-content [style*="#0c0c0c"],
+.kw-site-content [style*="#080808"],
+.kw-site-content [style*="#0c0a06"] {
+  background: hsl(var(--background)) !important;
+}
+
+.kw-site-content .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: hsl(var(--gold));
+  margin-bottom: 1rem;
+}
+
+.kw-site-content .sec-h {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: hsl(var(--foreground));
+}
+
+.kw-site-content .sec-h em {
+  color: hsl(var(--gold));
+  font-style: normal;
+}
+
+.kw-site-content .sec-p {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: hsl(var(--muted-foreground));
 }
 
 .kw-site-content .text-white,
