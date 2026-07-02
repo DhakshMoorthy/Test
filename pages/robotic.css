@@ -1,4 +1,34 @@
-/* Robotic SAP aesthetic — 90% black, 10% accent yellow */
+/* Brand tokens */
+:root {
+  --kw-black: #0a0a0a;
+  --kw-yellow: #e8a000;
+  --kw-yellow-soft: rgba(232, 160, 0, 0.1);
+  --kw-text: #0a0a0a;
+  --kw-text-body: #141414;
+  --kw-text-muted: #3d3d3d;
+  --kw-text-soft: #525252;
+}
+
+.kw-site {
+  background: #ffffff;
+  color: var(--kw-text);
+}
+
+.kw-text-body {
+  color: var(--kw-text-body);
+}
+
+.kw-text-muted {
+  color: var(--kw-text-muted);
+}
+
+.kw-text-soft {
+  color: var(--kw-text-soft);
+}
+
+.kw-yellow {
+  color: var(--kw-yellow);
+}
 
 @keyframes kw-fade-up {
   from {
@@ -29,15 +59,10 @@
   }
 }
 
-.kw-site {
-  background: #ffffff;
-  color: #0a0a0a;
-}
-
 .kw-grid-bg {
   background-image:
-    linear-gradient(#0a0a0a 1px, transparent 1px),
-    linear-gradient(90deg, #0a0a0a 1px, transparent 1px);
+    linear-gradient(var(--kw-black) 1px, transparent 1px),
+    linear-gradient(90deg, var(--kw-black) 1px, transparent 1px);
   background-size: 64px 64px;
 }
 
@@ -45,7 +70,7 @@
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(196, 146, 0, 0.06) 50%,
+    rgba(232, 160, 0, 0.08) 50%,
     transparent 100%
   );
   background-size: 100% 200%;
@@ -54,7 +79,7 @@
 
 .kw-cursor {
   animation: kw-cursor-blink 1s step-end infinite;
-  color: #c49200;
+  color: var(--kw-yellow);
   font-weight: 300;
 }
 
@@ -83,11 +108,44 @@
 }
 
 .kw-hero h1 {
-  color: #0a0a0a;
+  color: var(--kw-black);
+  font-weight: 800;
 }
 
-.kw-logo {
+/* Nav logo — wide wordmark, constrained width */
+.kw-nav-logo {
+  display: block;
+  height: 20px;
+  width: auto;
+  max-width: 108px;
+  object-fit: contain;
+  object-position: left center;
   filter: brightness(0);
+}
+
+@media (min-width: 640px) {
+  .kw-nav-logo {
+    height: 22px;
+    max-width: 120px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .kw-nav-logo {
+    height: 24px;
+    max-width: 128px;
+  }
+}
+
+/* Footer logo — small color icon, not wordmark scale */
+.kw-footer-logo {
+  display: block;
+  height: 18px;
+  width: auto;
+  max-width: 52px;
+  object-fit: contain;
+  object-position: left center;
+  filter: none !important;
 }
 
 section {

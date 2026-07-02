@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
-      <div className="pt-[76px] sm:pt-[88px] lg:pt-[96px]">{children}</div>
+      <div className="pt-[64px] sm:pt-[72px] lg:pt-[80px]">{children}</div>
     </div>
   );
 }

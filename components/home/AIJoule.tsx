@@ -22,17 +22,17 @@ function Typewriter({
     }
     setDisplay("");
     let i = 0;
-    let timer: ReturnType<typeof setInterval>;
+    let timer: ReturnType<typeof setInterval> | undefined;
     const startTimer = setTimeout(() => {
       timer = setInterval(() => {
         i += 1;
         setDisplay(text.slice(0, i));
-        if (i >= text.length) clearInterval(timer);
+        if (i >= text.length && timer) clearInterval(timer);
       }, 18);
     }, delay);
     return () => {
       clearTimeout(startTimer);
-      clearInterval(timer);
+      if (timer) clearInterval(timer);
     };
   }, [text, active, delay]);
 
@@ -56,10 +56,10 @@ export default function AIJoule() {
         <div className="grid items-start gap-16 lg:grid-cols-2 lg:gap-20">
           <div>
             <SectionHeader eyebrow={AI_SECTION.eyebrow} title={AI_SECTION.title} />
-            <p className="-mt-6 mb-4 text-[17px] leading-relaxed text-[#0a0a0a]/80">
+            <p className="-mt-6 mb-4 text-[17px] leading-relaxed text-[#141414]">
               {AI_SECTION.lead}
             </p>
-            <p className="text-[16px] leading-relaxed text-[#0a0a0a]/65">
+            <p className="text-[16px] leading-relaxed text-[#3d3d3d]">
               {AI_SECTION.description}
             </p>
           </div>
@@ -69,36 +69,36 @@ export default function AIJoule() {
               <div className="flex gap-1.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-[#0a0a0a]/15" />
                 <span className="h-2.5 w-2.5 rounded-full bg-[#0a0a0a]/10" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#C49200]/60" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#E8A000]/60" />
               </div>
-              <span className="ml-2 font-mono text-[12px] text-[#0a0a0a]/50">
+              <span className="ml-2 font-mono text-[12px] text-[#525252]">
                 SAP Joule AI Copilot
               </span>
               <span className="ml-auto flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#C49200]" />
-                <span className="font-mono text-[10px] uppercase tracking-wider text-[#0a0a0a]/40">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#E8A000]" />
+                <span className="font-mono text-[10px] uppercase tracking-wider text-[#525252]">
                   Live
                 </span>
               </span>
             </div>
             <div className="space-y-4">
               <div>
-                <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-[#0a0a0a]/35">
+                <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-[#525252]">
                   Query
                 </p>
                 <div className="rounded-lg border border-[#0a0a0a]/8 bg-white p-4">
-                  <p className="font-mono text-[13px] text-[#0a0a0a]/80">
-                    <span className="text-[#C49200]">&gt;</span>{" "}
+                  <p className="font-mono text-[13px] text-[#141414]">
+                    <span className="text-[#E8A000]">&gt;</span>{" "}
                     <Typewriter key={`q-${activeDemo}`} text={demo.query} active delay={0} />
                   </p>
                 </div>
               </div>
               <div>
-                <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-[#0a0a0a]/35">
+                <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-[#525252]">
                   Response
                 </p>
                 <div className="rounded-lg border border-[#0a0a0a]/8 bg-white p-4">
-                  <p className="text-[14px] leading-relaxed text-[#0a0a0a]/70">
+                  <p className="text-[14px] leading-relaxed text-[#141414]">
                     <Typewriter key={`r-${activeDemo}`} text={demo.response} active delay={900} />
                   </p>
                 </div>
@@ -122,8 +122,8 @@ export default function AIJoule() {
               <span
                 className={`mb-4 flex h-10 w-10 items-center justify-center rounded-lg border transition-colors ${
                   i === activeDemo
-                    ? "border-[#C49200]/25 bg-[#C49200]/8 text-[#C49200]"
-                    : "border-[#0a0a0a]/8 bg-white text-[#0a0a0a]/45"
+                    ? "border-[#E8A000]/25 bg-[#E8A000]/8 text-[#E8A000]"
+                    : "border-[#0a0a0a]/8 bg-white text-[#525252]"
                 }`}
               >
                 <SapIcon name={cap.icon} className="h-5 w-5" />
@@ -131,7 +131,7 @@ export default function AIJoule() {
               <h3 className="mb-2 text-[16px] font-semibold text-[#0a0a0a]">
                 {cap.title}
               </h3>
-              <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-[#0a0a0a]/40 transition-colors group-hover:text-[#C49200]">
+              <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-[#525252] transition-colors group-hover:text-[#E8A000]">
                 <Play className="h-3 w-3" strokeWidth={2} />
                 Run Demo
               </span>

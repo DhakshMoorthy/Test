@@ -4,8 +4,8 @@
 @source "../components/**/*.{tsx,ts}";
 
 :root {
-  --gold: 40 85% 38%;
-  --gold-light: 43 90% 42%;
+  --gold: 40 100% 45%;
+  --gold-light: 43 100% 48%;
   --background: 0 0% 100%;
   --foreground: 0 0% 4%;
   --primary: 0 0% 4%;
@@ -15,12 +15,12 @@
   --secondary: 0 0% 98%;
   --secondary-foreground: 0 0% 15%;
   --muted: 0 0% 96%;
-  --muted-foreground: 0 0% 40%;
-  --accent: 40 85% 38%;
+  --muted-foreground: 0 0% 28%;
+  --accent: 40 100% 45%;
   --accent-foreground: 0 0% 4%;
   --border: 0 0% 90%;
   --input: 0 0% 90%;
-  --ring: 40 85% 38%;
+  --ring: 40 100% 45%;
   --radius: 0rem;
 }
 
@@ -46,6 +46,7 @@ html {
 body {
   background-color: #ffffff;
   color: #0a0a0a;
+  font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--font-sans);

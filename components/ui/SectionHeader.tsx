@@ -15,15 +15,14 @@ export default function SectionHeader({
 
   return (
     <div className={`mb-12 max-w-3xl ${alignClass}`}>
-      <p className="kw-eyebrow mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#0a0a0a]/45">
-        <span className="text-[#C49200]">{eyebrow.split(" ")[0]}</span>
-        {eyebrow.includes(" ") ? ` ${eyebrow.split(" ").slice(1).join(" ")}` : ""}
+      <p className="kw-eyebrow mb-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-[#E8A000]">
+        {eyebrow}
       </p>
       <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-[1.12] tracking-[-0.03em] text-[#0a0a0a]">
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-[16px] leading-relaxed text-[#0a0a0a]/65">
+        <p className="mt-4 text-[16px] font-medium leading-relaxed text-[#3d3d3d]">
           {description}
         </p>
       )}

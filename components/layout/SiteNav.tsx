@@ -8,46 +8,48 @@ export default function SiteNav() {
   return (
     <>
       <nav className="fixed inset-x-0 top-0 z-[1000]">
-        <div className="relative mx-auto mt-3 flex h-14 w-[calc(100%-16px)] min-w-0 items-center gap-2 rounded-[22px] border border-[#0a0a0a]/8 bg-white/80 px-3 shadow-[0_8px_32px_rgba(0,0,0,0.04)] backdrop-blur-xl sm:mt-4 sm:h-[68px] sm:w-[calc(100%-32px)] sm:gap-3 sm:px-5 lg:mt-5 lg:w-[calc(100%-40px)] lg:max-w-[2000px] lg:gap-6 lg:rounded-[26px] lg:px-8">
+        <div className="relative mx-auto mt-3 flex h-12 w-[calc(100%-16px)] min-w-0 items-center gap-2 rounded-2xl border border-[#E8A000]/20 bg-white/92 px-3 shadow-[0_4px_24px_rgba(0,0,0,0.06)] backdrop-blur-xl sm:mt-4 sm:h-14 sm:w-[calc(100%-32px)] sm:gap-3 sm:px-4 lg:mt-5 lg:w-[calc(100%-40px)] lg:max-w-6xl lg:rounded-[22px] lg:px-6">
           <a
             href="/in"
-            className="flex min-w-0 shrink items-center gap-2 no-underline sm:gap-2.5 lg:gap-3"
+            className="flex min-w-0 max-w-[48%] shrink items-center gap-2 no-underline sm:max-w-none sm:gap-2.5"
+            aria-label={`${SITE.name} home`}
           >
             <img
               src={SITE.logo}
               alt={SITE.name}
-              className="kw-logo h-6 w-auto sm:h-7 lg:h-8"
+              className="kw-nav-logo shrink-0"
+              width={128}
+              height={24}
             />
-            <div className="hidden h-[28px] min-w-0 items-center gap-1.5 rounded-full border border-[#0a0a0a]/10 bg-white/80 px-2.5 sm:inline-flex lg:px-3">
+            <div className="hidden min-w-0 items-center gap-1 rounded-full border border-[#E8A000]/30 bg-[#E8A000]/[0.06] px-2 py-0.5 sm:inline-flex">
               <img
                 src={SITE.stagIcon}
                 alt=""
-                className="h-[14px] w-[14px] shrink-0 opacity-80"
+                className="h-3 w-3 shrink-0"
+                width={12}
+                height={12}
               />
-              <span className="whitespace-nowrap font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-[#0a0a0a]/70">
-                AI FIRST
+              <span className="whitespace-nowrap font-mono text-[9px] font-bold uppercase tracking-[0.05em] text-[#E8A000]">
+                AI
               </span>
-              <span
-                className="h-[12px] w-px shrink-0 bg-[#0a0a0a]/15"
-                aria-hidden="true"
-              />
-              <span className="whitespace-nowrap font-mono text-[10px] font-medium uppercase tracking-[0.06em] text-[#0a0a0a]">
+              <span className="h-2.5 w-px shrink-0 bg-[#E8A000]/35" aria-hidden="true" />
+              <span className="whitespace-nowrap font-mono text-[9px] font-semibold uppercase tracking-[0.05em] text-[#0a0a0a]">
                 SAP
               </span>
             </div>
           </a>
 
-          <div className="hidden min-h-0 min-w-0 flex-1 items-center justify-center overflow-hidden lg:flex">
-            <ul className="flex max-w-full list-none items-center gap-1 overflow-x-auto xl:gap-2">
+          <div className="hidden min-h-0 min-w-0 flex-1 items-center justify-center lg:flex">
+            <ul className="flex list-none items-center gap-0.5 p-0 xl:gap-1">
               {NAV_ITEMS.map((item) => (
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    className="inline-flex h-[30px] shrink-0 items-center gap-1 rounded-full px-3 py-0 text-[15px] font-medium tracking-[-0.01em] text-[#0a0a0a]/80 transition-all duration-200 hover:bg-[#0a0a0a]/5 hover:text-[#0a0a0a] xl:px-3.5 xl:text-[16px]"
+                    className="inline-flex h-8 shrink-0 items-center gap-0.5 rounded-full px-2.5 text-[14px] font-semibold tracking-[-0.01em] text-[#0a0a0a] transition-colors hover:bg-[#E8A000]/10 hover:text-[#0a0a0a] xl:px-3 xl:text-[15px]"
                   >
                     <span>{item.label}</span>
                     <ChevronDown
-                      className="h-[14px] w-[14px] shrink-0 text-[#0a0a0a]/30"
+                      className="h-3 w-3 shrink-0 text-[#E8A000]/70"
                       aria-hidden="true"
                     />
                   </a>
@@ -56,32 +58,28 @@ export default function SiteNav() {
             </ul>
           </div>
 
-          <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2.5 lg:ml-0 lg:gap-4">
+          <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
             <button
               type="button"
               aria-label="Search site"
-              className="inline-flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-full text-[#1a1a1a]/75 transition-colors duration-200 hover:text-[#E8A000]"
+              className="hidden h-8 w-8 items-center justify-center rounded-full text-[#0a0a0a] transition-colors hover:bg-[#E8A000]/10 hover:text-[#E8A000] sm:inline-flex"
             >
-              <Search className="h-[18px] w-[18px]" strokeWidth={2.15} />
+              <Search className="h-4 w-4" strokeWidth={2.15} />
             </button>
 
-            <div className="hidden shrink-0 items-center gap-2.5 lg:flex">
+            <div className="hidden shrink-0 items-center gap-2 lg:flex">
               <button
                 type="button"
-                className="flex h-[30px] shrink-0 items-center justify-center gap-1.5 rounded-[16px] border border-[#E8A000]/25 bg-white/90 px-3 text-[14px] font-medium leading-none text-[#1a1a1a] transition-all duration-200 hover:border-[#E8A000]/45 hover:bg-white"
+                className="flex h-8 items-center justify-center gap-1 rounded-full border border-[#E8A000]/25 bg-white px-2.5 text-[13px] font-semibold text-[#0a0a0a] transition-colors hover:border-[#E8A000]/45 hover:bg-[#E8A000]/5"
               >
-                <Globe
-                  className="h-[16px] w-[16px] text-[#666]"
-                  strokeWidth={1.7}
-                  aria-hidden="true"
-                />
-                <span className="uppercase tracking-[0.08em]">{SITE.region}</span>
-                <ChevronDown className="h-[12px] w-[12px] text-[#E8A000]" />
+                <Globe className="h-3.5 w-3.5 text-[#525252]" strokeWidth={1.75} aria-hidden="true" />
+                <span className="uppercase tracking-[0.06em]">{SITE.region}</span>
+                <ChevronDown className="h-3 w-3 text-[#E8A000]" />
               </button>
 
               <a
                 href="#contact"
-                className="inline-flex h-[30px] shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-[#0a0a0a]/12 bg-[#0a0a0a] px-6 text-[15px] font-semibold leading-none text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)]"
+                className="inline-flex h-8 items-center justify-center whitespace-nowrap rounded-full bg-[#E8A000] px-5 text-[14px] font-bold text-[#0a0a0a] no-underline transition-all hover:-translate-y-px hover:shadow-[0_6px_20px_rgba(232,160,0,0.35)]"
               >
                 Contact us
               </a>
@@ -89,26 +87,32 @@ export default function SiteNav() {
 
             <button
               type="button"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full text-[#1a1a1a] lg:hidden"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full text-[#0a0a0a] lg:hidden"
               onClick={() => setMobileOpen((open) => !open)}
               aria-expanded={mobileOpen}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
       </nav>
 
       {mobileOpen && (
-        <div className="fixed inset-0 z-[999] bg-white/95 backdrop-blur-xl lg:hidden">
-          <div className="flex h-full flex-col items-center justify-center gap-6 px-6 pt-20">
-            <img src={SITE.logo} alt={SITE.name} className="kw-logo h-8 w-auto" />
+        <div className="fixed inset-0 z-[1001] bg-white/98 backdrop-blur-xl lg:hidden">
+          <div className="flex h-full flex-col items-center justify-center gap-5 px-6 pt-16">
+            <img
+              src={SITE.logo}
+              alt={SITE.name}
+              className="kw-nav-logo mb-2"
+              width={128}
+              height={24}
+            />
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="text-xl font-medium text-[#1a1a1a] transition-colors hover:text-[#E8A000]"
+                className="text-lg font-semibold text-[#0a0a0a] no-underline transition-colors hover:text-[#E8A000]"
                 onClick={() => setMobileOpen(false)}
               >
                 {item.label}
@@ -116,7 +120,7 @@ export default function SiteNav() {
             ))}
             <a
               href="#contact"
-              className="inline-flex h-10 items-center justify-center rounded-full bg-[#0a0a0a] px-8 text-[15px] font-semibold text-white"
+              className="mt-2 inline-flex h-10 items-center justify-center rounded-full bg-[#E8A000] px-8 text-[15px] font-bold text-[#0a0a0a] no-underline"
               onClick={() => setMobileOpen(false)}
             >
               Contact us

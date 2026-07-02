@@ -25,7 +25,7 @@ export default function CFO() {
               className={`rounded-full border px-4 py-2 font-mono text-[11px] uppercase tracking-wider transition-all ${
                 i === active
                   ? "border-[#0a0a0a] bg-[#0a0a0a] text-white"
-                  : "border-[#0a0a0a]/10 bg-[#fafafa] text-[#0a0a0a]/50 hover:border-[#0a0a0a]/20"
+                  : "border-[#0a0a0a]/10 bg-[#fafafa] text-[#525252] hover:border-[#0a0a0a]/20"
               }`}
             >
               {service.title.split(" ")[0]}
@@ -46,15 +46,15 @@ export default function CFO() {
             >
               <div
                 className={`absolute bottom-3 left-0 top-3 w-[3px] rounded-full transition-colors ${
-                  i === active ? "bg-[#C49200]" : "bg-[#0a0a0a]/10"
+                  i === active ? "bg-[#E8A000]" : "bg-[#0a0a0a]/10"
                 }`}
               />
               <div className="mb-3 flex items-center gap-3">
                 <span
                   className={`flex h-9 w-9 items-center justify-center rounded-lg border transition-colors ${
                     i === active
-                      ? "border-[#C49200]/25 bg-[#C49200]/8 text-[#C49200]"
-                      : "border-[#0a0a0a]/8 bg-white text-[#0a0a0a]/40"
+                      ? "border-[#E8A000]/25 bg-[#E8A000]/8 text-[#E8A000]"
+                      : "border-[#0a0a0a]/8 bg-white text-[#525252]"
                   }`}
                 >
                   <SapIcon name={service.icon} className="h-4 w-4" />
@@ -63,14 +63,14 @@ export default function CFO() {
                   {service.title}
                 </h3>
               </div>
-              <p className="mb-4 text-[14px] leading-relaxed text-[#0a0a0a]/65">
+              <p className="mb-4 text-[14px] leading-relaxed text-[#3d3d3d]">
                 {service.description}
               </p>
               <div className="flex flex-wrap gap-2">
                 {service.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-[#0a0a0a]/6 bg-white px-2.5 py-1 font-mono text-[11px] text-[#0a0a0a]/50"
+                    className="rounded-full border border-[#0a0a0a]/6 bg-white px-2.5 py-1 font-mono text-[11px] text-[#525252]"
                   >
                     {tag}
                   </span>

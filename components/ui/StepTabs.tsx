@@ -42,20 +42,20 @@ export default function StepTabs({
               onClick={() => setActive(i)}
               className={`kw-card kw-tab-btn relative rounded-xl border p-5 text-left transition-all duration-300 ${
                 selected
-                  ? "border-[#0a0a0a]/12 bg-white shadow-[0_8px_32px_rgba(0,0,0,0.06)]"
+                  ? "border-[#E8A000]/35 bg-white shadow-[0_8px_32px_rgba(232,160,0,0.08)]"
                   : "border-[#0a0a0a]/6 bg-[#fafafa] hover:border-[#0a0a0a]/10 hover:bg-white"
               }`}
             >
               {selected && (
-                <div className="absolute inset-x-4 top-0 h-[2px] rounded-full bg-[#C49200]" />
+                <div className="absolute inset-x-4 top-0 h-[2px] rounded-full bg-[#E8A000]" />
               )}
               <div className="mb-3 flex items-center gap-3">
                 {step.icon && (
                   <span
                     className={`flex h-9 w-9 items-center justify-center rounded-lg border transition-colors ${
                       selected
-                        ? "border-[#C49200]/25 bg-[#C49200]/8 text-[#C49200]"
-                        : "border-[#0a0a0a]/8 bg-white text-[#0a0a0a]/40"
+                        ? "border-[#E8A000]/25 bg-[#E8A000]/8 text-[#E8A000]"
+                        : "border-[#0a0a0a]/8 bg-white text-[#525252]"
                     }`}
                   >
                     <SapIcon name={step.icon} className="h-4 w-4" />
@@ -63,7 +63,7 @@ export default function StepTabs({
                 )}
                 <p
                   className={`font-mono text-[11px] font-bold uppercase tracking-[0.2em] ${
-                    selected ? "text-[#C49200]" : "text-[#0a0a0a]/35"
+                    selected ? "text-[#E8A000]" : "text-[#525252]"
                   }`}
                 >
                   {labelPrefix} {step.label}
@@ -71,12 +71,12 @@ export default function StepTabs({
               </div>
               <h3
                 className={`text-[15px] font-semibold leading-snug transition-colors ${
-                  selected ? "text-[#0a0a0a]" : "text-[#0a0a0a]/45"
+                  selected ? "text-[#0a0a0a]" : "text-[#525252]"
                 }`}
               >
                 {step.title}
               </h3>
-              <p className="mt-2 line-clamp-2 text-[13px] leading-relaxed text-[#0a0a0a]/50">
+              <p className="mt-2 line-clamp-2 text-[13px] leading-relaxed text-[#525252]">
                 {step.description}
               </p>
             </button>
@@ -100,7 +100,7 @@ export default function StepTabs({
             {detail.title.includes(":") ? (
               <>
                 {detail.title.split(":")[0]}:{" "}
-                <span className="text-[#0a0a0a]/75">
+                <span className="text-[#E8A000]">
                   {detail.title.split(":").slice(1).join(":").trim()}
                 </span>
               </>
@@ -108,19 +108,19 @@ export default function StepTabs({
               detail.title
             )}
           </h3>
-          <p className="mt-4 text-[15px] leading-relaxed text-[#0a0a0a]/65">
+          <p className="mt-4 text-[15px] leading-relaxed text-[#3d3d3d]">
             {detail.description}
           </p>
-          <p className="mb-4 mt-8 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#0a0a0a]/40">
+          <p className="mb-4 mt-8 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#E8A000]">
             Key Deliverables
           </p>
           <ul className="m-0 list-none space-y-3 p-0">
             {detail.deliverables.map((item) => (
               <li key={item} className="flex items-center gap-3">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-[#0a0a0a]/10 bg-[#fafafa] text-[#C49200]">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-[#0a0a0a]/10 bg-[#fafafa] text-[#E8A000]">
                   <CheckIcon />
                 </span>
-                <span className="text-[15px] text-[#0a0a0a]/80">{item}</span>
+                <span className="text-[15px] text-[#141414]">{item}</span>
               </li>
             ))}
           </ul>

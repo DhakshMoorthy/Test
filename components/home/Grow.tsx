@@ -9,7 +9,7 @@ export default function Grow() {
       <div className="mx-auto max-w-6xl px-6 py-20 sm:px-8 sm:py-28">
         <div className="mb-16 grid items-end gap-8 lg:grid-cols-2 lg:gap-16">
           <SectionHeader eyebrow={GROW.eyebrow} title={GROW.title} />
-          <p className="text-[16px] leading-relaxed text-[#0a0a0a]/65 lg:pb-2">
+          <p className="text-[16px] leading-relaxed text-[#3d3d3d] lg:pb-2">
             {GROW.description}
           </p>
         </div>
@@ -33,22 +33,22 @@ export default function Grow() {
                 {item.bullets.map((bullet) => (
                   <li
                     key={bullet}
-                    className="flex items-center gap-2.5 text-[14px] text-[#0a0a0a]/75"
+                    className="flex items-center gap-2.5 text-[14px] text-[#141414]"
                   >
-                    <span className="shrink-0 text-[#C49200]">
+                    <span className="shrink-0 text-[#E8A000]">
                       <CheckIcon className="h-3 w-3" />
                     </span>
                     {bullet}
                   </li>
                 ))}
               </ul>
-              <div className="absolute inset-x-6 bottom-0 h-[2px] rounded-full bg-[#C49200] opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="absolute inset-x-6 bottom-0 h-[2px] rounded-full bg-[#E8A000] opacity-0 transition-opacity group-hover:opacity-100" />
             </div>
           ))}
 
           <div className="flex flex-col items-center justify-center rounded-xl border border-[#0a0a0a]/10 bg-white p-7 text-center">
             <h3 className="mb-3 text-lg font-bold text-[#0a0a0a]">Ready to Grow?</h3>
-            <p className="mb-6 max-w-[240px] text-[14px] text-[#0a0a0a]/65">
+            <p className="mb-6 max-w-[240px] text-[14px] text-[#3d3d3d]">
               Let&apos;s build your roadmap to SAP S/4HANA Cloud together.
             </p>
             <a

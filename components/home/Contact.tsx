@@ -9,19 +9,19 @@ export default function Contact() {
           <div className="kw-grid-bg pointer-events-none absolute inset-0 opacity-[0.08]" />
           <div className="kw-scan-line pointer-events-none absolute inset-0 opacity-[0.05]" />
           <div className="relative">
-            <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.22em] text-white/40">
+            <p className="mb-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-[#E8A000]">
               SAP Advisory
             </p>
             <h2 className="max-w-lg text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold tracking-[-0.03em] text-white">
               {CONTACT.title}
             </h2>
-            <p className="mt-4 max-w-md text-[16px] leading-relaxed text-white/60">
+            <p className="mt-4 max-w-md text-[16px] font-medium leading-relaxed text-white/75">
               {CONTACT.description}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <a
                 href={`mailto:${SITE.email}`}
-                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-[14px] font-semibold text-[#0a0a0a] no-underline transition-all hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-full bg-[#E8A000] px-6 py-3 text-[14px] font-bold text-[#0a0a0a] no-underline transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(232,160,0,0.35)]"
               >
                 {CONTACT.cta}
                 <ArrowRight className="h-4 w-4" strokeWidth={2} />
