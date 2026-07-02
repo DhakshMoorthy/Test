@@ -1,38 +1,55 @@
-"use client";
+import { useEffect, useRef, useState } from "react";
 
-import { motion, useInView, useSpring, useTransform } from "framer-motion";
-import { useEffect, useRef } from "react";
-
-interface AnimatedCounterProps {
+type Props = {
   value: number;
   suffix?: string;
-  prefix?: string;
+  duration?: number;
   className?: string;
-}
+};
 
 export default function AnimatedCounter({
   value,
   suffix = "",
-  prefix = "",
-  className,
-}: AnimatedCounterProps) {
+  duration = 1800,
+  className = "",
+}: Props) {
+  const [display, setDisplay] = useState(0);
+  const [started, setStarted] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const spring = useSpring(0, { duration: 2000, bounce: 0 });
-  const display = useTransform(spring, (current) =>
-    Math.round(current).toString()
-  );
 
   useEffect(() => {
-    if (isInView) {
-      spring.set(value);
-    }
-  }, [isInView, spring, value]);
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+
+    const start = performance.now();
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(Math.round(value * eased));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [started, value, duration]);
 
   return (
-    <span ref={ref} className={className}>
-      {prefix}
-      <motion.span>{display}</motion.span>
+    <span ref={ref} className={`tabular-nums ${className}`}>
+      {display}
       {suffix}
     </span>
   );

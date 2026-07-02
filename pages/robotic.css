@@ -1,0 +1,164 @@
+/* ─── Brand tokens ────────────────────────────────────────────── */
+:root {
+  --kw-yellow: #e8a000;
+  --kw-black: #0a0a0a;
+  --kw-text: #0a0a0a;
+  --kw-body: #141414;
+  --kw-muted: #3d3d3d;
+  --kw-soft: #525252;
+}
+
+.kw-site { background: #fff; color: var(--kw-black); }
+
+/* ─── Grid / scan overlays ────────────────────────────────────── */
+.kw-grid-bg {
+  background-image:
+    linear-gradient(var(--kw-black) 1px, transparent 1px),
+    linear-gradient(90deg, var(--kw-black) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* ─── Keyframes ──────────────────────────────────────────────── */
+@keyframes kw-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes kw-scan {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes kw-cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* Three distinct float paths so chips feel organic */
+@keyframes kw-float-a {
+  0%,100% { transform: translateY(0px)  translateX(0px); }
+  25%     { transform: translateY(-12px) translateX(6px); }
+  75%     { transform: translateY(-6px)  translateX(-5px); }
+}
+@keyframes kw-float-b {
+  0%,100% { transform: translateY(0px)  translateX(0px); }
+  33%     { transform: translateY(-16px) translateX(-8px); }
+  66%     { transform: translateY(-8px)  translateX(7px); }
+}
+@keyframes kw-float-c {
+  0%,100% { transform: translateY(0px); }
+  50%     { transform: translateY(-20px); }
+}
+
+/* Path draw for SAP Activate line */
+@keyframes kw-path-draw {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* Node entrance */
+@keyframes kw-node-in {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Glow pulse on active node */
+@keyframes kw-glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,160,0,0.4); }
+  50%       { box-shadow: 0 0 0 12px rgba(232,160,0,0); }
+}
+
+/* Scan line sweep */
+.kw-scan-line {
+  background: linear-gradient(180deg,
+    transparent 0%, rgba(232,160,0,0.07) 50%, transparent 100%);
+  background-size: 100% 200%;
+  animation: kw-scan 8s linear infinite;
+}
+
+/* ─── Floating hero chips ─────────────────────────────────────── */
+.kw-chip {
+  position: absolute;
+  display: flex;
+  padding: 9px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(232,160,0,0.22);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04),
+              inset 0 1px 0 rgba(255,255,255,0.9);
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+  min-width: 120px;
+}
+.kw-chip-a { animation: kw-float-a 6.5s ease-in-out infinite; }
+.kw-chip-b { animation: kw-float-b 8.5s ease-in-out infinite; }
+.kw-chip-c { animation: kw-float-c 7.5s ease-in-out infinite; }
+
+/* ─── Nav logo ───────────────────────────────────────────────── */
+.kw-nav-logo {
+  display: block;
+  height: 20px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  object-position: left center;
+  filter: brightness(0);
+}
+@media (min-width: 640px)  { .kw-nav-logo { height: 22px; } }
+@media (min-width: 1024px) { .kw-nav-logo { height: 24px; max-width: 128px; } }
+
+/* ─── Footer logo ────────────────────────────────────────────── */
+.kw-footer-logo {
+  display: block;
+  height: 18px;
+  width: auto;
+  max-width: 52px;
+  object-fit: contain;
+  object-position: left center;
+  filter: none !important;
+}
+
+/* ─── Section enter ──────────────────────────────────────────── */
+.kw-card   { animation: kw-fade-up 0.6s ease both; }
+.kw-metric { animation: kw-fade-up 0.5s ease both; }
+.kw-stat   { animation: kw-fade-up 0.7s ease both; }
+.kw-panel  { animation: kw-fade-up 0.4s ease both; }
+.kw-tab-btn:active { transform: scale(0.98); }
+
+/* ─── 3D card tilt ───────────────────────────────────────────── */
+.kw-card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+.kw-card-3d:hover {
+  box-shadow: 0 20px 60px rgba(0,0,0,0.10), 0 4px 16px rgba(0,0,0,0.06);
+}
+
+/* ─── Pathway chip — inline styles handle positioning now ────── */
+
+/* ─── Terminal cursor ────────────────────────────────────────── */
+.kw-cursor {
+  animation: kw-cursor-blink 1s step-end infinite;
+  color: #E8A000;
+  font-weight: 300;
+}
+
+/* ─── 3D perspective section ─────────────────────────────────── */
+.kw-hero h1 {
+  color: var(--kw-black);
+  font-weight: 800;
+}
+
+section { scroll-margin-top: 6rem; }
+img { max-width: 100%; height: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  .kw-card, .kw-metric, .kw-stat, .kw-panel,
+  .kw-scan-line, .kw-chip, .kw-chip-a, .kw-chip-b, .kw-chip-c {
+    animation: none;
+  }
+}

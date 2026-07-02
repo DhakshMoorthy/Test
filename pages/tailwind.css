@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@source "../content/**/*.html";
+@source "../components/**/*.{tsx,ts}";
+
+:root {
+  --gold: 40 100% 45%;
+  --gold-light: 43 100% 48%;
+  --background: 0 0% 100%;
+  --foreground: 0 0% 4%;
+  --primary: 0 0% 4%;
+  --primary-foreground: 0 0% 100%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 4%;
+  --secondary: 0 0% 98%;
+  --secondary-foreground: 0 0% 15%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 28%;
+  --accent: 40 100% 45%;
+  --accent-foreground: 0 0% 4%;
+  --border: 0 0% 90%;
+  --input: 0 0% 90%;
+  --ring: 40 100% 45%;
+  --radius: 0rem;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-gold: hsl(var(--gold));
+  --color-card: hsl(var(--card));
+  --color-secondary: hsl(var(--secondary));
+  --color-muted: hsl(var(--muted));
+  --font-sans: "Ubuntu", "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Ubuntu Mono", "SF Mono", "Fira Code", "Consolas", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #ffffff;
+  color: #0a0a0a;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Put heading defaults in @layer base so Tailwind utilities (text-white etc.) can override */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-sans);
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    color: #0a0a0a;
+  }
+}
+
+::selection {
+  background: rgba(196, 146, 0, 0.15);
+  color: #0a0a0a;
+}
