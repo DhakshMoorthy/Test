@@ -58,7 +58,7 @@ const CHIPS: Chip[] = [
   },
   {
     kind: "stat",
-    value: 80, suffix: "%", label: "SAP-Certified",
+    value: 80, suffix: "", label: "SAP-Certified",
     icon: "shield", anim: "b",
     pos: { top: "25%", right: "13%" },
     hide: "hidden 2xl:flex",
