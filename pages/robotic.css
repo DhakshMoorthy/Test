@@ -76,27 +76,26 @@
   animation: kw-scan 8s linear infinite;
 }
 
-/* ─── Floating hero chips ────────────────────────────────────── */
+/* ─── Floating hero chips ─────────────────────────────────────── */
 .kw-chip {
   position: absolute;
   display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 13px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.82);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(232,160,0,0.18);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+  padding: 9px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(232,160,0,0.22);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04),
+              inset 0 1px 0 rgba(255,255,255,0.9);
   pointer-events: none;
   user-select: none;
-  white-space: nowrap;
   z-index: 2;
+  min-width: 120px;
 }
-.kw-chip-a { animation: kw-float-a 6s ease-in-out infinite; }
-.kw-chip-b { animation: kw-float-b 8s ease-in-out infinite; }
-.kw-chip-c { animation: kw-float-c 7s ease-in-out infinite; }
+.kw-chip-a { animation: kw-float-a 6.5s ease-in-out infinite; }
+.kw-chip-b { animation: kw-float-b 8.5s ease-in-out infinite; }
+.kw-chip-c { animation: kw-float-c 7.5s ease-in-out infinite; }
 
 /* ─── Nav logo ───────────────────────────────────────────────── */
 .kw-nav-logo {
@@ -139,61 +138,7 @@
   box-shadow: 0 20px 60px rgba(0,0,0,0.10), 0 4px 16px rgba(0,0,0,0.06);
 }
 
-/* ─── Pathway (SAP Activate) ─────────────────────────────────── */
-.kw-path-line-bg {
-  position: absolute;
-  top: 50%;
-  left: calc(12.5%);
-  right: calc(12.5%);
-  height: 2px;
-  background: rgba(10,10,10,0.08);
-  transform: translateY(-50%);
-  border-radius: 2px;
-}
-.kw-path-line-fill {
-  position: absolute;
-  top: 50%;
-  left: calc(12.5%);
-  height: 2px;
-  background: linear-gradient(90deg, #E8A000, #f5c842);
-  transform: translateY(-50%);
-  border-radius: 2px;
-  transition: width 1.2s cubic-bezier(0.65, 0, 0.35, 1);
-}
-.kw-path-node {
-  position: relative;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 2px solid rgba(10,10,10,0.12);
-  background: #fff;
-  transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
-  cursor: pointer;
-}
-.kw-path-node.active {
-  border-color: #E8A000;
-  background: #E8A000;
-  color: #0a0a0a;
-  transform: scale(1.15);
-  animation: kw-glow-pulse 2s ease-in-out infinite;
-}
-.kw-path-node.done {
-  border-color: #E8A000;
-  background: rgba(232,160,0,0.1);
-  color: #E8A000;
-}
-.kw-path-node.idle {
-  color: rgba(10,10,10,0.35);
-}
-.kw-path-node.idle:hover {
-  border-color: rgba(232,160,0,0.4);
-  color: #E8A000;
-  transform: scale(1.05);
-}
+/* ─── Pathway chip — inline styles handle positioning now ────── */
 
 /* ─── Terminal cursor ────────────────────────────────────────── */
 .kw-cursor {

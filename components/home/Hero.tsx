@@ -1,70 +1,106 @@
 import { ArrowRight, Play } from "lucide-react";
 import { HERO } from "../../lib/constants";
 import AnimatedCounter from "../ui/AnimatedCounter";
-import { SapIcon } from "../ui/SapIcon";
+import { SapIcon, type IconName } from "../ui/SapIcon";
 
 const BG_TERMS = [
   "S/4HANA", "FI/CO", "Treasury", "Joule AI",
   "Analytics", "BTP", "Fiori", "Real-Time",
 ];
 
-const CHIPS: {
-  label: string;
-  icon: "chart" | "shield" | "automation" | "trend" | "dashboard" | "settings" | "rocket" | "cog";
-  anim: string;
-  style: React.CSSProperties;
-  hide?: string;
-}[] = [
+/* Live stat chips — look like mini dashboard widgets */
+type Chip =
+  | { kind: "stat"; value: number; suffix: string; label: string; icon: IconName; anim: "a" | "b" | "c"; pos: Record<string, string>; hide: string }
+  | { kind: "live"; label: string; sub: string; icon: IconName; anim: "a" | "b" | "c"; pos: Record<string, string>; hide: string };
+
+const CHIPS: Chip[] = [
   {
-    label: "SAP Joule AI",
-    icon: "automation",
-    anim: "kw-chip kw-chip-a",
-    style: { top: "13%", left: "4%", animationDelay: "0s" },
+    kind: "stat",
+    value: 95, suffix: "%", label: "Forecast Accuracy",
+    icon: "trend", anim: "b",
+    pos: { top: "13%", left: "3%" },
     hide: "hidden lg:flex",
   },
   {
-    label: "FI / CO Module",
-    icon: "chart",
-    anim: "kw-chip kw-chip-b",
-    style: { top: "11%", right: "5%", animationDelay: "1.4s" },
+    kind: "live",
+    label: "SAP Joule AI", sub: "Embedded AI — Live",
+    icon: "automation", anim: "a",
+    pos: { top: "10%", right: "4%" },
     hide: "hidden lg:flex",
   },
   {
-    label: "GST Compliance",
-    icon: "shield",
-    anim: "kw-chip kw-chip-c",
-    style: { top: "48%", left: "2%", animationDelay: "0.7s" },
+    kind: "stat",
+    value: 60, suffix: "%", label: "Manual Work Reduced",
+    icon: "cog", anim: "c",
+    pos: { top: "48%", left: "2%" },
     hide: "hidden lg:flex",
   },
   {
-    label: "S/4HANA Cloud",
-    icon: "settings",
-    anim: "kw-chip kw-chip-a",
-    style: { top: "46%", right: "2%", animationDelay: "2.1s" },
+    kind: "live",
+    label: "S/4HANA Cloud", sub: "GST Ready — Active",
+    icon: "settings", anim: "b",
+    pos: { top: "44%", right: "2%" },
     hide: "hidden lg:flex",
   },
   {
-    label: "SAC Analytics",
-    icon: "trend",
-    anim: "kw-chip kw-chip-b",
-    style: { bottom: "22%", left: "6%", animationDelay: "1s" },
+    kind: "stat",
+    value: 35, suffix: "K", label: "Project Hours",
+    icon: "chart", anim: "a",
+    pos: { bottom: "20%", left: "5%" },
     hide: "hidden xl:flex",
   },
   {
-    label: "BTP Platform",
-    icon: "dashboard",
-    anim: "kw-chip kw-chip-c",
-    style: { bottom: "24%", right: "6%", animationDelay: "1.8s" },
+    kind: "live",
+    label: "BTP Platform", sub: "Connected — Stable",
+    icon: "dashboard", anim: "c",
+    pos: { bottom: "22%", right: "5%" },
     hide: "hidden xl:flex",
   },
   {
-    label: "Fiori UX",
-    icon: "rocket",
-    anim: "kw-chip kw-chip-a",
-    style: { top: "28%", right: "12%", animationDelay: "3s" },
+    kind: "stat",
+    value: 80, suffix: "%", label: "SAP-Certified",
+    icon: "shield", anim: "b",
+    pos: { top: "25%", right: "13%" },
     hide: "hidden 2xl:flex",
   },
 ];
+
+function StatChip({ chip }: { chip: Extract<Chip, { kind: "stat" }> }) {
+  return (
+    <div
+      className={`kw-chip kw-chip-${chip.anim} ${chip.hide} flex-col gap-0`}
+      style={chip.pos}
+    >
+      <div className="mb-0.5 flex items-center gap-1.5">
+        <SapIcon name={chip.icon} className="h-3 w-3 text-[#E8A000]" strokeWidth={2} />
+        <span className="font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-[#0a0a0a]/45">
+          {chip.label}
+        </span>
+      </div>
+      <span className="font-mono text-[1.4rem] font-extrabold leading-none tracking-tight text-[#E8A000]">
+        <AnimatedCounter value={chip.value} suffix={chip.suffix} duration={2200} />
+      </span>
+    </div>
+  );
+}
+
+function LiveChip({ chip }: { chip: Extract<Chip, { kind: "live" }> }) {
+  return (
+    <div
+      className={`kw-chip kw-chip-${chip.anim} ${chip.hide} flex-col gap-0.5`}
+      style={chip.pos}
+    >
+      <div className="flex items-center gap-1.5">
+        <SapIcon name={chip.icon} className="h-3 w-3 text-[#0a0a0a]/60" strokeWidth={2} />
+        <span className="text-[12px] font-bold text-[#0a0a0a]">{chip.label}</span>
+        <span className="ml-0.5 rounded-full bg-[#E8A000] px-1.5 py-0 font-mono text-[8px] font-extrabold uppercase tracking-wider text-[#0a0a0a]">
+          Live
+        </span>
+      </div>
+      <p className="font-mono text-[9px] text-[#0a0a0a]/40">{chip.sub}</p>
+    </div>
+  );
+}
 
 export default function Hero() {
   return (
@@ -72,7 +108,7 @@ export default function Hero() {
       id="hero"
       className="kw-hero relative flex min-h-[calc(100vh-68px)] flex-col overflow-hidden pb-16 pt-4"
     >
-      {/* Background layers */}
+      {/* background */}
       <div className="pointer-events-none absolute inset-0">
         <div
           className="absolute inset-0"
@@ -84,8 +120,6 @@ export default function Hero() {
         />
         <div className="kw-grid-bg absolute inset-0 opacity-[0.038]" />
         <div className="kw-scan-line absolute inset-0 opacity-[0.05]" />
-
-        {/* Faint BG watermark terms */}
         {BG_TERMS.map((term, i) => (
           <span
             key={term}
@@ -97,24 +131,16 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Floating chips */}
-      {CHIPS.map((chip) => (
-        <div
-          key={chip.label}
-          className={`${chip.anim} ${chip.hide ?? "flex"}`}
-          style={chip.style}
-        >
-          <SapIcon name={chip.icon} className="h-3.5 w-3.5 text-[#E8A000]" strokeWidth={1.75} />
-          <span className="font-mono text-[10px] font-semibold text-[#0a0a0a]">
-            {chip.label}
-          </span>
-        </div>
-      ))}
+      {/* floating chips */}
+      {CHIPS.map((chip, i) =>
+        chip.kind === "stat"
+          ? <StatChip key={i} chip={chip} />
+          : <LiveChip key={i} chip={chip} />,
+      )}
 
-      {/* Main content */}
+      {/* content */}
       <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 text-center sm:px-8">
 
-        {/* Badge */}
         <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-[#E8A000]/30 bg-[#E8A000]/[0.07] px-5 py-2">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E8A000] opacity-55" />
@@ -135,7 +161,6 @@ export default function Hero() {
           {HERO.subtitle}
         </p>
 
-        {/* Pill badges */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5">
           {HERO.pills.map((pill) => (
             <span
@@ -148,7 +173,6 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* CTAs */}
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
           <a
             href="#ai"
@@ -166,7 +190,7 @@ export default function Hero() {
           </a>
         </div>
 
-        {/* Stats */}
+        {/* animated stats */}
         <div className="mt-14 flex flex-wrap justify-center gap-10 sm:gap-16">
           {HERO.stats.map((stat) => (
             <div key={stat.label} className="kw-stat text-center">
