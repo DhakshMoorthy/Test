@@ -4,40 +4,24 @@
 @source "../components/**/*.{tsx,ts}";
 
 :root {
-  --gold: 40 100% 45%;
-  --gold-light: 43 100% 48%;
-  --gold-glow: 40 100% 45%;
+  --gold: 40 85% 38%;
+  --gold-light: 43 90% 42%;
   --background: 0 0% 100%;
-  --foreground: 220 18% 14%;
-  --primary: 40 100% 45%;
-  --primary-foreground: 0 0% 0%;
+  --foreground: 0 0% 4%;
+  --primary: 0 0% 4%;
+  --primary-foreground: 0 0% 100%;
   --card: 0 0% 100%;
-  --card-foreground: 220 18% 14%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 220 18% 14%;
-  --secondary: 40 28% 96%;
-  --secondary-foreground: 220 18% 18%;
-  --muted: 40 20% 96%;
-  --muted-foreground: 220 10% 42%;
-  --accent: 40 100% 45%;
-  --accent-foreground: 0 0% 0%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
-  --border: 40 18% 90%;
-  --input: 40 18% 90%;
-  --ring: 40 100% 45%;
+  --card-foreground: 0 0% 4%;
+  --secondary: 0 0% 98%;
+  --secondary-foreground: 0 0% 15%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 40%;
+  --accent: 40 85% 38%;
+  --accent-foreground: 0 0% 4%;
+  --border: 0 0% 90%;
+  --input: 0 0% 90%;
+  --ring: 40 85% 38%;
   --radius: 0rem;
-  --ink: 220 18% 14%;
-  --bg2: 40 30% 98%;
-  --bg2-hsl: 40 30% 98%;
-  --sidebar-background: 0 0% 100%;
-  --sidebar-foreground: 220 10% 35%;
-  --sidebar-primary: 40 100% 45%;
-  --sidebar-primary-foreground: 0 0% 0%;
-  --sidebar-accent: 40 25% 96%;
-  --sidebar-accent-foreground: 220 18% 14%;
-  --sidebar-border: 40 18% 90%;
-  --sidebar-ring: 40 100% 45%;
 }
 
 @theme inline {
@@ -50,7 +34,8 @@
   --color-card: hsl(var(--card));
   --color-secondary: hsl(var(--secondary));
   --color-muted: hsl(var(--muted));
-  --font-sans: "Ubuntu Local", "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Ubuntu", "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Ubuntu Mono", "SF Mono", "Fira Code", "Consolas", monospace;
 }
 
 html {
@@ -59,8 +44,8 @@ html {
 }
 
 body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
+  background-color: #ffffff;
+  color: #0a0a0a;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--font-sans);
@@ -76,9 +61,10 @@ h6 {
   font-family: var(--font-sans);
   letter-spacing: -0.03em;
   font-weight: 700;
+  color: #0a0a0a;
 }
 
 ::selection {
-  background: hsl(var(--gold) / 0.18);
-  color: hsl(var(--foreground));
+  background: rgba(196, 146, 0, 0.15);
+  color: #0a0a0a;
 }

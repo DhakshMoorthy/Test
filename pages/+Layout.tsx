@@ -1,7 +1,6 @@
 import "./Layout.css";
 import "./tailwind.css";
-import "../assets/styles/src_index.css";
-import "./theme-overrides.css";
+import "./robotic.css";
 import SiteNav from "../components/layout/SiteNav";
 
 export default function Layout({ children }: { children: React.ReactNode }) {

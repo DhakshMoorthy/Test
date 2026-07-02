@@ -8,7 +8,7 @@ export default function SiteNav() {
   return (
     <>
       <nav className="fixed inset-x-0 top-0 z-[1000]">
-        <div className="relative mx-auto mt-3 flex h-14 w-[calc(100%-16px)] min-w-0 items-center gap-2 rounded-[22px] border border-[#E8A000]/20 bg-white/72 px-3 shadow-[0_8px_32px_rgba(0,0,0,0.06)] backdrop-blur-xl sm:mt-4 sm:h-[68px] sm:w-[calc(100%-32px)] sm:gap-3 sm:px-5 lg:mt-5 lg:w-[calc(100%-40px)] lg:max-w-[2000px] lg:gap-6 lg:rounded-[26px] lg:px-8">
+        <div className="relative mx-auto mt-3 flex h-14 w-[calc(100%-16px)] min-w-0 items-center gap-2 rounded-[22px] border border-[#0a0a0a]/8 bg-white/80 px-3 shadow-[0_8px_32px_rgba(0,0,0,0.04)] backdrop-blur-xl sm:mt-4 sm:h-[68px] sm:w-[calc(100%-32px)] sm:gap-3 sm:px-5 lg:mt-5 lg:w-[calc(100%-40px)] lg:max-w-[2000px] lg:gap-6 lg:rounded-[26px] lg:px-8">
           <a
             href="/in"
             className="flex min-w-0 shrink items-center gap-2 no-underline sm:gap-2.5 lg:gap-3"
@@ -18,20 +18,20 @@ export default function SiteNav() {
               alt={SITE.name}
               className="kw-logo h-6 w-auto sm:h-7 lg:h-8"
             />
-            <div className="hidden h-[28px] min-w-0 items-center gap-1.5 rounded-full border border-[#E8A000]/25 bg-white/80 px-2.5 sm:inline-flex lg:px-3">
+            <div className="hidden h-[28px] min-w-0 items-center gap-1.5 rounded-full border border-[#0a0a0a]/10 bg-white/80 px-2.5 sm:inline-flex lg:px-3">
               <img
                 src={SITE.stagIcon}
                 alt=""
-                className="h-[14px] w-[14px] shrink-0"
+                className="h-[14px] w-[14px] shrink-0 opacity-80"
               />
-              <span className="whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.04em] text-[#E8A000]">
+              <span className="whitespace-nowrap font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-[#0a0a0a]/70">
                 AI FIRST
               </span>
               <span
-                className="h-[12px] w-px shrink-0 bg-[#E8A000]/30"
+                className="h-[12px] w-px shrink-0 bg-[#0a0a0a]/15"
                 aria-hidden="true"
               />
-              <span className="whitespace-nowrap text-[11px] font-medium uppercase tracking-[0.04em] text-[#1a1a1a]">
+              <span className="whitespace-nowrap font-mono text-[10px] font-medium uppercase tracking-[0.06em] text-[#0a0a0a]">
                 SAP
               </span>
             </div>
@@ -43,11 +43,11 @@ export default function SiteNav() {
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    className="inline-flex h-[30px] shrink-0 items-center gap-1 rounded-full px-3 py-0 text-[15px] font-medium tracking-[-0.01em] text-[#1a1a1a]/85 transition-all duration-200 hover:bg-[#E8A000]/8 hover:text-[#1a1a1a] xl:px-3.5 xl:text-[16px]"
+                    className="inline-flex h-[30px] shrink-0 items-center gap-1 rounded-full px-3 py-0 text-[15px] font-medium tracking-[-0.01em] text-[#0a0a0a]/80 transition-all duration-200 hover:bg-[#0a0a0a]/5 hover:text-[#0a0a0a] xl:px-3.5 xl:text-[16px]"
                   >
                     <span>{item.label}</span>
                     <ChevronDown
-                      className="h-[14px] w-[14px] shrink-0 text-[#E8A000]"
+                      className="h-[14px] w-[14px] shrink-0 text-[#0a0a0a]/30"
                       aria-hidden="true"
                     />
                   </a>
@@ -81,10 +81,7 @@ export default function SiteNav() {
 
               <a
                 href="#contact"
-                className="inline-flex h-[30px] shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full border-none px-6 text-[15px] font-semibold leading-none text-[#141414] transition-all duration-200 hover:brightness-105"
-                style={{
-                  background: "linear-gradient(135deg, #E8A000, #ffd86b)",
-                }}
+                className="inline-flex h-[30px] shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-[#0a0a0a]/12 bg-[#0a0a0a] px-6 text-[15px] font-semibold leading-none text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)]"
               >
                 Contact us
               </a>
@@ -119,8 +116,7 @@ export default function SiteNav() {
             ))}
             <a
               href="#contact"
-              className="inline-flex h-10 items-center justify-center rounded-full px-8 text-[15px] font-semibold text-[#141414]"
-              style={{ background: "linear-gradient(135deg, #E8A000, #ffd86b)" }}
+              className="inline-flex h-10 items-center justify-center rounded-full bg-[#0a0a0a] px-8 text-[15px] font-semibold text-white"
               onClick={() => setMobileOpen(false)}
             >
               Contact us
