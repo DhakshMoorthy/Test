@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+@source "../content/**/*.html";
+@source "../components/**/*.{tsx,ts}";
+
 :root {
   --gold: 40 100% 45%;
   --gold-light: 43 100% 48%;

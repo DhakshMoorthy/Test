@@ -6,7 +6,7 @@
     "dev": "vike dev --host 0.0.0.0 --port 3000",
     "build": "vike build",
     "preview": "vike build && vike preview --host 0.0.0.0 --port 3000",
-    "start": "vike preview --host 0.0.0.0 --port 3000"
+    "start": "vike build && vike preview --host 0.0.0.0 --port 3000"
   },
   "dependencies": {
     "lucide-react": "^1.22.0",
