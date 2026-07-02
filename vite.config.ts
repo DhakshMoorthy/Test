@@ -5,4 +5,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [vike(), react(), tailwindcss()],
+  server: {
+    host: true,
+    allowedHosts: [".cursorvm.com", "localhost"],
+  },
 });
