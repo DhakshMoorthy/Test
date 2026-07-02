@@ -12,10 +12,15 @@
   transform: none !important;
 }
 
-/* Black logo on white nav */
-.kw-logo,
-.kw-site-content img[alt="Kannanware"] {
+/* Black logo on white nav — keep footer logo in color */
+.kw-logo {
   filter: brightness(0);
+}
+
+.kw-site-content footer img[alt="Kannanware"] {
+  filter: none !important;
+  height: 2rem !important;
+  width: auto !important;
 }
 
 .kw-site-content {
@@ -198,4 +203,65 @@
 .kw-site-content a[style*="linear-gradient"]:hover {
   transform: translateY(-1px);
   transition: transform 0.2s ease;
+}
+
+/* Inline white text from production HTML → black/dark */
+.kw-site-content [style*="color:#ffffff"],
+.kw-site-content [style*="color: #ffffff"],
+.kw-site-content [style*="color:#fff"],
+.kw-site-content [style*="color: #fff"] {
+  color: hsl(var(--foreground)) !important;
+}
+
+.kw-site-content [style*="color:rgba(255,255,255"],
+.kw-site-content [style*="color: rgba(255,255,255"] {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.kw-site-content [style*="color:rgba(255,255,255,.9)"],
+.kw-site-content [style*="color:rgba(255,255,255,.95)"],
+.kw-site-content [style*="color:rgba(255,255,255,.92)"],
+.kw-site-content [style*="color:rgba(255,255,255,.85)"],
+.kw-site-content [style*="color:rgba(255,255,255,.8)"] {
+  color: hsl(var(--foreground) / 0.9) !important;
+}
+
+/* Form inputs: light bg, dark text */
+.kw-site-content footer input,
+.kw-site-content footer textarea,
+.kw-site-content footer select {
+  background: hsl(var(--secondary)) !important;
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.kw-site-content footer input::placeholder,
+.kw-site-content footer textarea::placeholder {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.kw-site-content footer label {
+  color: hsl(var(--gold)) !important;
+}
+
+/* Metrics stat numbers: gold accent on white */
+.kw-site-content #metrics .text-white {
+  color: hsl(var(--gold)) !important;
+}
+
+/* Dark card backgrounds → light */
+.kw-site-content [style*="background:rgba(255,255,255,.025)"],
+.kw-site-content [style*="background:rgba(255,255,255,.04)"],
+.kw-site-content [style*="background:rgba(255,255,255,.065)"],
+.kw-site-content [style*="background:rgba(255,255,255,.03)"] {
+  background: hsl(var(--secondary)) !important;
+}
+
+.kw-site-content [style*="background:#faf8f2"] {
+  background: #faf8f2 !important;
+}
+
+/* AI Joule demo panel */
+.kw-site-content [style*="color:rgba(255,255,255,.8)"] {
+  color: hsl(var(--foreground) / 0.85) !important;
 }

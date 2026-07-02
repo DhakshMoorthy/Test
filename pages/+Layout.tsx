@@ -1,5 +1,6 @@
 import "./Layout.css";
 import "./tailwind.css";
+import "../public/assets/static/src_index.css";
 import "./theme-overrides.css";
 import SiteNav from "../components/layout/SiteNav";
 
