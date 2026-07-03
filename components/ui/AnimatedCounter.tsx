@@ -30,11 +30,7 @@ export default function AnimatedCounter({
       duration,
       ease: "power2.out",
       onUpdate: () =>
-        setDisplay(
-          isDecimal
-            ? Math.round(obj.val * 10) / 10
-            : Math.round(obj.val)
-        ),
+        setDisplay(isDecimal ? Math.round(obj.val * 10) / 10 : Math.round(obj.val)),
     });
   }, [value, duration]);
 
@@ -42,7 +38,7 @@ export default function AnimatedCounter({
 
   return (
     <span className={className}>
-      <span className="text-accent mr-1">{arrow}</span>
+      {direction && <span className="text-accent mr-1">{arrow}</span>}
       {prefix}
       {display}
       {suffix}

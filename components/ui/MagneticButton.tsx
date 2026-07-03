@@ -3,8 +3,7 @@
 import { useMagnetic } from "@/lib/hooks/useMagnetic";
 import { cn } from "@/lib/utils";
 
-interface MagneticButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "ghost";
   size?: "sm" | "md" | "lg";
   children: React.ReactNode;
@@ -17,15 +16,12 @@ export default function MagneticButton({
   children,
   ...props
 }: MagneticButtonProps) {
-  const { ref, handleMouseMove, handleMouseLeave, handleMouseEnter } =
-    useMagnetic(0.25);
+  const { ref, handleMouseMove, handleMouseLeave, handleMouseEnter } = useMagnetic(0.25);
 
   const variants = {
-    primary:
-      "bg-accent text-white shadow-[0_4px_20px_rgba(37,99,235,0.35)] hover:shadow-[0_8px_28px_rgba(37,99,235,0.45)] hover:bg-accent-light",
-    secondary:
-      "bg-white text-foreground border border-border hover:border-accent/30 hover:bg-accent-pale",
-    ghost: "text-muted hover:text-accent hover:bg-accent-pale",
+    primary: "bg-accent text-[#090909] shadow-[0_4px_20px_rgba(250,171,24,0.4)] hover:bg-accent-light hover:shadow-[0_8px_28px_rgba(250,171,24,0.5)]",
+    secondary: "bg-white text-foreground border border-border hover:border-accent/40 hover:bg-accent-pale",
+    ghost: "text-muted hover:text-accent-dark hover:bg-accent-pale",
   };
 
   const sizes = {
@@ -38,7 +34,7 @@ export default function MagneticButton({
     <button
       ref={ref as React.RefObject<HTMLButtonElement>}
       className={cn(
-        "relative inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-300",
+        "relative inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-300",
         variants[variant],
         sizes[size],
         className

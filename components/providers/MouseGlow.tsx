@@ -15,8 +15,7 @@ export default function MouseGlow() {
         top: position.y - 180,
         width: 360,
         height: 360,
-        background:
-          "radial-gradient(circle, rgba(37, 99, 235, 0.06) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(250, 171, 24, 0.07) 0%, transparent 70%)",
         transition: "opacity 0.4s ease",
       }}
       aria-hidden

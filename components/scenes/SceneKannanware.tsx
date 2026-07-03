@@ -3,18 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import dynamic from "next/dynamic";
 import SectionLayout from "@/components/ui/SectionLayout";
+import ERPIllustration from "@/components/illustrations/ERPIllustration";
 import { DEPARTMENTS } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const SceneCanvas = dynamic(() => import("@/components/three/SceneCanvas"), {
-  ssr: false,
-});
-const ERPCore = dynamic(() => import("@/components/three/ERPCore"), {
-  ssr: false,
-});
 
 export default function SceneKannanware() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -23,7 +16,6 @@ export default function SceneKannanware() {
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
-
     const trigger = ScrollTrigger.create({
       trigger: el,
       start: "top 70%",
@@ -31,7 +23,6 @@ export default function SceneKannanware() {
       scrub: 0.6,
       onUpdate: (self) => setProgress(self.progress),
     });
-
     return () => trigger.kill();
   }, []);
 
@@ -48,13 +39,9 @@ export default function SceneKannanware() {
             <span className="gradient-text">Total Unity.</span>
           </>
         }
-        description="Kannanware ERP connects every department through a single intelligent core — replacing fragmentation with clarity."
+        description="Kannanware connects every SAP module through a single intelligent core — replacing fragmentation with clarity across finance, supply chain, and operations."
         reverse
-        visual={
-          <SceneCanvas camera={{ position: [4, 3.5, 4], fov: 42 }}>
-            <ERPCore progress={progress} rotationProgress={progress} />
-          </SceneCanvas>
-        }
+        visual={<ERPIllustration progress={progress} />}
       >
         <div className="flex flex-wrap gap-2">
           {DEPARTMENTS.map((dept, i) => (
@@ -62,7 +49,7 @@ export default function SceneKannanware() {
               key={dept.id}
               className={`rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-500 ${
                 i < connectedCount
-                  ? "bg-accent-pale text-accent ring-1 ring-accent/20"
+                  ? "bg-accent-pale text-accent-dark ring-1 ring-accent/30"
                   : "bg-surface text-muted ring-1 ring-border"
               }`}
             >

@@ -1,10 +1,22 @@
+export const BRAND = {
+  primary: "#faab18",
+  light: "#fbbf24",
+  dark: "#d4890a",
+  pale: "#fff8eb",
+  soft: "#fef3c7",
+  glow: "#fcd34d",
+  navBg: "#090909",
+  navBorder: "#5a4308",
+  navAccent: "#f0b21d",
+} as const;
+
 export const COLORS = {
   background: "#FFFFFF",
-  surface: "#F8FAFC",
-  surfaceLight: "#F1F5F9",
-  accent: "#2563EB",
-  accentLight: "#3B82F6",
-  accentGlow: "#60A5FA",
+  surface: "#FAFAFA",
+  surfaceLight: "#F5F5F5",
+  accent: BRAND.primary,
+  accentLight: BRAND.light,
+  accentGlow: BRAND.glow,
   text: "#0F172A",
   textMuted: "#64748B",
   success: "#10B981",
@@ -32,19 +44,19 @@ export const ORDER_STEPS = [
 ] as const;
 
 export const AI_AGENTS = [
-  { id: "forecast", label: "Demand Forecasting", description: "Predict demand with AI-driven models" },
+  { id: "forecast", label: "Demand Forecasting", description: "Predict demand with AI-driven SAP models" },
   { id: "anomaly", label: "Risk Detection", description: "Spot anomalies before they escalate" },
-  { id: "approve", label: "Auto Approvals", description: "Smart workflow automation" },
+  { id: "approve", label: "Auto Approvals", description: "Joule-powered workflow automation" },
   { id: "inventory", label: "Cost Optimization", description: "Reduce spend across operations" },
 ] as const;
 
 export const INDUSTRIES = [
-  { id: "manufacturing", label: "Manufacturing", color: "#2563EB", description: "Smart factories with real-time production tracking" },
-  { id: "retail", label: "Retail", color: "#7C3AED", description: "Omnichannel inventory and customer experience" },
+  { id: "manufacturing", label: "Manufacturing", color: "#faab18", description: "Smart factories with real-time SAP production tracking" },
+  { id: "retail", label: "Retail", color: "#e89b0c", description: "Omnichannel inventory and customer experience" },
   { id: "healthcare", label: "Healthcare", color: "#10B981", description: "Patient records and supply chain compliance" },
-  { id: "construction", label: "Construction", color: "#F59E0B", description: "Project costing and resource allocation" },
-  { id: "logistics", label: "Logistics", color: "#06B6D4", description: "Fleet management and route optimization" },
-  { id: "automotive", label: "Automotive", color: "#EF4444", description: "Supply chain and quality control" },
+  { id: "energy", label: "Energy", color: "#f59e0b", description: "Asset lifecycle and commodity management" },
+  { id: "logistics", label: "Logistics", color: "#d4890a", description: "Fleet management and route optimization" },
+  { id: "financial", label: "Financial Services", color: "#b45309", description: "SOX-compliant finance and treasury" },
 ] as const;
 
 export const KPI_METRICS = [
@@ -71,11 +83,11 @@ export const CHAOS_WARNINGS = [
 ] as const;
 
 export const NAV_LINKS = [
-  { href: "#solution", label: "Solutions" },
+  { href: "#solution", label: "Products" },
   { href: "#industries", label: "Industries" },
+  { href: "#ai", label: "Capabilities" },
   { href: "#journey", label: "Services" },
-  { href: "#ai", label: "Resources" },
-  { href: "#finale", label: "About Us" },
+  { href: "#finale", label: "About us" },
 ] as const;
 
 export const HERO_STATS = [

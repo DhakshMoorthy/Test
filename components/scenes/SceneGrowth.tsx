@@ -3,19 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import dynamic from "next/dynamic";
 import SectionLayout from "@/components/ui/SectionLayout";
+import GrowthIllustration from "@/components/illustrations/GrowthIllustration";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { KPI_METRICS } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const SceneCanvas = dynamic(() => import("@/components/three/SceneCanvas"), {
-  ssr: false,
-});
-const SmartCity = dynamic(() => import("@/components/three/SmartCity"), {
-  ssr: false,
-});
 
 export default function SceneGrowth() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -24,7 +17,6 @@ export default function SceneGrowth() {
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
-
     const trigger = ScrollTrigger.create({
       trigger: el,
       start: "top 65%",
@@ -32,7 +24,6 @@ export default function SceneGrowth() {
       scrub: 0.5,
       onUpdate: (self) => setProgress(self.progress),
     });
-
     return () => trigger.kill();
   }, []);
 
@@ -43,17 +34,13 @@ export default function SceneGrowth() {
         badge="07 — Business Growth"
         title={
           <>
-            Watch Your City{" "}
+            Watch Your Operations{" "}
             <span className="gradient-text">Get Smarter</span>
           </>
         }
-        description="As Kannanware takes hold, your operations evolve — buildings connect, routes optimize, and data flows in real time."
+        description="As Kannanware takes hold, your infrastructure evolves — buildings connect, routes optimize, and SAP data flows in real time."
         reverse
-        visual={
-          <SceneCanvas camera={{ position: [3.5, 4, 3.5], fov: 42 }}>
-            <SmartCity progress={progress} />
-          </SceneCanvas>
-        }
+        visual={<GrowthIllustration progress={progress} />}
       >
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {KPI_METRICS.slice(0, 5).map((metric) => (

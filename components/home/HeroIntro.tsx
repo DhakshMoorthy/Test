@@ -1,18 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
 import MagneticButton from "@/components/ui/MagneticButton";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import VisualPanel from "@/components/ui/VisualPanel";
+import HeroIllustration from "@/components/illustrations/HeroIllustration";
 import { HERO_STATS } from "@/lib/constants";
-
-const SceneCanvas = dynamic(() => import("@/components/three/SceneCanvas"), {
-  ssr: false,
-});
-const HeroEcosystem = dynamic(
-  () => import("@/components/three/HeroEcosystem"),
-  { ssr: false }
-);
 
 export default function HeroIntro() {
   return (
@@ -25,9 +18,9 @@ export default function HeroIntro() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-accent mb-4 text-sm font-semibold tracking-wide"
+            className="text-accent-dark mb-4 text-sm font-semibold tracking-wide"
           >
-            SAP ERP · AI · Digital Transformation
+            AI-First SAP Consulting · Implementation · Run
           </motion.p>
 
           <motion.h1
@@ -36,14 +29,14 @@ export default function HeroIntro() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="font-display text-4xl leading-[1.1] font-bold tracking-tight md:text-5xl lg:text-6xl"
           >
-            Transform Your Business with{" "}
-            <span className="gradient-text">Intelligent ERP</span>
+            SAP Transformation with{" "}
+            <span className="gradient-text">Embedded AI</span>
           </motion.h1>
 
           <ScrollReveal delay={0.35}>
             <p className="text-muted mt-6 max-w-lg text-lg leading-relaxed">
-              Kannanware unifies finance, operations, and AI into one seamless
-              platform — so your teams move faster and decisions get smarter.
+              AI-powered SAP solutions automating reconciliation, strengthening
+              controls, and delivering governed insights your board can trust.
             </p>
           </ScrollReveal>
 
@@ -56,33 +49,27 @@ export default function HeroIntro() {
             <MagneticButton
               size="lg"
               onClick={() =>
-                document
-                  .getElementById("finale")
-                  ?.scrollIntoView({ behavior: "smooth" })
+                document.getElementById("finale")?.scrollIntoView({ behavior: "smooth" })
               }
             >
-              Book a Demo
+              Explore AI Solutions →
             </MagneticButton>
             <MagneticButton
               variant="secondary"
               size="lg"
               onClick={() =>
-                document
-                  .getElementById("chaos")
-                  ?.scrollIntoView({ behavior: "smooth" })
+                document.getElementById("chaos")?.scrollIntoView({ behavior: "smooth" })
               }
             >
-              See How It Works
+              See AI in Action
             </MagneticButton>
           </motion.div>
         </div>
 
         <div className="relative">
-          <div className="canvas-panel !h-[20rem] lg:!h-[26rem]">
-            <SceneCanvas camera={{ position: [4.5, 3.5, 4.5], fov: 40 }}>
-              <HeroEcosystem />
-            </SceneCanvas>
-          </div>
+          <VisualPanel className="!h-[20rem] lg:!h-[26rem]">
+            <HeroIllustration />
+          </VisualPanel>
 
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -96,12 +83,10 @@ export default function HeroIntro() {
             <div className="mt-3 space-y-3">
               {HERO_STATS.map((stat) => (
                 <div key={stat.label} className="flex items-center justify-between">
-                  <span className="text-sm text-foreground">{stat.label}</span>
+                  <span className="text-sm">{stat.label}</span>
                   <div className="text-right">
                     <span className="text-sm font-semibold">{stat.value}</span>
-                    <span className="ml-2 text-xs font-medium text-green-500">
-                      {stat.trend}
-                    </span>
+                    <span className="ml-2 text-xs font-medium text-green-600">{stat.trend}</span>
                   </div>
                 </div>
               ))}

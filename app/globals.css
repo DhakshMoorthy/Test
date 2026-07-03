@@ -4,18 +4,23 @@
   --background: #FFFFFF;
   --foreground: #0F172A;
   --muted: #64748B;
-  --surface: #F8FAFC;
-  --surface-light: #F1F5F9;
-  --border: #E2E8F0;
-  --accent: #2563EB;
-  --accent-light: #3B82F6;
-  --accent-glow: #60A5FA;
-  --accent-pale: #EFF6FF;
+  --surface: #FAFAFA;
+  --surface-light: #F5F5F5;
+  --border: #E8E8E8;
+  --accent: #faab18;
+  --accent-light: #fbbf24;
+  --accent-dark: #d4890a;
+  --accent-glow: #fcd34d;
+  --accent-pale: #fff8eb;
+  --accent-soft: #fef3c7;
   --glass: rgba(255, 255, 255, 0.72);
-  --glass-border: rgba(226, 232, 240, 0.9);
-  --glow: rgba(37, 99, 235, 0.15);
+  --glass-border: rgba(232, 232, 232, 0.9);
+  --glow: rgba(250, 171, 24, 0.2);
   --shadow-soft: 0 4px 24px rgba(15, 23, 42, 0.06);
-  --shadow-card: 0 8px 32px rgba(37, 99, 235, 0.08);
+  --shadow-card: 0 8px 32px rgba(250, 171, 24, 0.12);
+  --nav-bg: #090909;
+  --nav-border: #5a4308;
+  --nav-accent: #f0b21d;
 }
 
 @theme inline {
@@ -27,90 +32,60 @@
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-light: var(--accent-light);
+  --color-accent-dark: var(--accent-dark);
   --color-accent-glow: var(--accent-glow);
   --color-accent-pale: var(--accent-pale);
+  --color-accent-soft: var(--accent-soft);
   --font-sans: var(--font-inter);
   --font-display: var(--font-space);
 }
 
-html {
-  scroll-behavior: auto;
-}
-
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
+html { scroll-behavior: auto; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
 ::selection {
-  background: rgba(37, 99, 235, 0.15);
+  background: rgba(250, 171, 24, 0.25);
   color: var(--foreground);
 }
 
-.font-display {
-  font-family: var(--font-space), system-ui, sans-serif;
-}
+.font-display { font-family: var(--font-space), system-ui, sans-serif; }
 
 .glass {
   background: var(--glass);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow-soft);
 }
 
-.glass-strong,
 .glass-nav {
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(9, 9, 9, 0.95);
   backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(226, 232, 240, 0.95);
-  box-shadow: 0 8px 40px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
+  border: 1px solid var(--nav-border);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.38);
 }
 
-.glow-accent {
-  box-shadow: var(--shadow-card);
-}
-
-.glow-text {
-  text-shadow: none;
-}
+.glow-accent { box-shadow: var(--shadow-card); }
 
 .gradient-text {
-  background: linear-gradient(135deg, #2563EB 0%, #3B82F6 50%, #60A5FA 100%);
+  background: linear-gradient(135deg, #d4890a 0%, #faab18 50%, #fbbf24 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .animated-gradient {
-  background: linear-gradient(
-    180deg,
-    #FFFFFF 0%,
-    #F8FAFC 40%,
-    #EFF6FF 100%
-  );
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFFCF5 50%, #FFF8EB 100%);
 }
 
 .section-badge {
@@ -124,7 +99,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-dark);
 }
 
 .white-card {
@@ -140,72 +115,52 @@ body {
   transform: translateY(-2px);
 }
 
-.scene-section {
-  position: relative;
-  width: 100%;
-  padding: 6rem 0;
-}
+.scene-section { position: relative; width: 100%; padding: 6rem 0; }
+@media (min-width: 1024px) { .scene-section { padding: 8rem 0; } }
 
-@media (min-width: 1024px) {
-  .scene-section {
-    padding: 8rem 0;
-  }
-}
-
-.canvas-panel {
+.visual-panel {
   position: relative;
   height: 22rem;
   border-radius: 1.5rem;
   overflow: hidden;
-  background: linear-gradient(145deg, #F8FAFC 0%, #EFF6FF 100%);
+  background: linear-gradient(145deg, #FFFCF8 0%, #FFF5E0 100%);
   border: 1px solid var(--border);
 }
 
-@media (min-width: 1024px) {
-  .canvas-panel {
-    height: 28rem;
-  }
-}
+@media (min-width: 1024px) { .visual-panel { height: 28rem; } }
 
-.canvas-container {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.scene-content {
-  position: relative;
-  z-index: 10;
-}
+.visual-panel svg { width: 100%; height: 100%; display: block; }
 
 .noise-overlay {
   pointer-events: none;
   position: fixed;
   inset: 0;
   z-index: 9998;
-  opacity: 0.015;
+  opacity: 0.012;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: rgba(250, 171, 24, 0.4); border-radius: 3px; }
+
+@keyframes dash-flow {
+  to { stroke-dashoffset: -20; }
 }
-::-webkit-scrollbar-track {
-  background: var(--surface);
+
+.animate-dash {
+  stroke-dasharray: 6 4;
+  animation: dash-flow 1.5s linear infinite;
 }
-::-webkit-scrollbar-thumb {
-  background: rgba(37, 99, 235, 0.3);
-  border-radius: 3px;
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
+
+.animate-float { animation: float-y 4s ease-in-out infinite; }

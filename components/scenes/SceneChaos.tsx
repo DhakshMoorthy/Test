@@ -1,16 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
 import SectionLayout from "@/components/ui/SectionLayout";
+import ChaosIllustration from "@/components/illustrations/ChaosIllustration";
 import { CHAOS_WARNINGS } from "@/lib/constants";
-
-const SceneCanvas = dynamic(() => import("@/components/three/SceneCanvas"), {
-  ssr: false,
-});
-const ChaosWorld = dynamic(() => import("@/components/three/ChaosWorld"), {
-  ssr: false,
-});
 
 export default function SceneChaos() {
   return (
@@ -23,12 +16,8 @@ export default function SceneChaos() {
           <span className="text-red-500">Chaos</span>
         </>
       }
-      description="Manual processes, siloed data, and delayed decisions slow your entire operation. Every team works harder — but nothing moves faster."
-      visual={
-        <SceneCanvas camera={{ position: [3.5, 3, 3.5], fov: 42 }}>
-          <ChaosWorld />
-        </SceneCanvas>
-      }
+      description="Manual processes, siloed SAP modules, and delayed decisions slow your entire operation. Every team works harder — but nothing moves faster."
+      visual={<ChaosIllustration />}
     >
       <div className="flex flex-wrap gap-2">
         {CHAOS_WARNINGS.map((warning, i) => (

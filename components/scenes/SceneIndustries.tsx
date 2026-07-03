@@ -1,22 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import dynamic from "next/dynamic";
 import SectionLayout from "@/components/ui/SectionLayout";
+import IndustryIllustration from "@/components/illustrations/IndustryIllustration";
 import { INDUSTRIES } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const SceneCanvas = dynamic(() => import("@/components/three/SceneCanvas"), {
-  ssr: false,
-});
-const IndustryWorlds = dynamic(
-  () => import("@/components/three/IndustryWorlds"),
-  { ssr: false }
-);
 
 export default function SceneIndustries() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -25,7 +16,6 @@ export default function SceneIndustries() {
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
-
     const trigger = ScrollTrigger.create({
       trigger: el,
       start: "top 60%",
@@ -36,7 +26,6 @@ export default function SceneIndustries() {
         setIndustryIndex(Math.min(idx, INDUSTRIES.length - 1));
       },
     });
-
     return () => trigger.kill();
   }, []);
 
@@ -49,31 +38,21 @@ export default function SceneIndustries() {
         badge="06 — Industry Modules"
         title={
           <>
-            Built for{" "}
-            <span className="gradient-text">Your Industry</span>
+            Deep Experience{" "}
+            <span className="gradient-text">Across Every Sector</span>
           </>
         }
-        description="Purpose-built modules for manufacturing, retail, healthcare, and more — each tailored to your sector's unique workflows."
-        visual={
-          <SceneCanvas camera={{ position: [0, 2, 5], fov: 42 }}>
-            <IndustryWorlds industryIndex={industryIndex} />
-          </SceneCanvas>
-        }
+        description="Purpose-built SAP modules for manufacturing, retail, healthcare, energy, and more — each tailored to your industry's unique workflows."
+        visual={<IndustryIllustration index={industryIndex} />}
       >
-        <motion.div
-          key={current.id}
-          initial={{ opacity: 0, x: 12 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.35 }}
+        <div
           className="white-card p-5"
+          style={{ borderColor: `${current.color}33` }}
         >
-          <div
-            className="mb-2 h-1 w-10 rounded-full"
-            style={{ background: current.color }}
-          />
+          <div className="mb-2 h-1 w-10 rounded-full" style={{ background: current.color }} />
           <h3 className="font-display text-lg font-bold">{current.label}</h3>
           <p className="text-muted mt-1 text-sm">{current.description}</p>
-        </motion.div>
+        </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
           {INDUSTRIES.map((ind, i) => (
@@ -83,8 +62,8 @@ export default function SceneIndustries() {
               onClick={() => setIndustryIndex(i)}
               className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-all duration-300 ${
                 i === industryIndex
-                  ? "bg-accent text-white shadow-[0_4px_16px_rgba(37,99,235,0.3)]"
-                  : "bg-surface text-muted ring-1 ring-border hover:text-accent"
+                  ? "bg-accent text-[#090909] shadow-[0_4px_16px_rgba(250,171,24,0.35)]"
+                  : "bg-surface text-muted ring-1 ring-border hover:text-accent-dark"
               }`}
             >
               {ind.label}

@@ -1,16 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
 import SectionLayout from "@/components/ui/SectionLayout";
+import AIIllustration from "@/components/illustrations/AIIllustration";
 import { AI_AGENTS } from "@/lib/constants";
-
-const SceneCanvas = dynamic(() => import("@/components/three/SceneCanvas"), {
-  ssr: false,
-});
-const AIAgents3D = dynamic(() => import("@/components/three/AIAgents3D"), {
-  ssr: false,
-});
 
 export default function SceneAIAgents() {
   return (
@@ -19,17 +12,13 @@ export default function SceneAIAgents() {
       badge="04 — AI Integration"
       title={
         <>
-          AI That Works{" "}
+          SAP Joule AI That Works{" "}
           <span className="gradient-text">Alongside Your Team</span>
         </>
       }
-      description="Intelligent agents monitor, predict, and act — so your people focus on strategy while AI handles the routine."
+      description="Intelligent agents monitor, predict, and act across your SAP landscape — so your people focus on strategy while AI handles the routine."
       reverse
-      visual={
-        <SceneCanvas camera={{ position: [0, 1.2, 3.5], fov: 42 }}>
-          <AIAgents3D />
-        </SceneCanvas>
-      }
+      visual={<AIIllustration />}
     >
       <div className="grid gap-3 sm:grid-cols-2">
         {AI_AGENTS.map((agent, i) => (

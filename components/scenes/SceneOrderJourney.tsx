@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionLayout from "@/components/ui/SectionLayout";
+import OrderFlowIllustration from "@/components/illustrations/OrderFlowIllustration";
 import { ORDER_STEPS } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,7 +16,6 @@ export default function SceneOrderJourney() {
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
-
     const trigger = ScrollTrigger.create({
       trigger: el,
       start: "top 60%",
@@ -27,7 +26,6 @@ export default function SceneOrderJourney() {
         setActiveStep(Math.min(step, ORDER_STEPS.length - 1));
       },
     });
-
     return () => trigger.kill();
   }, []);
 
@@ -42,38 +40,8 @@ export default function SceneOrderJourney() {
             <span className="gradient-text">Seamlessly</span>
           </>
         }
-        description="Watch a single order flow through your entire business — every handoff visible, every step automated."
-        visual={
-          <div className="flex h-full items-center justify-center p-6">
-            <div className="grid w-full max-w-sm grid-cols-3 gap-3">
-              {ORDER_STEPS.map((step, i) => (
-                <motion.div
-                  key={step.id}
-                  animate={{
-                    scale: i === activeStep ? 1.05 : 1,
-                    opacity: i <= activeStep ? 1 : 0.45,
-                  }}
-                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  className={`flex flex-col items-center rounded-xl p-3 text-center transition-colors duration-300 ${
-                    i === activeStep
-                      ? "bg-accent-pale ring-2 ring-accent/30"
-                      : i < activeStep
-                        ? "bg-white ring-1 ring-border"
-                        : "bg-surface ring-1 ring-border"
-                  }`}
-                >
-                  <span className="text-xl">{step.icon}</span>
-                  <span className="mt-1.5 text-[10px] leading-tight font-medium">
-                    {step.label}
-                  </span>
-                  {i < activeStep && (
-                    <span className="mt-1 text-[9px] text-green-500">✓</span>
-                  )}
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        }
+        description="Watch a single order flow through sales, warehouse, production, and finance — every handoff visible in SAP, every step automated."
+        visual={<OrderFlowIllustration activeStep={activeStep} />}
       >
         <div className="white-card inline-flex items-center gap-3 px-5 py-3">
           <span className="text-2xl">{ORDER_STEPS[activeStep].icon}</span>

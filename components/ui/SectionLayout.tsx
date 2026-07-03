@@ -1,11 +1,12 @@
 import { cn } from "@/lib/utils";
+import VisualPanel from "@/components/ui/VisualPanel";
 
 interface SectionLayoutProps {
   id?: string;
   badge: string;
   title: React.ReactNode;
   description: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   visual: React.ReactNode;
   reverse?: boolean;
   className?: string;
@@ -34,9 +35,9 @@ export default function SectionLayout({
           </p>
           {children && <div className="mt-8">{children}</div>}
         </div>
-        <div className={cn("canvas-panel", reverse && "lg:order-1")}>
+        <VisualPanel className={cn(reverse && "lg:order-1")}>
           {visual}
-        </div>
+        </VisualPanel>
       </div>
     </section>
   );

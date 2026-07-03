@@ -2,37 +2,28 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
 import MagneticButton from "@/components/ui/MagneticButton";
 import RippleButton from "@/components/ui/RippleButton";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
+import VisualPanel from "@/components/ui/VisualPanel";
+import FinaleIllustration from "@/components/illustrations/FinaleIllustration";
 import { COMPANY_STATS } from "@/lib/constants";
-
-const SceneCanvas = dynamic(() => import("@/components/three/SceneCanvas"), {
-  ssr: false,
-});
-const ParticleLogo = dynamic(
-  () => import("@/components/three/ParticleLogo"),
-  { ssr: false }
-);
 
 export default function SceneFinale() {
   return (
     <section id="finale" className="scene-section overflow-hidden">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="canvas-panel !h-[16rem] md:!h-[20rem]">
-          <SceneCanvas camera={{ position: [0, 0, 6], fov: 45 }}>
-            <ParticleLogo progress={1} />
-          </SceneCanvas>
-        </div>
+        <VisualPanel className="!h-[16rem] md:!h-[20rem]">
+          <FinaleIllustration />
+        </VisualPanel>
 
         <div className="mt-12 text-center">
           <Image
-            src="/logo.svg"
+            src="/assets/kannanware/kw-logo.png"
             alt="Kannanware"
-            width={160}
-            height={36}
-            className="mx-auto h-9 w-auto"
+            width={200}
+            height={40}
+            className="mx-auto h-10 w-auto"
           />
 
           <motion.h2
@@ -47,7 +38,7 @@ export default function SceneFinale() {
           </motion.h2>
 
           <p className="text-muted mx-auto mt-4 max-w-xl">
-            Join thousands of businesses connected in one digital ecosystem.
+            Trusted by enterprises across the Americas to modernize SAP.
           </p>
 
           <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -60,12 +51,8 @@ export default function SceneFinale() {
                 transition={{ delay: i * 0.08, duration: 0.4 }}
                 className="white-card p-4"
               >
-                <p className="font-display text-2xl font-bold text-accent">
-                  <AnimatedCounter
-                    value={stat.value}
-                    suffix={stat.suffix}
-                    duration={2}
-                  />
+                <p className="font-display text-2xl font-bold text-accent-dark">
+                  <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={2} />
                 </p>
                 <p className="text-muted mt-1 text-xs">{stat.label}</p>
               </motion.div>
@@ -76,20 +63,8 @@ export default function SceneFinale() {
             <RippleButton>
               <MagneticButton size="lg" className="group">
                 Book a Demo
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="transition-transform group-hover:translate-x-0.5"
-                >
-                  <path
-                    d="M5 12h14M13 6l6 6-6 6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="transition-transform group-hover:translate-x-0.5">
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </MagneticButton>
             </RippleButton>
