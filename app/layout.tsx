@@ -1,38 +1,54 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
+import MouseGlow from "@/components/providers/MouseGlow";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space",
   subsets: ["latin"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Wrightfully Fit | Fitness Beyond the Gym",
+  title: "Kannanware | Intelligent ERP & AI for Digital Transformation",
   description:
-    "Personal training, luxury wellness retreats, and premium wellness products in Turks & Caicos. Train at our Grace Bay gym or immerse yourself in a 4-day fitness retreat.",
+    "Experience how Kannanware transforms businesses with SAP ERP, AI agents, and digital transformation. Scroll through an interactive story of enterprise evolution.",
   keywords: [
-    "Wrightfully Fit",
-    "personal training",
-    "wellness retreats",
-    "Grace Bay gym",
-    "Turks and Caicos fitness",
-    "luxury wellness",
+    "Kannanware",
+    "SAP ERP",
+    "AI",
+    "Digital Transformation",
+    "Enterprise Resource Planning",
+    "Business Intelligence",
+    "Manufacturing ERP",
+    "Supply Chain",
   ],
   openGraph: {
-    title: "Wrightfully Fit | Fitness Beyond the Gym",
+    title: "Kannanware | Transforming Businesses with Intelligent ERP & AI",
     description:
-      "Personal training, luxury wellness retreats, and premium wellness products in Turks & Caicos.",
+      "An interactive journey through enterprise transformation — from chaos to clarity with Kannanware ERP & AI.",
     type: "website",
     locale: "en_US",
-    siteName: "Wrightfully Fit",
+    siteName: "Kannanware",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kannanware | Intelligent ERP & AI",
+    description:
+      "Transform your business with Kannanware — SAP ERP, AI agents, and digital transformation.",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -42,11 +58,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body
-        className={`${playfair.variable} ${dmSans.variable} font-sans antialiased`}
+        className={`${inter.variable} ${spaceGrotesk.variable} bg-background text-foreground font-sans antialiased`}
       >
-        {children}
+        <SmoothScrollProvider>
+          <MouseGlow />
+          <div className="noise-overlay" aria-hidden />
+          <Navbar />
+          {children}
+          <Footer />
+        </SmoothScrollProvider>
       </body>
     </html>
   );

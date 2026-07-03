@@ -1,23 +1,14 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { cn } from "@/lib/utils";
+import { motion, useInView } from "framer-motion";
 
 interface ScrollRevealProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  direction?: "up" | "down" | "left" | "right" | "none";
+  direction?: "up" | "down" | "left" | "right";
 }
-
-const directionOffset = {
-  up: { y: 40, x: 0 },
-  down: { y: -40, x: 0 },
-  left: { x: 40, y: 0 },
-  right: { x: -40, y: 0 },
-  none: { x: 0, y: 0 },
-};
 
 export default function ScrollReveal({
   children,
@@ -25,17 +16,27 @@ export default function ScrollReveal({
   delay = 0,
   direction = "up",
 }: ScrollRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const offset = directionOffset[direction];
+
+  const offsets = {
+    up: { y: 40, x: 0 },
+    down: { y: -40, x: 0 },
+    left: { y: 0, x: 40 },
+    right: { y: 0, x: -40 },
+  };
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, ...offset }}
-      animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, ...offset }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={cn(className)}
+      className={className}
+      initial={{ opacity: 0, ...offsets[direction] }}
+      animate={
+        isInView
+          ? { opacity: 1, y: 0, x: 0 }
+          : { opacity: 0, ...offsets[direction] }
+      }
+      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>
