@@ -1,269 +1,76 @@
-const CDN =
-  "https://images.squarespace-cdn.com/content/v1/65a693f6b63149536bd675b4";
+export const COLORS = {
+  background: "#05070A",
+  surface: "#0A0E14",
+  surfaceLight: "#111820",
+  accent: "#2563EB",
+  accentLight: "#3B82F6",
+  accentGlow: "#60A5FA",
+  text: "#F8FAFC",
+  textMuted: "#94A3B8",
+  success: "#10B981",
+  warning: "#F59E0B",
+  danger: "#EF4444",
+} as const;
+
+export const DEPARTMENTS = [
+  { id: "finance", label: "Finance", angle: 0 },
+  { id: "hr", label: "HR", angle: 51 },
+  { id: "sales", label: "Sales", angle: 102 },
+  { id: "crm", label: "CRM", angle: 153 },
+  { id: "manufacturing", label: "Manufacturing", angle: 204 },
+  { id: "warehouse", label: "Warehouse", angle: 255 },
+  { id: "procurement", label: "Procurement", angle: 306 },
+] as const;
+
+export const ORDER_STEPS = [
+  { id: "order", label: "Customer places order", icon: "🛒" },
+  { id: "sales", label: "Sales confirms", icon: "✅" },
+  { id: "warehouse", label: "Warehouse checks stock", icon: "📦" },
+  { id: "robot", label: "Robot picks items", icon: "🤖" },
+  { id: "forklift", label: "Forklift transports pallet", icon: "🚜" },
+  { id: "truck", label: "Truck loads", icon: "🚛" },
+  { id: "invoice", label: "Invoice generated", icon: "📄" },
+  { id: "payment", label: "Finance receives payment", icon: "💰" },
+  { id: "dashboard", label: "Dashboard updates instantly", icon: "📊" },
+] as const;
+
+export const AI_AGENTS = [
+  { id: "anomaly", label: "Detect anomalies", description: "Real-time pattern recognition" },
+  { id: "approve", label: "Approve purchase orders", description: "Smart workflow automation" },
+  { id: "forecast", label: "Forecast demand", description: "Predictive analytics engine" },
+  { id: "maintenance", label: "Predict maintenance", description: "IoT-driven insights" },
+  { id: "inventory", label: "Recommend inventory", description: "Optimal stock levels" },
+  { id: "risk", label: "Flag financial risks", description: "Proactive compliance" },
+] as const;
+
+export const INDUSTRIES = [
+  { id: "manufacturing", label: "Manufacturing", color: "#3B82F6", description: "Smart factories with real-time production tracking" },
+  { id: "retail", label: "Retail", color: "#8B5CF6", description: "Omnichannel inventory and customer experience" },
+  { id: "healthcare", label: "Healthcare", color: "#10B981", description: "Patient records and supply chain compliance" },
+  { id: "construction", label: "Construction", color: "#F59E0B", description: "Project costing and resource allocation" },
+  { id: "logistics", label: "Logistics", color: "#06B6D4", description: "Fleet management and route optimization" },
+  { id: "automotive", label: "Automotive", color: "#EF4444", description: "Supply chain and quality control" },
+] as const;
+
+export const GROWTH_METRICS = [
+  { id: "costs", label: "Costs", direction: "down" as const, value: 32 },
+  { id: "productivity", label: "Productivity", direction: "up" as const, value: 47 },
+  { id: "revenue", label: "Revenue", direction: "up" as const, value: 58 },
+  { id: "satisfaction", label: "Customer Satisfaction", direction: "up" as const, value: 41 },
+  { id: "speed", label: "Speed", direction: "up" as const, value: 63 },
+] as const;
+
+export const CHAOS_WARNINGS = [
+  "Where is my order?",
+  "Payment delayed",
+  "Inventory mismatch",
+  "Manual approval pending",
+] as const;
 
 export const NAV_LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "Gym", href: "#gym" },
-  { label: "Wellness Retreats", href: "#retreats" },
-  { label: "Shop", href: "#shop" },
-  { label: "Blog", href: "#blog" },
-  { label: "Contact", href: "#contact" },
+  { href: "#chaos", label: "The Problem" },
+  { href: "#solution", label: "Solution" },
+  { href: "#journey", label: "Journey" },
+  { href: "#ai", label: "AI" },
+  { href: "#industries", label: "Industries" },
 ] as const;
-
-export const HERO_STATS = [
-  { label: "Personal Training", value: "1:1", suffix: "" },
-  { label: "Wellness Retreats", value: "4", suffix: "-Day" },
-  { label: "Grace Bay", value: "1", suffix: " Location" },
-  { label: "Expert Coaches", value: "10", suffix: "+" },
-] as const;
-
-export const HERO_SLIDES = [
-  {
-    id: "gym",
-    eyebrow: "Personal Training",
-    title: "Train at Wrightfully Fit",
-    description:
-      "One-on-one coaching with expert trainers who guide your form, push your limits, and help you reach your goals — in our state-of-the-art Grace Bay gym.",
-    cta: "Explore the Gym",
-    ctaHref: "#gym",
-    image: "/assets/hero/trainer.jpg",
-  },
-  {
-    id: "retreats",
-    eyebrow: "Wellness Retreats",
-    title: "RETREAT. RELAX. RESULTS.",
-    description:
-      "Beach workouts, yoga, recovery, healthy cuisine, and island adventures — immersive outdoor wellness experiences in Turks & Caicos.",
-    cta: "Discover Retreats",
-    ctaHref: "#retreats",
-    image: "/assets/hero/wellness.jpg",
-  },
-  {
-    id: "shop",
-    eyebrow: "Premium Shop",
-    title: "Shop Wrightfully Fit",
-    description:
-      "Premium apparel, accessories, supplements, and branded wellness products — crafted for those who demand excellence in every detail.",
-    cta: "Visit the Shop",
-    ctaHref: "#shop",
-    image: "/assets/hero/shop.jpg",
-  },
-] as const;
-
-export const MERCH_PRODUCTS = [
-  {
-    name: "Classic Dad Hat — Green Camo",
-    price: "From $28",
-    image: "/assets/merch/hat.jpg",
-  },
-  {
-    name: "Wrightfully Fit Apparel",
-    price: "From $35",
-    image: "/assets/merch/apparel.jpeg",
-  },
-  {
-    name: "Branded Athletic Wear",
-    price: "From $40",
-    image: "/assets/merch/group.jpg",
-  },
-  {
-    name: "Wellness Essentials",
-    price: "From $22",
-    image: "/assets/merch/essentials.jpeg",
-  },
-] as const;
-
-export const WHY_CHOOSE_US = [
-  {
-    icon: "MapPin",
-    title: "Prime Grace Bay Location",
-    description:
-      "Centrally located at Saltmills Plaza in the heart of Grace Bay — ideal for island visitors staying in villas or luxury resorts.",
-  },
-  {
-    icon: "Users",
-    title: "World-Class Coaching",
-    description:
-      "Certified personal trainers and nutrition counsellors who design progressive programs tailored to your goals and lifestyle.",
-  },
-  {
-    icon: "Palmtree",
-    title: "Paradise Setting",
-    description:
-      "Train surrounded by turquoise waters and white sand beaches. Wellness has never felt this inspiring.",
-  },
-  {
-    icon: "Sparkles",
-    title: "Holistic Approach",
-    description:
-      "From in-gym training to immersive retreats, we address fitness, recovery, nutrition, and mental wellbeing as one.",
-  },
-] as const;
-
-export const PROGRAMS = [
-  {
-    title: "Personal Training",
-    description:
-      "One-on-one sessions with expert coaches who build your perfect workout — strength, mobility, and results.",
-    image: `${CDN}/81b3d0cb-d4e9-4af5-856d-83cdb435f9e6/_MG_6124-Edit.jpg?format=1000w`,
-    tag: "Most Popular",
-  },
-  {
-    title: "Group Fitness",
-    description:
-      "High-energy group classes that keep you motivated, accountable, and progressing alongside a supportive community.",
-    image: `${CDN}/0280f3e4-d5c3-4c20-956a-055a2b839aec/group2.jpg?format=1000w`,
-    tag: null,
-  },
-  {
-    title: "Cardio & Conditioning",
-    description:
-      "Custom cardio programs designed by our trainers to boost endurance, burn fat, and elevate your performance.",
-    image: `${CDN}/1705495320927-0AOWWC3W8VJN1VN9XQX1/image-asset.jpeg?format=1000w`,
-    tag: null,
-  },
-  {
-    title: "Wellness Retreats",
-    description:
-      "Four-day immersive experiences blending fitness, yoga, recovery, beach workouts, and island adventures.",
-    image: `${CDN}/1724156555197-FZXT0RBYNRL4XVMYFGT9/unsplash-image-li4dxZ0KYRw.jpg?format=1000w`,
-    tag: "Signature",
-  },
-] as const;
-
-export const TRANSFORMATIONS = [
-  {
-    name: "Sarah M.",
-    result: "Lost 18 lbs in 12 weeks",
-    quote:
-      "Training at Wrightfully Fit completely changed my relationship with fitness. The coaches pushed me beyond what I thought possible.",
-    image: `${CDN}/d9d7c4cc-fb8d-4f0a-9f89-6786f93f2692/_MG_6076-Edit.jpg?format=800w`,
-  },
-  {
-    name: "James T.",
-    result: "Completed first wellness retreat",
-    quote:
-      "The retreat was life-changing. Beach workouts at sunrise, incredible food, and a team that genuinely cares about your wellbeing.",
-    image: `${CDN}/8618a1e0-62e1-4d02-af72-ad7177c399bc/_MG_6016-Edit.jpg?format=800w`,
-  },
-  {
-    name: "Elena R.",
-    result: "Gained strength & confidence",
-    quote:
-      "From my first session to now, I've never felt stronger. The Grace Bay gym is world-class and the community is incredible.",
-    image: `${CDN}/8bf41b37-3f81-4a08-9f20-0643acdd3a02/_MG_5941-Edit.jpg?format=800w`,
-  },
-] as const;
-
-export const TESTIMONIALS = [
-  {
-    name: "Michael & Lisa K.",
-    role: "Wellness Retreat Guests",
-    quote:
-      "We came for a vacation and left transformed. The combination of luxury accommodations, expert training, and island adventures was beyond anything we expected.",
-    rating: 5,
-  },
-  {
-    name: "David P.",
-    role: "Personal Training Client",
-    quote:
-      "As a frequent visitor to Turks & Caicos, having Wrightfully Fit at Saltmills Plaza is a game-changer. Professional, welcoming, and results-driven.",
-    rating: 5,
-  },
-  {
-    name: "Amanda S.",
-    role: "Group Fitness Member",
-    quote:
-      "The energy in every class is electric. I've made lifelong friends and achieved fitness goals I never thought I'd reach in paradise.",
-    rating: 5,
-  },
-] as const;
-
-export const INSTAGRAM_POSTS = [
-  {
-    id: 1,
-    image: `${CDN}/573069e2-5e31-46aa-b4ad-adc11611dd44/_MG_6085-Edit.jpg?format=600w`,
-    alt: "Training at Wrightfully Fit gym",
-  },
-  {
-    id: 2,
-    image: `${CDN}/1724156555197-FZXT0RBYNRL4XVMYFGT9/unsplash-image-li4dxZ0KYRw.jpg?format=600w`,
-    alt: "Beach wellness session",
-  },
-  {
-    id: 3,
-    image: `${CDN}/0280f3e4-d5c3-4c20-956a-055a2b839aec/group2.jpg?format=600w`,
-    alt: "Group fitness class",
-  },
-  {
-    id: 4,
-    image: `${CDN}/44a0dfb9-d79b-4a26-ac14-e59cf40d3bbb/AdobeStock_657869411.jpeg?format=600w`,
-    alt: "Wellness retreat experience",
-  },
-  {
-    id: 5,
-    image: `${CDN}/81b3d0cb-d4e9-4af5-856d-83cdb435f9e6/_MG_6124-Edit.jpg?format=600w`,
-    alt: "Strength training session",
-  },
-  {
-    id: 6,
-    image: `${CDN}/48beee9f-39b5-45f1-a213-995e16cf4541/PHOTO-2024-03-20-11-04-56.jpg?format=600w`,
-    alt: "Island fitness lifestyle",
-  },
-] as const;
-
-export const BLOG_POSTS = [
-  {
-    title: "5 Reasons to Train in Turks & Caicos",
-    excerpt:
-      "Discover why Grace Bay is the ultimate destination for fitness enthusiasts seeking sun, sand, and serious results.",
-    date: "June 15, 2026",
-    image: `${CDN}/1724156555197-FZXT0RBYNRL4XVMYFGT9/unsplash-image-li4dxZ0KYRw.jpg?format=800w`,
-    category: "Travel & Fitness",
-  },
-  {
-    title: "Inside Our 4-Day Wellness Retreat",
-    excerpt:
-      "A day-by-day look at what makes Wrightfully Fit retreats the most sought-after wellness experience in the Caribbean.",
-    date: "June 8, 2026",
-    image: `${CDN}/1706273908197-EZPSIPITKCIJ7WC203KA/image-asset.jpeg?format=800w`,
-    category: "Wellness Retreats",
-  },
-  {
-    title: "Nutrition Tips from Our Coaches",
-    excerpt:
-      "Expert guidance on fueling your body for peak performance — whether you're training at the gym or on island time.",
-    date: "May 28, 2026",
-    image: `${CDN}/1705495320927-0AOWWC3W8VJN1VN9XQX1/image-asset.jpeg?format=800w`,
-    category: "Nutrition",
-  },
-] as const;
-
-export const FOOTER_LINKS = {
-  explore: [
-    { label: "The Gym", href: "#gym" },
-    { label: "Wellness Retreats", href: "#retreats" },
-    { label: "Shop", href: "#shop" },
-    { label: "Programs", href: "#programs" },
-  ],
-  company: [
-    { label: "About Us", href: "#founder" },
-    { label: "Blog", href: "#blog" },
-    { label: "Contact", href: "#contact" },
-    { label: "Book a Session", href: "#contact" },
-  ],
-} as const;
-
-export const SITE_CONFIG = {
-  name: "Wrightfully Fit",
-  tagline: "Fitness Beyond the Gym.",
-  description:
-    "Personal training, luxury wellness retreats, and premium wellness products in Turks & Caicos.",
-  logo: "/assets/logo.webp",
-  logoAlt: "/assets/logo.png",
-  instagram: "https://www.instagram.com/wrightfullyfit_tci/",
-  shopUrl: "https://www.wrightfullyfit.com/shop",
-  email: "info@wrightfullyfit.com",
-  phone: "+1 (649) 555-0142",
-  address: "Saltmills Plaza, Grace Bay, Providenciales, Turks & Caicos",
-} as const;

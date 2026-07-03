@@ -1,50 +1,48 @@
-# Wrightfully Fit — Premium Website
+# Kannanware
 
-Luxury wellness website for [Wrightfully Fit](https://www.wrightfullyfit.com/).
+A premium, award-winning interactive storytelling website for Kannanware — an SAP ERP, AI, and Digital Transformation company.
 
-## Quick start
+## Tech Stack
+
+- **Next.js 15** — App Router, TypeScript
+- **React Three Fiber + Drei** — 3D isometric miniature worlds
+- **GSAP + ScrollTrigger** — Cinematic scroll-driven animations
+- **Framer Motion** — UI microinteractions
+- **Lenis** — Butter-smooth scrolling
+- **Tailwind CSS 4** — Premium dark theme styling
+
+## Experience
+
+Seven scroll-driven scenes tell the story of enterprise transformation:
+
+1. **Chaos** — A miniature company in disarray
+2. **Kannanware ERP** — The glowing core unifies all departments
+3. **Order Journey** — One order flows through the entire business
+4. **AI Agents** — Floating intelligent assistants
+5. **Executive Dashboard** — Futuristic command center
+6. **Industry Showcase** — Manufacturing, Retail, Healthcare, and more
+7. **Business Growth** — Smart city transformation
+8. **Finale** — Particle ecosystem with CTA
+
+## Getting Started
 
 ```bash
 npm install
-npm run dev:clean
+npm run dev
 ```
 
-Open **http://localhost:3000**
+Open [http://localhost:3000](http://localhost:3000).
 
-### If you see "Internal Server Error"
-
-This is almost always a stale build cache. Run:
-
-```bash
-pkill -f "next"
-npm run dev:clean
-```
-
-Or for production:
-
-```bash
-pkill -f "next"
-npm run build:clean
-npm start
-```
-
-## Production
+## Build
 
 ```bash
 npm run build
 npm start
 ```
 
-## Features
+## Design
 
-- Full-screen hero slider (4 slides) with brand banner design
-- Sticky transparent navbar → solid white on scroll
-- Official logo & merch from wrightfullyfit.com
-- All homepage sections with Framer Motion animations
-- Swiper carousels, glassmorphism, animated counters
-- Instagram edge tab (peeks from right, slides open)
-- Mobile-first, SEO-friendly, accessible
-
-## Stack
-
-Next.js 15 · React 19 · TypeScript · Tailwind CSS v4 · Framer Motion · Swiper.js
+- Dark theme (`#05070A`) with electric blue accents (`#2563EB`)
+- Glassmorphism, soft glow lighting, floating particles
+- Magnetic buttons, ripple effects, mouse-following glow
+- Fully responsive, 60fps optimized, lazy-loaded 3D assets

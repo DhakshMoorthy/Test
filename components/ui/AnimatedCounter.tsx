@@ -1,38 +1,50 @@
 "use client";
 
-import { motion, useInView, useSpring, useTransform } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
+import { gsap } from "gsap";
 
 interface AnimatedCounterProps {
   value: number;
-  suffix?: string;
   prefix?: string;
+  suffix?: string;
+  duration?: number;
   className?: string;
+  direction?: "up" | "down";
 }
 
 export default function AnimatedCounter({
   value,
-  suffix = "",
   prefix = "",
+  suffix = "",
+  duration = 2,
   className,
+  direction = "up",
 }: AnimatedCounterProps) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const spring = useSpring(0, { duration: 2000, bounce: 0 });
-  const display = useTransform(spring, (current) =>
-    Math.round(current).toString()
-  );
+  const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    if (isInView) {
-      spring.set(value);
-    }
-  }, [isInView, spring, value]);
+    const obj = { val: 0 };
+    const isDecimal = value % 1 !== 0;
+    gsap.to(obj, {
+      val: value,
+      duration,
+      ease: "power2.out",
+      onUpdate: () =>
+        setDisplay(
+          isDecimal
+            ? Math.round(obj.val * 10) / 10
+            : Math.round(obj.val)
+        ),
+    });
+  }, [value, duration]);
+
+  const arrow = direction === "down" ? "↓" : "↑";
 
   return (
-    <span ref={ref} className={className}>
+    <span className={className}>
+      <span className="text-accent mr-1">{arrow}</span>
       {prefix}
-      <motion.span>{display}</motion.span>
+      {display}
       {suffix}
     </span>
   );
