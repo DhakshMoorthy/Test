@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import FullVisualSection from "@/components/ui/FullVisualSection";
+import SectionLayout from "@/components/ui/SectionLayout";
+import VisualPanel from "@/components/ui/VisualPanel";
 import GrowthIllustration from "@/components/illustrations/GrowthIllustration";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { KPI_METRICS } from "@/lib/constants";
@@ -26,26 +27,28 @@ export default function SceneGrowth() {
 
   return (
     <div ref={ref}>
-      <FullVisualSection
+      <SectionLayout
         id="growth"
-        badge="07 — Business Growth"
-        title={<>Watch Your Operations <span className="gradient-text">Get Smarter</span></>}
-        description="As Kannanware takes hold, your infrastructure evolves — buildings connect to SAP IoT, drones inspect warehouses, and data flows in real time."
-        visual={<GrowthIllustration progress={progress} />}
-        bgClass="bg-[#FFFDF9]"
-        footer={
-          <div className="grid grid-cols-3 gap-3 sm:grid-cols-5">
-            {KPI_METRICS.slice(0, 5).map((m) => (
-              <div key={m.id} className="white-card p-3 text-center">
-                <p className="font-display text-xl font-bold">
-                  <AnimatedCounter value={m.value} suffix="%" direction={m.direction} duration={1.5} />
-                </p>
-                <p className="text-muted mt-0.5 text-[10px]">{m.label}</p>
-              </div>
-            ))}
-          </div>
+        badge="07 — Impact That Matters"
+        title={<>Delivering Measurable<br /><span className="gradient-text">Business Impact.</span></>}
+        description="Kannanware is your partner in digital transformation. Together, we build smarter, stronger, future-ready businesses."
+        visual={
+          <VisualPanel>
+            <GrowthIllustration progress={progress} />
+          </VisualPanel>
         }
-      />
+      >
+        <div className="grid grid-cols-3 gap-3">
+          {KPI_METRICS.slice(0, 6).map((m) => (
+            <div key={m.id} className="white-card p-3 text-center">
+              <p className="font-display text-xl font-bold">
+                <AnimatedCounter value={m.value} suffix="%" direction={m.direction} duration={1.5} />
+              </p>
+              <p className="text-muted mt-0.5 text-[9px] leading-tight">{m.label}</p>
+            </div>
+          ))}
+        </div>
+      </SectionLayout>
     </div>
   );
 }

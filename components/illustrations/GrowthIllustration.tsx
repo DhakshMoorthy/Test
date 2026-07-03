@@ -1,154 +1,124 @@
 "use client";
 
-import { GOLD, Person, Truck, SapScreen, FactoryBuilding } from "./shared";
+import { G, DEFS } from "./shared";
 
 export default function GrowthIllustration({ progress = 0.5 }: { progress?: number }) {
   const p = Math.max(0, Math.min(1, progress));
+  const groundY = 360;
 
   const buildings = [
-    { x:  80, h:  80, w: 55 },
-    { x: 170, h: 130, w: 60 },
-    { x: 265, h:  65, w: 50 },
-    { x: 350, h: 155, w: 65 },
-    { x: 450, h:  90, w: 55 },
-    { x: 540, h: 170, w: 70 },
-    { x: 650, h:  80, w: 55 },
-    { x: 740, h: 140, w: 65 },
-    { x: 840, h: 100, w: 58 },
-    { x: 935, h: 120, w: 60 },
-    { x:1030, h:  75, w: 52 },
-    { x:1120, h: 105, w: 55 },
+    { x: 52,  h: 95,  w: 44 }, { x: 116, h: 145, w: 50 },
+    { x: 185, h: 72,  w: 42 }, { x: 242, h: 180, w: 56 },
+    { x: 316, h: 90,  w: 44 }, { x: 372, h: 158, w: 52 },
+    { x: 437, h: 82,  w: 44 }, { x: 495, h: 130, w: 50 },
   ];
-  const groundY = 420;
 
   return (
-    <svg viewBox="0 0 1240 540" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <svg viewBox="0 0 600 420" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <defs dangerouslySetInnerHTML={{ __html: DEFS }} />
       <defs>
         <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FFF8F0" />
-          <stop offset="100%" stopColor="#FFFCF7" />
+          <stop offset="0%" stopColor="#FFFDF8" />
+          <stop offset="100%" stopColor="#FFF8EB" />
         </linearGradient>
       </defs>
-      <rect width="1240" height="540" fill="url(#skyGrad)" />
+      <rect width="600" height="420" fill="url(#skyGrad)" />
 
-      {/* Sun / AI node in sky */}
-      {p > 0.3 && (
-        <g className="animate-float">
-          <circle cx="1100" cy="80" r="44" fill="#FFF8EB" stroke={GOLD.primary} strokeWidth="2" />
-          <circle cx="1100" cy="80" r="30" fill={GOLD.primary} opacity="0.3" />
-          <text x="1100" y="74" textAnchor="middle" fill={GOLD.dark} fontSize="9" fontWeight="800">SAP</text>
-          <text x="1100" y="88" textAnchor="middle" fill={GOLD.dark} fontSize="9" fontWeight="700">JOULE</text>
-        </g>
-      )}
+      {/* Central K orb in sky */}
+      <circle cx="300" cy="90" r="52" fill={G.p} opacity="0.1" />
+      <circle cx="300" cy="90" r="40" fill={G.p} opacity="0.18" />
+      <circle cx="300" cy="90" r="30" fill="#090909" />
+      <text x="300" y="98" textAnchor="middle" fill={G.p} fontSize="22" fontWeight="900">K</text>
 
-      {/* AI drone fleet */}
-      {p > 0.4 && [200,420,680,900].map((dx, i) => (
-        <g key={i} className="animate-float" style={{ animationDelay: `${i * 0.6}s` }}
-          transform={`translate(${dx}, ${60 + i * 18})`}>
-          <rect x="-22" y="-6" width="44" height="12" rx="4" fill="#374151" />
-          <line x1="-30" y1="-2" x2="-46" y2="-10" stroke="#9CA3AF" strokeWidth="2" />
-          <line x1="-30" y1="2"  x2="-46" y2="10"  stroke="#9CA3AF" strokeWidth="2" />
-          <line x1="30"  y1="-2" x2="46"  y2="-10" stroke="#9CA3AF" strokeWidth="2" />
-          <line x1="30"  y1="2"  x2="46"  y2="10"  stroke="#9CA3AF" strokeWidth="2" />
-          <circle cx="0" cy="2" r="5" fill={GOLD.primary} />
-          <text x="0" y="6" textAnchor="middle" fill="#090909" fontSize="4" fontWeight="800">IoT</text>
+      {/* Connection lines from K to smart buildings */}
+      {buildings.map((b, i) => {
+        const smart = i / buildings.length < p;
+        if (!smart) return null;
+        return (
+          <line key={i} x1="300" y1="90" x2={b.x + b.w / 2} y2={groundY - b.h}
+            stroke={G.p} strokeWidth="0.8" opacity="0.25" strokeDasharray="5 4" />
+        );
+      })}
+
+      {/* Drone fleet */}
+      {p > 0.4 && [160, 310, 460].map((dx, i) => (
+        <g key={i} className="animate-float" style={{ animationDelay: `${i * 0.7}s` }}
+          transform={`translate(${dx}, ${110 + i * 12})`}>
+          <rect x="-14" y="-4" width="28" height="8" rx="3" fill="#374151" />
+          <line x1="-20" y1="-1" x2="-28" y2="-6" stroke="#9CA3AF" strokeWidth="1.5" />
+          <line x1="-20" y1="1"  x2="-28" y2="6"  stroke="#9CA3AF" strokeWidth="1.5" />
+          <line x1="20"  y1="-1" x2="28"  y2="-6" stroke="#9CA3AF" strokeWidth="1.5" />
+          <line x1="20"  y1="1"  x2="28"  y2="6"  stroke="#9CA3AF" strokeWidth="1.5" />
+          <circle cx="0" cy="0" r="4" fill={G.p} />
         </g>
       ))}
 
       {/* Buildings */}
       {buildings.map((b, i) => {
         const smart = i / buildings.length < p;
+        const winRows = Math.max(2, Math.floor(b.h / 28));
         return (
           <g key={i}>
-            {/* building body */}
-            <rect x={b.x} y={groundY - b.h} width={b.w} height={b.h} rx="4"
-              fill={smart ? "#FFF8EB" : "#F3F4F6"}
-              stroke={smart ? GOLD.primary : "#D1D5DB"} strokeWidth={smart ? 1.5 : 1} />
-            {/* windows grid */}
-            {Array.from({ length: Math.min(4, Math.floor(b.h / 25)) }, (_, row) =>
-              [0, 1].map((col) => (
-                <rect key={`${row}-${col}`}
-                  x={b.x + 8 + col * (b.w / 2 - 6)}
-                  y={groundY - b.h + 12 + row * 22}
-                  width={b.w / 2 - 12} height={14} rx="2"
-                  fill={smart ? GOLD.pale : "#E5E7EB"} opacity={smart ? 0.9 : 0.6} />
-              ))
-            )}
-            {/* SAP IoT badge on smart buildings */}
+            {/* building */}
+            <rect x={b.x} y={groundY - b.h} width={b.w} height={b.h} rx="3"
+              fill={smart ? G.pale : "#F3F4F6"}
+              stroke={smart ? G.p : "#D1D5DB"} strokeWidth={smart ? 1.5 : 1} />
+            {/* windows */}
+            {Array.from({ length: winRows }, (_, row) => [0, 1].map(col => (
+              <rect key={`${row}-${col}`}
+                x={b.x + 6 + col * (b.w / 2 - 5)}
+                y={groundY - b.h + 12 + row * 24}
+                width={b.w / 2 - 10} height="14" rx="2"
+                fill={smart ? G.l : "#E5E7EB"} opacity={smart ? 0.7 : 0.5} />
+            )))}
+            {/* IoT badge */}
             {smart && (
-              <>
-                <rect x={b.x + 4} y={groundY - b.h + 4} width={b.w - 8} height="14" rx="3"
-                  fill={GOLD.primary} opacity="0.8" />
-                <text x={b.x + b.w / 2} y={groundY - b.h + 14} textAnchor="middle"
-                  fill="#090909" fontSize="5.5" fontWeight="800">SAP IoT</text>
-              </>
-            )}
-            {/* Data beam to sky */}
-            {smart && p > 0.5 && (
-              <line x1={b.x + b.w / 2} y1={groundY - b.h} x2="1100" y2="80"
-                stroke={GOLD.primary} strokeWidth="0.6" opacity="0.25" />
+              <g>
+                <rect x={b.x + 4} y={groundY - b.h + 4} width={b.w - 8} height="13" rx="3" fill={G.p} />
+                <text x={b.x + b.w / 2} y={groundY - b.h + 13} textAnchor="middle"
+                  fill="#090909" fontSize="5" fontWeight="800">SAP IoT</text>
+              </g>
             )}
           </g>
         );
       })}
 
-      {/* Solar panels */}
-      {p > 0.55 && [350, 540, 740].map((sx, i) => (
-        <g key={i} transform={`translate(${sx}, ${groundY - 175})`}>
-          {[0,1,2,3].map((j) => (
-            <rect key={j} x={j * 22} y="0" width="18" height="12" rx="2"
-              fill={GOLD.dark} transform="rotate(-20, 0, 0)" opacity="0.75" />
+      {/* Solar panels on roofs */}
+      {p > 0.55 && [242, 372].map((bx, i) => (
+        <g key={i} transform={`translate(${bx + 4}, ${groundY - buildings[i === 0 ? 3 : 5].h - 10})`}>
+          {[0,1,2].map(j => (
+            <rect key={j} x={j * 14} y="0" width="11" height="8" rx="1"
+              fill={G.d} opacity="0.8" transform="rotate(-15,0,0)" />
           ))}
         </g>
       ))}
 
-      {/* Factory */}
-      <FactoryBuilding x={60} y={260} w={80} h={60} />
-
-      {/* Ground road */}
-      <rect x="0" y={groundY} width="1240" height="60" fill="#F1F5F9" />
-      <line x1="0" y1={groundY} x2="1240" y2={groundY} stroke="#E2E8F0" strokeWidth="1.5" />
-
-      {/* Road markings */}
-      {Array.from({ length: 12 }, (_, i) => (
-        <rect key={i} x={30 + i * 100} y={groundY + 28} width="60" height="5" rx="2"
-          fill="#fff" opacity="0.6" />
+      {/* Road */}
+      <rect x="0" y={groundY} width="600" height="55" fill="#F1F5F9" />
+      <line x1="0" y1={groundY} x2="600" y2={groundY} stroke="#E2E8F0" strokeWidth="1.5" />
+      {Array.from({ length: 6 }, (_, i) => (
+        <rect key={i} x={25 + i * 96} y={groundY + 25} width="60" height="5" rx="2"
+          fill="#fff" opacity="0.65" />
       ))}
-
-      {/* Trucks with data trails */}
-      <Truck x={120} y={groundY + 10} />
-      <Truck x={380} y={groundY + 10} />
-      <Truck x={640} y={groundY + 10} />
-      <Truck x={900} y={groundY + 10} />
-
-      {/* Glowing route */}
+      {/* Delivery route glow */}
       {p > 0.25 && (
-        <path d={`M 60 ${groundY + 32} Q 400 ${groundY + 20} 700 ${groundY + 30} T 1180 ${groundY + 32}`}
-          stroke={GOLD.primary} strokeWidth="2.5" fill="none" className="animate-dash" opacity="0.55" />
+        <path d={`M 30 ${groundY + 28} Q 200 ${groundY + 16} 370 ${groundY + 24} T 570 ${groundY + 28}`}
+          stroke={G.p} strokeWidth="2.5" fill="none" opacity="0.5" className="animate-dash" />
       )}
 
-      {/* People on street */}
-      <Person x={250} y={groundY + 50} variant="office" />
-      <Person x={500} y={groundY + 50} variant="manager" facing="left" />
-      <Person x={800} y={groundY + 50} variant="worker" />
-      <Person x={1050} y={groundY + 50} variant="office" facing="left" />
-
-      {/* Live metrics floating */}
+      {/* Metric badges floating */}
       {p > 0.6 && [
-        { x: 110, y: 190, label: "↓30% Costs" },
-        { x: 350, y: 155, label: "↑45% Efficiency" },
-        { x: 590, y: 145, label: "↑60% Speed" },
-        { x: 810, y: 160, label: "↑35% CSAT" },
-        { x: 1030, y: 175, label: "↓70% Manual" },
+        { x: 48,  y: 185, t: "↓30% Costs"   },
+        { x: 185, y: 198, t: "↑45% Efficiency" },
+        { x: 335, y: 200, t: "↑60% Speed"   },
+        { x: 462, y: 188, t: "↑35% CSAT"    },
       ].map((m, i) => (
         <g key={i} className="animate-float" style={{ animationDelay: `${i * 0.3}s` }}>
-          <rect x={m.x} y={m.y} width="100" height="24" rx="12" fill={GOLD.primary} />
-          <text x={m.x + 50} y={m.y + 16} textAnchor="middle" fill="#090909" fontSize="8" fontWeight="800">{m.label}</text>
+          <rect x={m.x} y={m.y} width="106" height="22" rx="11" fill={G.p} />
+          <text x={m.x + 53} y={m.y + 14} textAnchor="middle"
+            fill="#090909" fontSize="7.5" fontWeight="800">{m.t}</text>
         </g>
       ))}
-
-      {/* SAP dashboard card */}
-      <SapScreen x={440} y={groundY - 55} w={180} h={45} label="SAP Fiori — Smart Ops" />
     </svg>
   );
 }

@@ -1,10 +1,11 @@
 "use client";
 
+import SectionLayout from "@/components/ui/SectionLayout";
+import VisualPanel from "@/components/ui/VisualPanel";
+import ERPIllustration from "@/components/illustrations/ERPIllustration";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import FullVisualSection from "@/components/ui/FullVisualSection";
-import ERPIllustration from "@/components/illustrations/ERPIllustration";
 import { DEPARTMENTS } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -27,25 +28,30 @@ export default function SceneKannanware() {
 
   return (
     <div ref={ref}>
-      <FullVisualSection
+      <SectionLayout
         id="solution"
         badge="02 — The Solution"
-        title={<>One Platform. <span className="gradient-text">Total Unity.</span></>}
-        description="Kannanware connects every SAP module through a single intelligent core — replacing fragmentation with clarity across finance, supply chain, and operations."
-        visual={<ERPIllustration progress={progress} />}
-        bgClass="bg-[#FFFDF9]"
-        footer={
-          <div className="flex flex-wrap gap-2">
-            {DEPARTMENTS.map((dept, i) => (
-              <span key={dept.id} className={`rounded-full px-3 py-1.5 text-xs font-semibold transition-all duration-500 ${
+        title={<>Every Process. <span className="gradient-text">Working in Sync.</span></>}
+        description="From order to cash, every step flows seamlessly across your organisation. No silos. No delays."
+        reverse
+        visual={
+          <VisualPanel>
+            <ERPIllustration progress={progress} />
+          </VisualPanel>
+        }
+      >
+        <div className="flex flex-wrap gap-2">
+          {DEPARTMENTS.map((dept, i) => (
+            <span key={dept.id}
+              className={`rounded-full px-3 py-1.5 text-xs font-semibold transition-all duration-500 ${
                 i < connectedCount
                   ? "bg-accent-pale text-accent-dark ring-1 ring-accent/30"
                   : "bg-surface-light text-muted ring-1 ring-border"
-              }`}>{dept.label}</span>
-            ))}
-          </div>
-        }
-      />
+              }`}
+            >{dept.label}</span>
+          ))}
+        </div>
+      </SectionLayout>
     </div>
   );
 }

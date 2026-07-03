@@ -1,35 +1,27 @@
 "use client";
 
-import { motion } from "framer-motion";
-import FullVisualSection from "@/components/ui/FullVisualSection";
+import SectionLayout from "@/components/ui/SectionLayout";
+import VisualPanel from "@/components/ui/VisualPanel";
 import AIIllustration from "@/components/illustrations/AIIllustration";
-import { AI_AGENTS } from "@/lib/constants";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 export default function SceneAIAgents() {
   return (
-    <FullVisualSection
+    <SectionLayout
       id="ai"
-      badge="04 — AI Integration"
-      title={<>SAP Joule AI <span className="gradient-text">Alongside Your Team</span></>}
-      description="Intelligent agents monitor, predict, and act across your SAP landscape — freeing your people for the work that actually matters."
-      visual={<AIIllustration />}
-      bgClass="bg-[#FFFCF5]"
-      footer={
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {AI_AGENTS.map((a, i) => (
-            <motion.div key={a.id}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className="white-card p-4"
-            >
-              <p className="text-sm font-semibold">{a.label}</p>
-              <p className="text-muted mt-1 text-xs">{a.description}</p>
-            </motion.div>
-          ))}
-        </div>
+      badge="04 — AI-Powered Automation"
+      title={<>AI That Works<br /><span className="gradient-text">For You.</span></>}
+      description="Intelligent automation that predicts, recommends, and acts — so your team can focus on growth."
+      reverse
+      visual={
+        <VisualPanel>
+          <AIIllustration />
+        </VisualPanel>
       }
-    />
+    >
+      <MagneticButton variant="secondary" size="md">
+        Explore AI Capabilities →
+      </MagneticButton>
+    </SectionLayout>
   );
 }

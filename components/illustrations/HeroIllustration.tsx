@@ -1,104 +1,119 @@
 "use client";
 
-import { GOLD, SapScreen, Person, WarehouseRack, Forklift, Truck, DataFlow, FactoryBuilding } from "./shared";
+import { G, DEFS, FinanceIcon, HRIcon, SalesIcon, CRMIcon, MfgIcon, WarehouseIcon, ProcureIcon } from "./shared";
+
+interface NodeProps {
+  cx: number; cy: number; label: string;
+  lx: number; ly: number;
+  children: React.ReactNode;
+}
+
+function DeptNode({ cx, cy, label, lx, ly, children }: NodeProps) {
+  return (
+    <g>
+      {/* connection line */}
+      <line x1={cx} y1={cy} x2={lx} y2={ly}
+        stroke={G.p} strokeWidth="1.5" strokeDasharray="6 4" opacity="0.6" />
+      {/* dot on cube end */}
+      <circle cx={lx} cy={ly} r="4" fill={G.p} />
+      {/* outer glow ring */}
+      <circle cx={cx} cy={cy} r="32" fill={G.pale} filter="url(#cardShadow)" />
+      <circle cx={cx} cy={cy} r="32" fill="#fff" stroke={G.p} strokeWidth="1.5" />
+      <circle cx={cx} cy={cy} r="22" fill={G.soft} />
+      {/* icon */}
+      <g transform={`translate(${cx},${cy})`}>{children}</g>
+      {/* label */}
+      <text x={cx} y={cy + 48} textAnchor="middle" fill="#374151" fontSize="10" fontWeight="700">{label}</text>
+    </g>
+  );
+}
 
 export default function HeroIllustration() {
+  /* Platform center: (300, 330). Cube top at (300, 190). */
+  const cubeTop: [number, number] = [300, 235];
+
+  const nodes = [
+    { cx: 300, cy: 62,  label: "Finance",     lx: 300,        ly: cubeTop[1]-18, Icon: FinanceIcon   },
+    { cx: 112, cy: 175, label: "HR",           lx: cubeTop[0]-46, ly: cubeTop[1]+8, Icon: HRIcon      },
+    { cx: 488, cy: 175, label: "Sales",        lx: cubeTop[0]+46, ly: cubeTop[1]+8, Icon: SalesIcon   },
+    { cx: 102, cy: 330, label: "Warehouse",    lx: cubeTop[0]-46, ly: cubeTop[1]+50, Icon: WarehouseIcon },
+    { cx: 498, cy: 330, label: "CRM",          lx: cubeTop[0]+46, ly: cubeTop[1]+50, Icon: CRMIcon    },
+    { cx: 300, cy: 430, label: "Manufacturing",lx: 300,        ly: cubeTop[1]+68, Icon: MfgIcon       },
+    { cx: 188, cy: 76,  label: "Procurement",  lx: cubeTop[0]-28, ly: cubeTop[1]-12, Icon: ProcureIcon },
+  ];
+
   return (
-    <svg viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <svg viewBox="0 0 600 500" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <defs dangerouslySetInnerHTML={{ __html: DEFS }} />
       <defs>
-        <radialGradient id="hGlow" cx="50%" cy="50%" r="45%">
-          <stop offset="0%" stopColor={GOLD.primary} stopOpacity="0.18" />
-          <stop offset="100%" stopColor={GOLD.primary} stopOpacity="0" />
+        <radialGradient id="platGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stopColor="#fff" />
+          <stop offset="100%" stopColor={G.soft} />
         </radialGradient>
-        <linearGradient id="hPlat" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FFF8EB" />
-          <stop offset="100%" stopColor="#FEF3C7" />
+        <radialGradient id="platGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stopColor={G.p} stopOpacity="0.12" />
+          <stop offset="100%" stopColor={G.p} stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id="cubeTop" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stopColor={G.l} />
+          <stop offset="100%" stopColor={G.p} />
+        </linearGradient>
+        <linearGradient id="cubeLeft" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stopColor={G.d} />
+          <stop offset="100%" stopColor={G.p} />
+        </linearGradient>
+        <linearGradient id="cubeRight" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stopColor={G.p} />
+          <stop offset="100%" stopColor="#e8970a" />
         </linearGradient>
       </defs>
 
-      <ellipse cx="600" cy="380" rx="520" ry="140" fill="url(#hGlow)" />
-      <ellipse cx="600" cy="430" rx="480" ry="90" fill="url(#hPlat)" stroke={GOLD.light} strokeWidth="1" />
+      {/* ── PLATFORM ── */}
+      {/* shadow */}
+      <ellipse cx="300" cy="355" rx="225" ry="40" fill="rgba(15,23,42,0.06)" />
+      {/* edge */}
+      <path d="M 75,330 A 225,72 0 0,0 525,330 L 525,348 A 225,72 0 0,1 75,348 Z"
+        fill={G.soft} opacity="0.7" />
+      {/* outer glow */}
+      <ellipse cx="300" cy="330" rx="225" ry="72" fill="url(#platGlow)" />
+      {/* surface */}
+      <ellipse cx="300" cy="330" rx="222" ry="70" fill="url(#platGrad)" stroke={G.line} strokeWidth="1.2" />
 
-      {/* ── FINANCE OFFICE (left) ── */}
-      <rect x="60" y="240" width="200" height="120" rx="6" fill="#F9FAFB" stroke="#E5E7EB" strokeWidth="1.5" />
-      <text x="160" y="262" textAnchor="middle" fill="#9CA3AF" fontSize="9" fontWeight="700">FINANCE</text>
-      <SapScreen x={75} y={268} w={60} h={40} label="FI/CO" />
-      <SapScreen x={155} y={268} w={60} h={40} label="TR" />
-      <Person x={110} y={360} variant="manager" />
-      <Person x={180} y={362} variant="office" facing="left" />
-      <DataFlow x1={260} y1={300} x2={460} y2={320} />
+      {/* surface grid on platform */}
+      {[-150,-75,0,75,150].map(dx => (
+        <line key={dx} x1={300+dx} y1={330-70*Math.sqrt(1-(dx/222)**2)} x2={300+dx} y2={330+70*Math.sqrt(1-(dx/222)**2)}
+          stroke={G.soft} strokeWidth="0.8" opacity="0.6" />
+      ))}
+      {[-40,-20,0,20,40].map(dy => {
+        const rx2 = 222 * Math.sqrt(1-(dy/70)**2);
+        return <line key={dy} x1={300-rx2} y1={330+dy} x2={300+rx2} y2={330+dy}
+          stroke={G.soft} strokeWidth="0.8" opacity="0.6" />;
+      })}
 
-      {/* ── HR OFFICE (far left) ── */}
-      <rect x="40" y="390" width="160" height="90" rx="5" fill="#F9FAFB" stroke="#E5E7EB" strokeWidth="1" />
-      <text x="120" y="408" textAnchor="middle" fill="#9CA3AF" fontSize="8" fontWeight="700">HR</text>
-      <SapScreen x={55} y={415} w={55} h={35} label="HCM" />
-      <Person x={160} y={475} variant="office" facing="left" />
-      <DataFlow x1={200} y1={430} x2={460} y2={360} />
+      {/* ── DEPT NODES (draw under cube) ── */}
+      {nodes.map(({ cx, cy, label, lx, ly, Icon }) => (
+        <DeptNode key={label} cx={cx} cy={cy} label={label} lx={lx} ly={ly}>
+          <Icon s={10} c={G.d} />
+        </DeptNode>
+      ))}
 
-      {/* ── SALES + CRM (top center-left) ── */}
-      <rect x="320" y="160" width="200" height="100" rx="6" fill="#FAFAFA" stroke="#E5E7EB" strokeWidth="1" />
-      <text x="420" y="180" textAnchor="middle" fill="#9CA3AF" fontSize="9" fontWeight="700">SALES / CRM</text>
-      <SapScreen x={335} y={188} w={60} h={38} label="SD" />
-      <SapScreen x={410} y={188} w={60} h={38} label="CRM" />
-      <Person x={380} y={262} variant="office" />
-      <Person x={450} y={260} variant="manager" facing="left" />
-      <DataFlow x1={420} y1={260} x2={520} y2={320} />
-
-      {/* ── MANUFACTURING (bottom center-left) ── */}
-      <FactoryBuilding x={270} y={380} w={140} h={80} />
-      <Person x={320} y={462} variant="worker" />
-      <Person x={370} y={460} variant="worker" facing="left" />
-      <DataFlow x1={340} y1={380} x2={480} y2={350} />
-
-      {/* ── CENTRAL ERP CORE ── */}
-      <g className="animate-float">
-        <rect x="460" y="275" width="140" height="120" rx="14" fill={GOLD.primary} />
-        <rect x="472" y="287" width="116" height="96" rx="10" fill={GOLD.dark} />
-        <text x="530" y="322" textAnchor="middle" fill="#fff" fontSize="14" fontWeight="900" letterSpacing="0.5">KANNANWARE</text>
-        <text x="530" y="342" textAnchor="middle" fill={GOLD.pale} fontSize="9" fontWeight="700">SAP S/4HANA</text>
-        <text x="530" y="358" textAnchor="middle" fill="#fff" fontSize="7" opacity="0.7">AI-First ERP Core</text>
-        <rect x="490" y="367" width="80" height="14" rx="7" fill={GOLD.primary} opacity="0.4" />
-        <text x="530" y="378" textAnchor="middle" fill="#fff" fontSize="6" fontWeight="600">● LIVE</text>
-      </g>
-      {/* Joule AI orb */}
-      <circle cx="530" cy="240" r="30" fill="#090909" stroke={GOLD.primary} strokeWidth="2" />
-      <text x="530" y="236" textAnchor="middle" fill={GOLD.primary} fontSize="7" fontWeight="800">SAP</text>
-      <text x="530" y="248" textAnchor="middle" fill="#fff" fontSize="7" fontWeight="700">JOULE</text>
-      <line x1="530" y1="270" x2="530" y2="275" stroke={GOLD.primary} strokeWidth="2" strokeDasharray="3 2" />
-
-      {/* ── WAREHOUSE (right) ── */}
-      <rect x="720" y="220" width="230" height="150" rx="6" fill="#FAFAFA" stroke="#E5E7EB" strokeWidth="1.5" />
-      <text x="835" y="242" textAnchor="middle" fill="#9CA3AF" fontSize="9" fontWeight="700">WAREHOUSE / WM</text>
-      <WarehouseRack x={740} y={250} />
-      <WarehouseRack x={805} y={250} />
-      <WarehouseRack x={870} y={250} />
-      <Forklift x={755} y={320} />
-      <Person x={840} y={370} variant="worker" facing="left" />
-      <Person x={885} y={368} variant="worker" />
-      <DataFlow x1={720} y1={300} x2={600} y2={330} />
-
-      {/* ── PROCUREMENT (far right top) ── */}
-      <rect x="960" y="210" width="180" height="100" rx="6" fill="#FAFAFA" stroke="#E5E7EB" strokeWidth="1" />
-      <text x="1050" y="230" textAnchor="middle" fill="#9CA3AF" fontSize="8" fontWeight="700">PROCUREMENT</text>
-      <SapScreen x={975} y={238} w={65} h={42} label="MM/SRM" />
-      <Person x={1080} y={310} variant="manager" facing="left" />
-      <DataFlow x1={960} y1={260} x2={600} y2={310} />
-
-      {/* ── LOGISTICS / TRUCKING (bottom right) ── */}
-      <rect x="760" y="420" width="280" height="90" rx="5" fill="#FFF8EB" stroke="#FCD34D" strokeWidth="1.5" />
-      <text x="900" y="440" textAnchor="middle" fill="#92400E" fontSize="8" fontWeight="700">LOGISTICS</text>
-      <Truck x={780} y={455} />
-      <Truck x={880} y={455} />
-      <Person x={980} y={500} variant="worker" facing="left" />
-      <DataFlow x1={760} y1={460} x2={600} y2={395} />
-
-      {/* ── DATA FLOWS ── */}
-      <DataFlow x1={600} y1={275} x2={600} y2={240} />
-      <DataFlow x1={530} y1={395} x2={440} y2={430} />
-      <DataFlow x1={600} y1={395} x2={600} y2={430} />
-
-      {/* ground line */}
-      <line x1="60" y1="510" x2="1140" y2="510" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="6 6" />
+      {/* ── ISOMETRIC CUBE ── */}
+      {/* cube drop shadow */}
+      <ellipse cx="300" cy="318" rx="55" ry="16" fill="rgba(15,23,42,0.12)" />
+      {/* top face */}
+      <path d="M 300,185 L 356,218 L 300,251 L 244,218 Z" fill="url(#cubeTop)" />
+      {/* left face */}
+      <path d="M 244,218 L 300,251 L 300,311 L 244,278 Z" fill="url(#cubeLeft)" />
+      {/* right face */}
+      <path d="M 356,218 L 300,251 L 300,311 L 356,278 Z" fill="url(#cubeRight)" />
+      {/* top face edge lines */}
+      <path d="M 300,185 L 356,218 L 300,251 L 244,218 Z" fill="none" stroke="#fff" strokeWidth="0.8" opacity="0.5" />
+      {/* logo text on top face */}
+      <text x="300" y="218" textAnchor="middle" fill="#fff" fontSize="8" fontWeight="900" transform="skewX(-10) skewY(5)">KANNANWARE</text>
+      <text x="300" y="233" textAnchor="middle" fill={G.pale} fontSize="6.5" fontWeight="700" transform="skewX(-10) skewY(5)">ERP</text>
+      {/* glowing dot on top */}
+      <circle cx="300" cy="168" r="8" fill="#090909" stroke={G.p} strokeWidth="2" filter="url(#glowFilter)" />
+      <text x="300" y="172" textAnchor="middle" fill={G.p} fontSize="5.5" fontWeight="800">AI</text>
     </svg>
   );
 }

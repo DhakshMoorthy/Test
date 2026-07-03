@@ -24,7 +24,7 @@ export default function SectionLayout({
 }: SectionLayoutProps) {
   return (
     <section id={id} className={cn("scene-section", className)}>
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-2 lg:gap-16">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-[44%_56%] lg:gap-12">
         <div className={cn(reverse && "lg:order-2")}>
           <span className="section-badge">{badge}</span>
           <h2 className="font-display mt-5 text-3xl leading-tight font-bold tracking-tight md:text-4xl lg:text-5xl">
