@@ -9,15 +9,15 @@ export default function MouseGlow() {
 
   return (
     <div
-      className="pointer-events-none fixed z-[9999] mix-blend-screen"
+      className="pointer-events-none fixed z-[9999]"
       style={{
-        left: position.x - 200,
-        top: position.y - 200,
-        width: 400,
-        height: 400,
+        left: position.x - 180,
+        top: position.y - 180,
+        width: 360,
+        height: 360,
         background:
-          "radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, transparent 70%)",
-        transition: "opacity 0.3s ease",
+          "radial-gradient(circle, rgba(37, 99, 235, 0.06) 0%, transparent 70%)",
+        transition: "opacity 0.4s ease",
       }}
       aria-hidden
     />

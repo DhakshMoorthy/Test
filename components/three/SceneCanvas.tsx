@@ -16,7 +16,7 @@ interface SceneCanvasProps {
 
 export default function SceneCanvas({
   children,
-  camera = { position: [8, 8, 8], fov: 45 },
+  camera = { position: [5, 4, 5], fov: 42 },
   className = "",
 }: SceneCanvasProps) {
   return (
@@ -29,12 +29,25 @@ export default function SceneCanvas({
             near: 0.1,
             far: 1000,
           }}
-          dpr={[1, 2]}
+          dpr={[1, 1.5]}
           gl={{ antialias: true, alpha: true }}
           style={{ background: "transparent" }}
         >
-          <ambientLight intensity={0.4} />
-          <directionalLight position={[10, 10, 5]} intensity={0.8} />
+          <ambientLight intensity={0.85} color="#f8fafc" />
+          <directionalLight
+            position={[6, 10, 4]}
+            intensity={1.1}
+            color="#ffffff"
+            castShadow
+          />
+          <directionalLight
+            position={[-4, 6, -2]}
+            intensity={0.35}
+            color="#93c5fd"
+          />
+          <hemisphereLight
+            args={["#ffffff", "#e2e8f0", 0.5]}
+          />
           {children}
         </Canvas>
       </Suspense>

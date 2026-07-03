@@ -2,7 +2,9 @@
 
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
+import { RoundedBox } from "@react-three/drei";
 import * as THREE from "three";
+import { smoothMat, PALETTE } from "@/lib/three/materials";
 
 interface SmartCityProps {
   progress?: number;
@@ -21,85 +23,45 @@ function Building({
 
   useFrame((state) => {
     if (!ref.current || !smart) return;
-    const mat = ref.current.material as THREE.MeshStandardMaterial;
-    mat.emissiveIntensity = 0.3 + Math.sin(state.clock.elapsedTime * 2) * 0.2;
+    const mat = ref.current.material as THREE.MeshPhysicalMaterial;
+    mat.emissiveIntensity = 0.1 + Math.sin(state.clock.elapsedTime * 1.5) * 0.05;
   });
 
   return (
-    <mesh ref={ref} position={[position[0], height / 2, position[2]]}>
-      <boxGeometry args={[0.4, height, 0.4]} />
-      <meshStandardMaterial
-        color={smart ? "#1e40af" : "#334155"}
-        emissive={smart ? "#2563EB" : "#000000"}
-        emissiveIntensity={smart ? 0.3 : 0}
+    <RoundedBox
+      ref={ref}
+      args={[0.28, height, 0.28]}
+      radius={0.04}
+      smoothness={3}
+      position={[position[0], height / 2 + 0.02, position[2]]}
+    >
+      <primitive
+        object={smoothMat(smart ? "#DBEAFE" : PALETTE.white, {
+          emissive: smart ? PALETTE.accent : "#000000",
+          emissiveIntensity: smart ? 0.1 : 0,
+        })}
+        attach="material"
       />
-    </mesh>
-  );
-}
-
-function Drone({ position }: { position: [number, number, number] }) {
-  const ref = useRef<THREE.Group>(null);
-
-  useFrame((state) => {
-    if (!ref.current) return;
-    const t = state.clock.elapsedTime;
-    ref.current.position.x = position[0] + Math.sin(t) * 1.5;
-    ref.current.position.z = position[2] + Math.cos(t * 0.7) * 1;
-    ref.current.position.y = position[1] + Math.sin(t * 2) * 0.2;
-  });
-
-  return (
-    <group ref={ref} position={position}>
-      <mesh>
-        <boxGeometry args={[0.15, 0.05, 0.15]} />
-        <meshStandardMaterial color="#2563EB" emissive="#2563EB" emissiveIntensity={0.5} />
-      </mesh>
-      <mesh position={[0.1, 0, 0.1]}>
-        <boxGeometry args={[0.08, 0.01, 0.02]} />
-        <meshStandardMaterial color="#60A5FA" />
-      </mesh>
-      <mesh position={[-0.1, 0, -0.1]}>
-        <boxGeometry args={[0.08, 0.01, 0.02]} />
-        <meshStandardMaterial color="#60A5FA" />
-      </mesh>
-    </group>
-  );
-}
-
-function SolarPanel({ position }: { position: [number, number, number] }) {
-  const ref = useRef<THREE.Mesh>(null);
-
-  useFrame((state) => {
-    if (!ref.current) return;
-    ref.current.rotation.x = -Math.PI / 6 + Math.sin(state.clock.elapsedTime * 0.5) * 0.05;
-  });
-
-  return (
-    <mesh ref={ref} position={position} rotation={[-Math.PI / 6, 0, 0]}>
-      <boxGeometry args={[0.3, 0.02, 0.2]} />
-      <meshStandardMaterial color="#1e3a8a" emissive="#2563EB" emissiveIntensity={0.2} />
-    </mesh>
+    </RoundedBox>
   );
 }
 
 export default function SmartCity({ progress = 0 }: SmartCityProps) {
-  const smartThreshold = progress;
-
   const buildings: { pos: [number, number, number]; height: number }[] = [
-    { pos: [-1.5, 0, -1], height: 1.2 },
-    { pos: [-0.5, 0, -0.5], height: 0.8 },
-    { pos: [0.5, 0, -1], height: 1.5 },
-    { pos: [1.5, 0, 0], height: 1.0 },
-    { pos: [-1, 0, 1], height: 0.6 },
-    { pos: [0, 0, 0.5], height: 1.8 },
-    { pos: [1, 0, 1.2], height: 0.9 },
+    { pos: [-1.2, 0, -0.8], height: 0.9 },
+    { pos: [-0.4, 0, -0.3], height: 0.6 },
+    { pos: [0.4, 0, -0.6], height: 1.1 },
+    { pos: [1.1, 0, 0.1], height: 0.75 },
+    { pos: [-0.8, 0, 0.7], height: 0.5 },
+    { pos: [0.1, 0, 0.5], height: 1.3 },
+    { pos: [0.9, 0, 0.8], height: 0.65 },
   ];
 
   return (
     <group>
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[8, 8]} />
-        <meshStandardMaterial color="#0A0E14" />
+        <circleGeometry args={[2.5, 48]} />
+        <primitive object={smoothMat(PALETTE.floor)} attach="material" />
       </mesh>
 
       {buildings.map((b, i) => (
@@ -107,42 +69,22 @@ export default function SmartCity({ progress = 0 }: SmartCityProps) {
           key={i}
           position={b.pos}
           height={b.height}
-          smart={i / buildings.length < smartThreshold}
+          smart={i / buildings.length < progress}
         />
       ))}
 
-      {progress > 0.3 && <Drone position={[0, 2, 0]} />}
-      {progress > 0.5 && <SolarPanel position={[2, 0.3, -1.5]} />}
-      {progress > 0.5 && <SolarPanel position={[2.3, 0.3, -1.2]} />}
-
-      {/* Glowing delivery routes */}
-      {progress > 0.2 && (
-        <>
-          <mesh position={[0, 0.02, 0]} rotation={[-Math.PI / 2, 0, 0.5]}>
-            <planeGeometry args={[4, 0.05]} />
-            <meshStandardMaterial
-              color="#2563EB"
-              emissive="#2563EB"
-              emissiveIntensity={0.8}
-              transparent
-              opacity={0.6}
-            />
-          </mesh>
-          <mesh position={[0, 0.02, 0.8]} rotation={[-Math.PI / 2, 0, -0.3]}>
-            <planeGeometry args={[3, 0.05]} />
-            <meshStandardMaterial
-              color="#2563EB"
-              emissive="#2563EB"
-              emissiveIntensity={0.8}
-              transparent
-              opacity={0.6}
-            />
-          </mesh>
-        </>
+      {progress > 0.3 && (
+        <mesh position={[0, 0.03, 0]} rotation={[-Math.PI / 2, 0, 0.4]}>
+          <planeGeometry args={[3, 0.04]} />
+          <meshStandardMaterial
+            color={PALETTE.accent}
+            emissive={PALETTE.accent}
+            emissiveIntensity={0.4}
+            transparent
+            opacity={0.5}
+          />
+        </mesh>
       )}
-
-      <ambientLight intensity={0.3 + progress * 0.3} />
-      <directionalLight position={[5, 10, 5]} intensity={0.5 + progress * 0.3} />
     </group>
   );
 }

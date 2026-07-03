@@ -4,85 +4,73 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import dynamic from "next/dynamic";
+import SectionLayout from "@/components/ui/SectionLayout";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
-import { GROWTH_METRICS } from "@/lib/constants";
+import { KPI_METRICS } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SceneCanvas = dynamic(
-  () => import("@/components/three/SceneCanvas"),
-  { ssr: false }
-);
+const SceneCanvas = dynamic(() => import("@/components/three/SceneCanvas"), {
+  ssr: false,
+});
 const SmartCity = dynamic(() => import("@/components/three/SmartCity"), {
   ssr: false,
 });
 
 export default function SceneGrowth() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    const el = sectionRef.current;
+    if (!el) return;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: "+=250%",
-        pin: true,
-        scrub: 1,
-        onUpdate: (self) => setProgress(self.progress),
-      },
+    const trigger = ScrollTrigger.create({
+      trigger: el,
+      start: "top 65%",
+      end: "bottom 25%",
+      scrub: 0.5,
+      onUpdate: (self) => setProgress(self.progress),
     });
 
-    return () => {
-      tl.scrollTrigger?.kill();
-      tl.kill();
-    };
+    return () => trigger.kill();
   }, []);
 
   return (
-    <section
-      id="growth"
-      ref={sectionRef}
-      className="scene-pin relative min-h-screen overflow-hidden bg-background"
-    >
-      <SceneCanvas camera={{ position: [4, 5, 4], fov: 45 }}>
-        <SmartCity progress={progress} />
-      </SceneCanvas>
-
-      <div className="scene-content flex min-h-screen flex-col items-center justify-center px-6">
-        <p className="text-muted mb-4 text-sm tracking-[0.3em] uppercase">
-          Scene 07
-        </p>
-        <h2 className="font-display max-w-3xl text-center text-4xl font-bold md:text-5xl">
-          Watch Your Business{" "}
-          <span className="gradient-text">Transform</span>
-        </h2>
-        <p className="text-muted mt-4 max-w-xl text-center">
-          Smarter buildings. Glowing routes. AI drones. Real-time collaboration.
-        </p>
-
-        <div className="mt-12 grid w-full max-w-3xl grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
-          {GROWTH_METRICS.map((metric) => (
-            <div
-              key={metric.id}
-              className="glass rounded-xl p-4 text-center transition-all duration-500 hover:glow-accent"
-            >
-              <p className="font-display text-2xl font-bold">
+    <div ref={sectionRef}>
+      <SectionLayout
+        id="growth"
+        badge="07 — Business Growth"
+        title={
+          <>
+            Watch Your City{" "}
+            <span className="gradient-text">Get Smarter</span>
+          </>
+        }
+        description="As Kannanware takes hold, your operations evolve — buildings connect, routes optimize, and data flows in real time."
+        reverse
+        visual={
+          <SceneCanvas camera={{ position: [3.5, 4, 3.5], fov: 42 }}>
+            <SmartCity progress={progress} />
+          </SceneCanvas>
+        }
+      >
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {KPI_METRICS.slice(0, 5).map((metric) => (
+            <div key={metric.id} className="white-card p-3 text-center">
+              <p className="font-display text-lg font-bold">
                 <AnimatedCounter
                   value={metric.value}
                   suffix="%"
                   direction={metric.direction}
-                  duration={2}
+                  duration={1.5}
                 />
               </p>
-              <p className="text-muted mt-1 text-xs">{metric.label}</p>
+              <p className="text-muted mt-0.5 text-[10px]">{metric.label}</p>
             </div>
           ))}
         </div>
-      </div>
-    </section>
+      </SectionLayout>
+    </div>
   );
 }

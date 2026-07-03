@@ -1,87 +1,113 @@
 "use client";
 
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import MagneticButton from "@/components/ui/MagneticButton";
-import FloatingParticles from "@/components/ui/FloatingParticles";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { HERO_STATS } from "@/lib/constants";
+
+const SceneCanvas = dynamic(() => import("@/components/three/SceneCanvas"), {
+  ssr: false,
+});
+const HeroEcosystem = dynamic(
+  () => import("@/components/three/HeroEcosystem"),
+  { ssr: false }
+);
 
 export default function HeroIntro() {
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6">
-      <FloatingParticles count={60} />
+    <section className="relative min-h-screen overflow-hidden pt-28 pb-16">
       <div className="animated-gradient absolute inset-0" />
 
-      {/* Grid overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
-
-      <div className="relative z-10 text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-muted mb-6 text-sm tracking-[0.4em] uppercase"
-        >
-          SAP ERP · AI · Digital Transformation
-        </motion.p>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display max-w-5xl text-5xl leading-[1.1] font-bold md:text-7xl lg:text-8xl"
-        >
-          Your Business,{" "}
-          <span className="gradient-text glow-text">Reimagined</span>
-        </motion.h1>
-
-        <ScrollReveal delay={0.8}>
-          <p className="text-muted mx-auto mt-8 max-w-2xl text-lg md:text-xl">
-            Scroll to experience how Kannanware transforms chaos into clarity —
-            one scene at a time.
-          </p>
-        </ScrollReveal>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          className="mt-10 flex flex-col items-center gap-6"
-        >
-          <MagneticButton
-            size="lg"
-            onClick={() =>
-              document
-                .getElementById("chaos")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2 lg:gap-8 lg:pt-12">
+        <div>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="text-accent mb-4 text-sm font-semibold tracking-wide"
           >
-            Begin the Story
-          </MagneticButton>
+            SAP ERP · AI · Digital Transformation
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display text-4xl leading-[1.1] font-bold tracking-tight md:text-5xl lg:text-6xl"
+          >
+            Transform Your Business with{" "}
+            <span className="gradient-text">Intelligent ERP</span>
+          </motion.h1>
+
+          <ScrollReveal delay={0.35}>
+            <p className="text-muted mt-6 max-w-lg text-lg leading-relaxed">
+              Kannanware unifies finance, operations, and AI into one seamless
+              platform — so your teams move faster and decisions get smarter.
+            </p>
+          </ScrollReveal>
 
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-muted flex flex-col items-center gap-2 text-xs"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            className="mt-8 flex flex-wrap gap-3"
           >
-            <span>Scroll to explore</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M12 5v14M5 12l7 7 7-7"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <MagneticButton
+              size="lg"
+              onClick={() =>
+                document
+                  .getElementById("finale")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              Book a Demo
+            </MagneticButton>
+            <MagneticButton
+              variant="secondary"
+              size="lg"
+              onClick={() =>
+                document
+                  .getElementById("chaos")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              See How It Works
+            </MagneticButton>
           </motion.div>
-        </motion.div>
+        </div>
+
+        <div className="relative">
+          <div className="canvas-panel !h-[20rem] lg:!h-[26rem]">
+            <SceneCanvas camera={{ position: [4.5, 3.5, 4.5], fov: 40 }}>
+              <HeroEcosystem />
+            </SceneCanvas>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="white-card absolute -bottom-4 -left-2 z-10 w-56 p-4 sm:-left-6 lg:w-64"
+          >
+            <p className="text-muted text-xs font-semibold tracking-wider uppercase">
+              Live Business Impact
+            </p>
+            <div className="mt-3 space-y-3">
+              {HERO_STATS.map((stat) => (
+                <div key={stat.label} className="flex items-center justify-between">
+                  <span className="text-sm text-foreground">{stat.label}</span>
+                  <div className="text-right">
+                    <span className="text-sm font-semibold">{stat.value}</span>
+                    <span className="ml-2 text-xs font-medium text-green-500">
+                      {stat.trend}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,97 +1,87 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import dynamic from "next/dynamic";
 import MagneticButton from "@/components/ui/MagneticButton";
 import RippleButton from "@/components/ui/RippleButton";
-import FloatingParticles from "@/components/ui/FloatingParticles";
+import AnimatedCounter from "@/components/ui/AnimatedCounter";
+import { COMPANY_STATS } from "@/lib/constants";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const SceneCanvas = dynamic(
-  () => import("@/components/three/SceneCanvas"),
-  { ssr: false }
-);
+const SceneCanvas = dynamic(() => import("@/components/three/SceneCanvas"), {
+  ssr: false,
+});
 const ParticleLogo = dynamic(
   () => import("@/components/three/ParticleLogo"),
   { ssr: false }
 );
 
 export default function SceneFinale() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: "+=150%",
-        pin: true,
-        scrub: 1,
-        onUpdate: (self) => setProgress(self.progress),
-      },
-    });
-
-    tl.fromTo(
-      ".finale-text",
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.4 },
-      0.3
-    );
-
-    return () => {
-      tl.scrollTrigger?.kill();
-      tl.kill();
-    };
-  }, []);
-
   return (
-    <section
-      id="finale"
-      ref={sectionRef}
-      className="scene-pin relative min-h-screen overflow-hidden bg-background"
-    >
-      <FloatingParticles count={80} />
-      <SceneCanvas camera={{ position: [0, 0, 8], fov: 50 }}>
-        <ParticleLogo progress={Math.max(progress, 0.3)} />
-      </SceneCanvas>
+    <section id="finale" className="scene-section overflow-hidden">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="canvas-panel !h-[16rem] md:!h-[20rem]">
+          <SceneCanvas camera={{ position: [0, 0, 6], fov: 45 }}>
+            <ParticleLogo progress={1} />
+          </SceneCanvas>
+        </div>
 
-      <div className="scene-content flex min-h-screen flex-col items-center justify-center px-6 text-center">
-        <motion.div
-          className="finale-text opacity-0"
-          initial={{ opacity: 0 }}
-        >
-          <p className="font-display mb-2 text-sm tracking-[0.4em] text-accent uppercase">
-            Kannanware
-          </p>
-          <h2 className="font-display max-w-4xl text-4xl leading-tight font-bold md:text-6xl lg:text-7xl">
+        <div className="mt-12 text-center">
+          <Image
+            src="/logo.svg"
+            alt="Kannanware"
+            width={160}
+            height={36}
+            className="mx-auto h-9 w-auto"
+          />
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="font-display mx-auto mt-6 max-w-3xl text-3xl font-bold tracking-tight md:text-5xl"
+          >
             Transforming Businesses with{" "}
-            <span className="gradient-text glow-text">
-              Intelligent ERP & AI
-            </span>
-          </h2>
-          <p className="text-muted mx-auto mt-6 max-w-2xl text-lg">
+            <span className="gradient-text">Intelligent ERP & AI</span>
+          </motion.h2>
+
+          <p className="text-muted mx-auto mt-4 max-w-xl">
             Join thousands of businesses connected in one digital ecosystem.
-            Experience the future of enterprise management.
           </p>
 
-          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {COMPANY_STATS.map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.4 }}
+                className="white-card p-4"
+              >
+                <p className="font-display text-2xl font-bold text-accent">
+                  <AnimatedCounter
+                    value={stat.value}
+                    suffix={stat.suffix}
+                    duration={2}
+                  />
+                </p>
+                <p className="text-muted mt-1 text-xs">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <RippleButton>
               <MagneticButton size="lg" className="group">
                 Book a Demo
                 <svg
-                  width="20"
-                  height="20"
+                  width="18"
+                  height="18"
                   viewBox="0 0 24 24"
                   fill="none"
-                  className="transition-transform group-hover:translate-x-1"
+                  className="transition-transform group-hover:translate-x-0.5"
                 >
                   <path
                     d="M5 12h14M13 6l6 6-6 6"
@@ -104,10 +94,10 @@ export default function SceneFinale() {
               </MagneticButton>
             </RippleButton>
             <MagneticButton variant="secondary" size="lg">
-              Explore Solutions
+              Watch Kannanware in 2 mins
             </MagneticButton>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

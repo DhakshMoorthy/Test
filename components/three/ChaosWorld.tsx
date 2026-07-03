@@ -2,93 +2,37 @@
 
 import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
+import { RoundedBox, Float } from "@react-three/drei";
 import * as THREE from "three";
+import { smoothMat, PALETTE } from "@/lib/three/materials";
 
-function Paper({ position, delay }: { position: [number, number, number]; delay: number }) {
+function AlertPulse({ position }: { position: [number, number, number] }) {
   const ref = useRef<THREE.Mesh>(null);
   useFrame((state) => {
     if (!ref.current) return;
-    const t = state.clock.elapsedTime + delay;
-    ref.current.position.y = position[1] + Math.sin(t * 2) * 0.3;
-    ref.current.rotation.x = Math.sin(t) * 0.5;
-    ref.current.rotation.z = Math.cos(t * 1.5) * 0.3;
-    ref.current.position.x = position[0] + Math.sin(t * 0.5) * 0.2;
+    const s = 1 + Math.sin(state.clock.elapsedTime * 3) * 0.15;
+    ref.current.scale.setScalar(s);
   });
   return (
     <mesh ref={ref} position={position}>
-      <planeGeometry args={[0.15, 0.2]} />
-      <meshStandardMaterial color="#f8fafc" side={THREE.DoubleSide} />
+      <sphereGeometry args={[0.06, 16, 16]} />
+      <primitive object={smoothMat(PALETTE.danger, { emissive: PALETTE.danger, emissiveIntensity: 0.6 })} attach="material" />
     </mesh>
   );
 }
 
-function Employee({ position, speed }: { position: [number, number, number]; speed: number }) {
-  const ref = useRef<THREE.Group>(null);
+function FloatingDoc({ position, delay }: { position: [number, number, number]; delay: number }) {
+  const ref = useRef<THREE.Mesh>(null);
   useFrame((state) => {
     if (!ref.current) return;
-    const t = state.clock.elapsedTime * speed;
-    ref.current.position.x = position[0] + Math.sin(t) * 0.8;
-    ref.current.position.z = position[2] + Math.cos(t * 0.7) * 0.5;
+    const t = state.clock.elapsedTime + delay;
+    ref.current.position.y = position[1] + Math.sin(t * 1.5) * 0.12;
+    ref.current.rotation.z = Math.sin(t) * 0.2;
   });
   return (
-    <group ref={ref} position={position}>
-      <mesh position={[0, 0.15, 0]}>
-        <capsuleGeometry args={[0.06, 0.15, 4, 8]} />
-        <meshStandardMaterial color="#64748b" />
-      </mesh>
-      <mesh position={[0, 0.35, 0]}>
-        <sphereGeometry args={[0.07, 8, 8]} />
-        <meshStandardMaterial color="#fbbf24" />
-      </mesh>
-    </group>
-  );
-}
-
-function Forklift({ position }: { position: [number, number, number] }) {
-  const ref = useRef<THREE.Group>(null);
-  useFrame((state) => {
-    if (!ref.current) return;
-    ref.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 3) * 0.02;
-  });
-  return (
-    <group ref={ref} position={position}>
-      <mesh>
-        <boxGeometry args={[0.4, 0.15, 0.3]} />
-        <meshStandardMaterial color="#f59e0b" />
-      </mesh>
-      <mesh position={[0.25, 0.2, 0]}>
-        <boxGeometry args={[0.05, 0.3, 0.05]} />
-        <meshStandardMaterial color="#94a3b8" />
-      </mesh>
-    </group>
-  );
-}
-
-function Truck({ position }: { position: [number, number, number] }) {
-  const ref = useRef<THREE.Group>(null);
-  useFrame(() => {
-    if (!ref.current) return;
-    ref.current.rotation.y = Math.sin(Date.now() * 0.001) * 0.1;
-  });
-  return (
-    <group ref={ref} position={position}>
-      <mesh>
-        <boxGeometry args={[0.6, 0.2, 0.25]} />
-        <meshStandardMaterial color="#ef4444" />
-      </mesh>
-      <mesh position={[0.35, 0.1, 0]}>
-        <boxGeometry args={[0.15, 0.15, 0.2]} />
-        <meshStandardMaterial color="#dc2626" />
-      </mesh>
-    </group>
-  );
-}
-
-function InventoryBox({ position, height }: { position: [number, number, number]; height: number }) {
-  return (
-    <mesh position={[position[0], position[1] + height / 2, position[2]]}>
-      <boxGeometry args={[0.3, height, 0.3]} />
-      <meshStandardMaterial color="#854d0e" />
+    <mesh ref={ref} position={position} rotation={[0.3, 0.2, 0.1]}>
+      <planeGeometry args={[0.12, 0.16]} />
+      <meshStandardMaterial color="#fff" side={THREE.DoubleSide} roughness={0.4} />
     </mesh>
   );
 }
@@ -102,85 +46,71 @@ export default function ChaosWorld({ progress = 0 }: ChaosWorldProps) {
 
   useFrame(() => {
     if (!groupRef.current) return;
-    const zoom = 1 + progress * 0.5;
-    groupRef.current.scale.setScalar(zoom);
+    groupRef.current.rotation.y = progress * 0.2;
   });
 
-  const papers = useMemo(
+  const docs = useMemo(
     () =>
-      Array.from({ length: 12 }, (_, i) => ({
-        pos: [
-          (Math.random() - 0.5) * 3,
-          0.5 + Math.random() * 1.5,
-          (Math.random() - 0.5) * 3,
-        ] as [number, number, number],
-        delay: i * 0.3,
+      Array.from({ length: 8 }, (_, i) => ({
+        pos: [(Math.random() - 0.5) * 2, 0.4 + Math.random(), (Math.random() - 0.5) * 2] as [number, number, number],
+        delay: i * 0.4,
       })),
     []
   );
 
   return (
     <group ref={groupRef}>
-      {/* Ground / office floor */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-        <planeGeometry args={[6, 6]} />
-        <meshStandardMaterial color="#1e293b" />
+      <mesh rotation={[-Math.PI / 2, 0, 0]}>
+        <circleGeometry args={[2.5, 48]} />
+        <primitive object={smoothMat(PALETTE.floor)} attach="material" />
       </mesh>
 
-      {/* Office building walls */}
-      <mesh position={[0, 0.5, -2.5]}>
-        <boxGeometry args={[5, 1, 0.1]} />
-        <meshStandardMaterial color="#334155" />
-      </mesh>
-      <mesh position={[-2.5, 0.5, 0]}>
-        <boxGeometry args={[0.1, 1, 5]} />
-        <meshStandardMaterial color="#334155" />
-      </mesh>
-      <mesh position={[2.5, 0.5, 0]}>
-        <boxGeometry args={[0.1, 1, 5]} />
-        <meshStandardMaterial color="#334155" />
-      </mesh>
+      <RoundedBox args={[2.2, 0.08, 1.6]} radius={0.03} position={[0, 0.04, 0]} smoothness={4}>
+        <primitive object={smoothMat("#E2E8F0")} attach="material" />
+      </RoundedBox>
 
-      {/* Desks */}
-      {[
-        [-1, 0.1, -1],
-        [1, 0.1, -1],
-        [-1, 0.1, 1],
-        [1, 0.1, 1],
-      ].map((pos, i) => (
-        <mesh key={i} position={pos as [number, number, number]}>
-          <boxGeometry args={[0.6, 0.08, 0.4]} />
-          <meshStandardMaterial color="#475569" />
-        </mesh>
+      {[[-0.6, 0.12, -0.3], [0.5, 0.12, 0.2], [-0.3, 0.12, 0.5]].map((pos, i) => (
+        <RoundedBox key={i} args={[0.45, 0.06, 0.3]} radius={0.02} position={pos as [number, number, number]} smoothness={3}>
+          <primitive object={smoothMat(PALETTE.white)} attach="material" />
+        </RoundedBox>
       ))}
 
-      {/* Employees */}
-      <Employee position={[-0.8, 0, -0.8]} speed={0.5} />
-      <Employee position={[0.8, 0, 0.5]} speed={0.7} />
-      <Employee position={[-0.5, 0, 1.2]} speed={0.4} />
-      <Employee position={[1.2, 0, -0.5]} speed={0.6} />
-
-      {/* Papers flying */}
-      {papers.map((p, i) => (
-        <Paper key={i} position={p.pos} delay={p.delay} />
+      {[[-0.5, 0.2, -0.2], [0.4, 0.2, 0.3], [0, 0.2, 0.6]].map((pos, i) => (
+        <Float key={i} speed={1.5 + i * 0.2} floatIntensity={0.1}>
+          <group position={pos as [number, number, number]}>
+            <mesh position={[0, 0.12, 0]}>
+              <capsuleGeometry args={[0.04, 0.12, 8, 16]} />
+              <primitive object={smoothMat(PALETTE.muted)} attach="material" />
+            </mesh>
+            <mesh position={[0, 0.28, 0]}>
+              <sphereGeometry args={[0.05, 16, 16]} />
+              <primitive object={smoothMat("#FCD34D")} attach="material" />
+            </mesh>
+          </group>
+        </Float>
       ))}
 
-      {/* Forklifts waiting */}
-      <Forklift position={[-1.8, 0.08, 2]} />
-      <Forklift position={[1.8, 0.08, 2]} />
+      {docs.map((d, i) => (
+        <FloatingDoc key={i} position={d.pos} delay={d.delay} />
+      ))}
 
-      {/* Trucks delayed */}
-      <Truck position={[0, 0.1, 2.8]} />
+      <group position={[1.2, 0.1, -0.8]}>
+        <RoundedBox args={[0.35, 0.12, 0.25]} radius={0.03} smoothness={3}>
+          <primitive object={smoothMat(PALETTE.warm)} attach="material" />
+        </RoundedBox>
+      </group>
 
-      {/* Overflowing inventory */}
-      <InventoryBox position={[-2, 0, -1.5]} height={0.8} />
-      <InventoryBox position={[-2.1, 0, -1.3]} height={1.2} />
-      <InventoryBox position={[-1.9, 0, -1.7]} height={1.0} />
-      <InventoryBox position={[2, 0, 0.5]} height={1.5} />
-      <InventoryBox position={[2.1, 0, 0.7]} height={0.9} />
+      <group position={[-1, 0, 0.9]}>
+        {[0, 0.25, 0.5].map((y, i) => (
+          <RoundedBox key={i} args={[0.22, 0.22, 0.22]} radius={0.04} position={[i * 0.05, 0.11 + y, i * 0.04]} smoothness={3}>
+            <primitive object={smoothMat("#D97706", { roughness: 0.5 })} attach="material" />
+          </RoundedBox>
+        ))}
+      </group>
 
-      {/* Red warning lights */}
-      <pointLight position={[0, 1.5, 0]} color="#ef4444" intensity={0.5 + Math.sin(Date.now() * 0.005) * 0.3} distance={4} />
+      <AlertPulse position={[-0.8, 0.6, -0.5]} />
+      <AlertPulse position={[0.6, 0.55, 0.4]} />
+      <AlertPulse position={[0, 0.7, -0.8]} />
     </group>
   );
 }

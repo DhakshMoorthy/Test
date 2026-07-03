@@ -1,97 +1,88 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import dynamic from "next/dynamic";
+import SectionLayout from "@/components/ui/SectionLayout";
 import { ORDER_STEPS } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SceneCanvas = dynamic(
-  () => import("@/components/three/SceneCanvas"),
-  { ssr: false }
-);
-const OrderFlow = dynamic(() => import("@/components/three/OrderFlow"), {
-  ssr: false,
-});
-
 export default function SceneOrderJourney() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    const el = sectionRef.current;
+    if (!el) return;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: "+=300%",
-        pin: true,
-        scrub: 1,
-        onUpdate: (self) => {
-          const step = Math.floor(self.progress * ORDER_STEPS.length);
-          setActiveStep(Math.min(step, ORDER_STEPS.length - 1));
-        },
+    const trigger = ScrollTrigger.create({
+      trigger: el,
+      start: "top 60%",
+      end: "bottom 30%",
+      scrub: 0.5,
+      onUpdate: (self) => {
+        const step = Math.floor(self.progress * ORDER_STEPS.length);
+        setActiveStep(Math.min(step, ORDER_STEPS.length - 1));
       },
     });
 
-    return () => {
-      tl.scrollTrigger?.kill();
-      tl.kill();
-    };
+    return () => trigger.kill();
   }, []);
 
-  const currentStep = ORDER_STEPS[activeStep];
-
   return (
-    <section
-      id="journey"
-      ref={sectionRef}
-      className="scene-pin relative min-h-screen overflow-hidden bg-background"
-    >
-      <SceneCanvas camera={{ position: [0, 5, 6], fov: 45 }}>
-        <OrderFlow activeStep={activeStep} />
-      </SceneCanvas>
-
-      <div className="scene-content flex min-h-screen flex-col items-center justify-start px-6 pt-24">
-        <p className="text-muted mb-4 text-sm tracking-[0.3em] uppercase">
-          Scene 03
-        </p>
-        <h2 className="font-display max-w-3xl text-center text-4xl font-bold md:text-5xl">
-          One Order.{" "}
-          <span className="gradient-text">Every Step Visible.</span>
-        </h2>
-
-        <div className="mt-12 w-full max-w-lg">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeStep}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className="glass glow-accent rounded-2xl p-6 text-center"
-            >
-              <span className="text-3xl">{currentStep.icon}</span>
-              <p className="mt-3 text-lg font-medium">{currentStep.label}</p>
-              <div className="mt-4 flex justify-center gap-1">
-                {ORDER_STEPS.map((_, i) => (
-                  <div
-                    key={i}
-                    className={`h-1.5 w-6 rounded-full transition-all duration-300 ${
-                      i <= activeStep ? "bg-accent" : "bg-white/10"
-                    }`}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+    <div ref={sectionRef}>
+      <SectionLayout
+        id="journey"
+        badge="03 — Process Flow"
+        title={
+          <>
+            From Order to Cash,{" "}
+            <span className="gradient-text">Seamlessly</span>
+          </>
+        }
+        description="Watch a single order flow through your entire business — every handoff visible, every step automated."
+        visual={
+          <div className="flex h-full items-center justify-center p-6">
+            <div className="grid w-full max-w-sm grid-cols-3 gap-3">
+              {ORDER_STEPS.map((step, i) => (
+                <motion.div
+                  key={step.id}
+                  animate={{
+                    scale: i === activeStep ? 1.05 : 1,
+                    opacity: i <= activeStep ? 1 : 0.45,
+                  }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  className={`flex flex-col items-center rounded-xl p-3 text-center transition-colors duration-300 ${
+                    i === activeStep
+                      ? "bg-accent-pale ring-2 ring-accent/30"
+                      : i < activeStep
+                        ? "bg-white ring-1 ring-border"
+                        : "bg-surface ring-1 ring-border"
+                  }`}
+                >
+                  <span className="text-xl">{step.icon}</span>
+                  <span className="mt-1.5 text-[10px] leading-tight font-medium">
+                    {step.label}
+                  </span>
+                  {i < activeStep && (
+                    <span className="mt-1 text-[9px] text-green-500">✓</span>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        }
+      >
+        <div className="white-card inline-flex items-center gap-3 px-5 py-3">
+          <span className="text-2xl">{ORDER_STEPS[activeStep].icon}</span>
+          <div>
+            <p className="text-muted text-xs uppercase tracking-wider">Current step</p>
+            <p className="font-medium">{ORDER_STEPS[activeStep].label}</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </SectionLayout>
+    </div>
   );
 }

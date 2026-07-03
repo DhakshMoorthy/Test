@@ -1,12 +1,12 @@
 export const COLORS = {
-  background: "#05070A",
-  surface: "#0A0E14",
-  surfaceLight: "#111820",
+  background: "#FFFFFF",
+  surface: "#F8FAFC",
+  surfaceLight: "#F1F5F9",
   accent: "#2563EB",
   accentLight: "#3B82F6",
   accentGlow: "#60A5FA",
-  text: "#F8FAFC",
-  textMuted: "#94A3B8",
+  text: "#0F172A",
+  textMuted: "#64748B",
   success: "#10B981",
   warning: "#F59E0B",
   danger: "#EF4444",
@@ -23,54 +23,63 @@ export const DEPARTMENTS = [
 ] as const;
 
 export const ORDER_STEPS = [
-  { id: "order", label: "Customer places order", icon: "🛒" },
-  { id: "sales", label: "Sales confirms", icon: "✅" },
-  { id: "warehouse", label: "Warehouse checks stock", icon: "📦" },
-  { id: "robot", label: "Robot picks items", icon: "🤖" },
-  { id: "forklift", label: "Forklift transports pallet", icon: "🚜" },
-  { id: "truck", label: "Truck loads", icon: "🚛" },
-  { id: "invoice", label: "Invoice generated", icon: "📄" },
-  { id: "payment", label: "Finance receives payment", icon: "💰" },
-  { id: "dashboard", label: "Dashboard updates instantly", icon: "📊" },
+  { id: "order", label: "Order Placed", icon: "🛒" },
+  { id: "stock", label: "Stock Check", icon: "📦" },
+  { id: "production", label: "Production", icon: "⚙️" },
+  { id: "delivery", label: "Delivery", icon: "🚛" },
+  { id: "invoice", label: "Invoice", icon: "📄" },
+  { id: "payment", label: "Payment", icon: "💰" },
 ] as const;
 
 export const AI_AGENTS = [
-  { id: "anomaly", label: "Detect anomalies", description: "Real-time pattern recognition" },
-  { id: "approve", label: "Approve purchase orders", description: "Smart workflow automation" },
-  { id: "forecast", label: "Forecast demand", description: "Predictive analytics engine" },
-  { id: "maintenance", label: "Predict maintenance", description: "IoT-driven insights" },
-  { id: "inventory", label: "Recommend inventory", description: "Optimal stock levels" },
-  { id: "risk", label: "Flag financial risks", description: "Proactive compliance" },
+  { id: "forecast", label: "Demand Forecasting", description: "Predict demand with AI-driven models" },
+  { id: "anomaly", label: "Risk Detection", description: "Spot anomalies before they escalate" },
+  { id: "approve", label: "Auto Approvals", description: "Smart workflow automation" },
+  { id: "inventory", label: "Cost Optimization", description: "Reduce spend across operations" },
 ] as const;
 
 export const INDUSTRIES = [
-  { id: "manufacturing", label: "Manufacturing", color: "#3B82F6", description: "Smart factories with real-time production tracking" },
-  { id: "retail", label: "Retail", color: "#8B5CF6", description: "Omnichannel inventory and customer experience" },
+  { id: "manufacturing", label: "Manufacturing", color: "#2563EB", description: "Smart factories with real-time production tracking" },
+  { id: "retail", label: "Retail", color: "#7C3AED", description: "Omnichannel inventory and customer experience" },
   { id: "healthcare", label: "Healthcare", color: "#10B981", description: "Patient records and supply chain compliance" },
   { id: "construction", label: "Construction", color: "#F59E0B", description: "Project costing and resource allocation" },
   { id: "logistics", label: "Logistics", color: "#06B6D4", description: "Fleet management and route optimization" },
   { id: "automotive", label: "Automotive", color: "#EF4444", description: "Supply chain and quality control" },
 ] as const;
 
-export const GROWTH_METRICS = [
-  { id: "costs", label: "Costs", direction: "down" as const, value: 32 },
-  { id: "productivity", label: "Productivity", direction: "up" as const, value: 47 },
-  { id: "revenue", label: "Revenue", direction: "up" as const, value: 58 },
-  { id: "satisfaction", label: "Customer Satisfaction", direction: "up" as const, value: 41 },
-  { id: "speed", label: "Speed", direction: "up" as const, value: 63 },
+export const KPI_METRICS = [
+  { id: "costs", label: "Operating Costs", direction: "down" as const, value: 30, icon: "📉" },
+  { id: "productivity", label: "Productivity", direction: "up" as const, value: 45, icon: "📈" },
+  { id: "decisions", label: "Faster Decisions", direction: "up" as const, value: 60, icon: "⚡" },
+  { id: "satisfaction", label: "Customer Satisfaction", direction: "up" as const, value: 35, icon: "😊" },
+  { id: "manual", label: "Manual Work", direction: "down" as const, value: 70, icon: "🤖" },
+  { id: "accuracy", label: "Data Accuracy", direction: "up" as const, value: 100, icon: "✓" },
+] as const;
+
+export const COMPANY_STATS = [
+  { label: "Years", value: 25, suffix: "+" },
+  { label: "Happy Customers", value: 1000, suffix: "+" },
+  { label: "Countries", value: 50, suffix: "+" },
+  { label: "Support", value: 24, suffix: "/7" },
 ] as const;
 
 export const CHAOS_WARNINGS = [
-  "Where is my order?",
-  "Payment delayed",
-  "Inventory mismatch",
-  "Manual approval pending",
+  { text: "Data mismatch", type: "danger" },
+  { text: "Out of stock!", type: "danger" },
+  { text: "Payment delayed", type: "warning" },
+  { text: "Manual approval pending", type: "warning" },
 ] as const;
 
 export const NAV_LINKS = [
-  { href: "#chaos", label: "The Problem" },
-  { href: "#solution", label: "Solution" },
-  { href: "#journey", label: "Journey" },
-  { href: "#ai", label: "AI" },
+  { href: "#solution", label: "Solutions" },
   { href: "#industries", label: "Industries" },
+  { href: "#journey", label: "Services" },
+  { href: "#ai", label: "Resources" },
+  { href: "#finale", label: "About Us" },
+] as const;
+
+export const HERO_STATS = [
+  { label: "Revenue", value: "$2.4M", trend: "+12%" },
+  { label: "Profit", value: "$680K", trend: "+8%" },
+  { label: "Cost Saved", value: "$320K", trend: "+15%" },
 ] as const;

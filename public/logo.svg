@@ -1,0 +1,11 @@
+<svg width="140" height="32" viewBox="0 0 140 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="4" width="24" height="24" rx="6" fill="url(#logoGrad)"/>
+  <path d="M7 10h4.5l3.5 6 3.5-6H23v2.2l-4.2 4.8L23 22v2h-5.5l-3.5-6.2L10.5 24H7v-2.2l4.2-4.8L7 12.2V10z" fill="white"/>
+  <text x="32" y="22" font-family="system-ui, sans-serif" font-size="15" font-weight="700" letter-spacing="0.12em" fill="#0F172A">KANNANWARE</text>
+  <defs>
+    <linearGradient id="logoGrad" x1="0" y1="4" x2="24" y2="28" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+</svg>

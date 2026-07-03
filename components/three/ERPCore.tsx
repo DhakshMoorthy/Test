@@ -2,14 +2,10 @@
 
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Text } from "@react-three/drei";
+import { RoundedBox, Float, Text } from "@react-three/drei";
 import * as THREE from "three";
 import { DEPARTMENTS } from "@/lib/constants";
-
-interface ERPCoreProps {
-  progress?: number;
-  rotationProgress?: number;
-}
+import { smoothMat, PALETTE } from "@/lib/three/materials";
 
 function DepartmentNode({
   label,
@@ -21,137 +17,100 @@ function DepartmentNode({
   connected: boolean;
 }) {
   const rad = (angle * Math.PI) / 180;
-  const x = Math.cos(rad) * 2.5;
-  const z = Math.sin(rad) * 2.5;
-  const ref = useRef<THREE.Mesh>(null);
-
-  useFrame((state) => {
-    if (!ref.current) return;
-    ref.current.position.y = 0.3 + Math.sin(state.clock.elapsedTime * 2 + angle) * 0.05;
-  });
+  const x = Math.cos(rad) * 2;
+  const z = Math.sin(rad) * 2;
 
   return (
-    <group position={[x, 0, z]}>
-      <mesh ref={ref}>
-        <boxGeometry args={[0.5, 0.3, 0.5]} />
-        <meshStandardMaterial
-          color={connected ? "#2563EB" : "#334155"}
-          emissive={connected ? "#2563EB" : "#000000"}
-          emissiveIntensity={connected ? 0.5 : 0}
-        />
-      </mesh>
-      <Text
-        position={[0, 0.35, 0]}
-        fontSize={0.12}
-        color={connected ? "#60A5FA" : "#64748b"}
-        anchorX="center"
-        anchorY="middle"
-      >
-        {label}
-      </Text>
-      {connected && (
-        <mesh position={[0, 0.5, 0]}>
-          <sphereGeometry args={[0.05, 8, 8]} />
-          <meshStandardMaterial
-            color="#60A5FA"
-            emissive="#2563EB"
-            emissiveIntensity={1}
+    <Float speed={1} floatIntensity={connected ? 0.12 : 0.05}>
+      <group position={[x, 0.12, z]}>
+        <RoundedBox args={[0.5, 0.2, 0.5]} radius={0.06} smoothness={4}>
+          <primitive
+            object={smoothMat(connected ? PALETTE.accent : PALETTE.white, {
+              emissive: connected ? PALETTE.accent : "#000000",
+              emissiveIntensity: connected ? 0.2 : 0,
+            })}
+            attach="material"
           />
-        </mesh>
-      )}
-    </group>
+        </RoundedBox>
+        <Text
+          position={[0, 0.28, 0]}
+          fontSize={0.09}
+          color={connected ? PALETTE.accent : PALETTE.muted}
+          anchorX="center"
+        >
+          {label}
+        </Text>
+      </group>
+    </Float>
   );
 }
 
-function ConnectionBeam({
-  angle,
-  active,
-}: {
-  angle: number;
-  active: boolean;
-}) {
+function ConnectionBeam({ angle, active }: { angle: number; active: boolean }) {
   const rad = (angle * Math.PI) / 180;
-  const x = Math.cos(rad) * 1.25;
-  const z = Math.sin(rad) * 1.25;
+  const x = Math.cos(rad) * 1;
+  const z = Math.sin(rad) * 1;
 
   return (
-    <mesh position={[x, 0.5, z]} rotation={[0, -rad + Math.PI / 2, Math.PI / 2]}>
-      <cylinderGeometry args={[0.02, 0.02, 1.25, 8]} />
+    <mesh position={[x, 0.1, z]} rotation={[0, -rad + Math.PI / 2, Math.PI / 2]}>
+      <cylinderGeometry args={[0.012, 0.012, 1, 12]} />
       <meshStandardMaterial
-        color={active ? "#2563EB" : "#1e293b"}
-        emissive={active ? "#2563EB" : "#000000"}
-        emissiveIntensity={active ? 0.8 : 0}
+        color={active ? PALETTE.accent : "#E2E8F0"}
+        emissive={active ? PALETTE.accent : "#000000"}
+        emissiveIntensity={active ? 0.5 : 0}
         transparent
-        opacity={active ? 0.9 : 0.2}
+        opacity={active ? 0.85 : 0.35}
       />
     </mesh>
   );
 }
 
+interface ERPCoreProps {
+  progress?: number;
+  rotationProgress?: number;
+}
+
 export default function ERPCore({ progress = 0, rotationProgress = 0 }: ERPCoreProps) {
   const coreRef = useRef<THREE.Group>(null);
-  const cubeRef = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
     if (!coreRef.current) return;
-    coreRef.current.rotation.y = rotationProgress * Math.PI * 2;
-    if (cubeRef.current) {
-      cubeRef.current.position.y = 0.5 + Math.sin(state.clock.elapsedTime) * 0.08;
-      cubeRef.current.rotation.y = state.clock.elapsedTime * 0.3;
-    }
+    coreRef.current.rotation.y = rotationProgress * Math.PI * 0.5 + Math.sin(state.clock.elapsedTime * 0.2) * 0.05;
   });
 
   const connectedCount = Math.floor(progress * DEPARTMENTS.length);
 
   return (
     <group ref={coreRef}>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-        <planeGeometry args={[8, 8]} />
-        <meshStandardMaterial color="#0A0E14" />
+      <mesh rotation={[-Math.PI / 2, 0, 0]}>
+        <circleGeometry args={[2.8, 64]} />
+        <primitive object={smoothMat(PALETTE.platform)} attach="material" />
       </mesh>
 
-      {/* ERP Core Cube */}
-      <group ref={cubeRef}>
-        <mesh>
-          <boxGeometry args={[0.8, 0.8, 0.8]} />
-          <meshStandardMaterial
-            color="#2563EB"
-            emissive="#2563EB"
-            emissiveIntensity={0.6}
-            metalness={0.8}
-            roughness={0.2}
-          />
-        </mesh>
-        <Text
-          position={[0, 0, 0.41]}
-          fontSize={0.1}
-          color="#ffffff"
-          anchorX="center"
-          anchorY="middle"
-        >
-          Kannanware
-        </Text>
-        <Text
-          position={[0, -0.12, 0.41]}
-          fontSize={0.06}
-          color="#93c5fd"
-          anchorX="center"
-          anchorY="middle"
-        >
-          ERP
-        </Text>
-        <pointLight color="#2563EB" intensity={2} distance={3} />
-      </group>
+      <Float speed={1.2} floatIntensity={0.15}>
+        <group position={[0, 0.35, 0]}>
+          <RoundedBox args={[0.65, 0.65, 0.65]} radius={0.1} smoothness={6}>
+            <primitive
+              object={smoothMat(PALETTE.accent, {
+                emissive: PALETTE.accent,
+                emissiveIntensity: 0.3,
+                metalness: 0.15,
+              })}
+              attach="material"
+            />
+          </RoundedBox>
+          <Text position={[0, 0, 0.33]} fontSize={0.08} color="#fff" anchorX="center">
+            Kannanware
+          </Text>
+          <Text position={[0, -0.1, 0.33]} fontSize={0.05} color="#BFDBFE" anchorX="center">
+            ERP
+          </Text>
+        </group>
+      </Float>
 
-      {/* Department connections */}
       {DEPARTMENTS.map((dept, i) => (
         <group key={dept.id}>
           <ConnectionBeam angle={dept.angle} active={i < connectedCount} />
-          <DepartmentNode
-            label={dept.label}
-            angle={dept.angle}
-            connected={i < connectedCount}
-          />
+          <DepartmentNode label={dept.label} angle={dept.angle} connected={i < connectedCount} />
         </group>
       ))}
     </group>

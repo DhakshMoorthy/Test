@@ -14,9 +14,8 @@ export default function GlassCard({
   return (
     <div
       className={cn(
-        "glass rounded-2xl p-6",
-        hover &&
-          "transition-all duration-500 hover:border-accent/30 hover:shadow-[0_0_40px_rgba(37,99,235,0.15)]",
+        "white-card p-6",
+        hover && "hover:border-accent/20",
         className
       )}
     >

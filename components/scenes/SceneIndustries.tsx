@@ -5,100 +5,93 @@ import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import dynamic from "next/dynamic";
+import SectionLayout from "@/components/ui/SectionLayout";
 import { INDUSTRIES } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SceneCanvas = dynamic(
-  () => import("@/components/three/SceneCanvas"),
-  { ssr: false }
-);
+const SceneCanvas = dynamic(() => import("@/components/three/SceneCanvas"), {
+  ssr: false,
+});
 const IndustryWorlds = dynamic(
   () => import("@/components/three/IndustryWorlds"),
   { ssr: false }
 );
 
 export default function SceneIndustries() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [industryIndex, setIndustryIndex] = useState(0);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    const el = sectionRef.current;
+    if (!el) return;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: `+=${INDUSTRIES.length * 100}%`,
-        pin: true,
-        scrub: 1,
-        onUpdate: (self) => {
-          const idx = Math.floor(self.progress * INDUSTRIES.length);
-          setIndustryIndex(Math.min(idx, INDUSTRIES.length - 1));
-        },
+    const trigger = ScrollTrigger.create({
+      trigger: el,
+      start: "top 60%",
+      end: "bottom 20%",
+      scrub: 0.5,
+      onUpdate: (self) => {
+        const idx = Math.floor(self.progress * INDUSTRIES.length);
+        setIndustryIndex(Math.min(idx, INDUSTRIES.length - 1));
       },
     });
 
-    return () => {
-      tl.scrollTrigger?.kill();
-      tl.kill();
-    };
+    return () => trigger.kill();
   }, []);
 
   const current = INDUSTRIES[industryIndex];
 
   return (
-    <section
-      id="industries"
-      ref={sectionRef}
-      className="scene-pin relative min-h-screen overflow-hidden bg-background"
-    >
-      <SceneCanvas camera={{ position: [0, 3, 4], fov: 50 }}>
-        <IndustryWorlds industryIndex={industryIndex} />
-      </SceneCanvas>
-
-      <div className="scene-content flex min-h-screen flex-col justify-between px-6 py-24">
-        <div>
-          <p className="text-muted mb-4 text-sm tracking-[0.3em] uppercase">
-            Scene 06
-          </p>
-          <h2 className="font-display max-w-2xl text-4xl font-bold md:text-5xl">
+    <div ref={sectionRef}>
+      <SectionLayout
+        id="industries"
+        badge="06 — Industry Modules"
+        title={
+          <>
             Built for{" "}
-            <span className="gradient-text">Every Industry</span>
-          </h2>
-        </div>
-
+            <span className="gradient-text">Your Industry</span>
+          </>
+        }
+        description="Purpose-built modules for manufacturing, retail, healthcare, and more — each tailored to your sector's unique workflows."
+        visual={
+          <SceneCanvas camera={{ position: [0, 2, 5], fov: 42 }}>
+            <IndustryWorlds industryIndex={industryIndex} />
+          </SceneCanvas>
+        }
+      >
         <motion.div
           key={current.id}
-          initial={{ opacity: 0, x: 30 }}
+          initial={{ opacity: 0, x: 12 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="glass glow-accent ml-auto max-w-md rounded-2xl p-6"
+          transition={{ duration: 0.35 }}
+          className="white-card p-5"
         >
           <div
-            className="mb-2 h-1 w-12 rounded-full"
+            className="mb-2 h-1 w-10 rounded-full"
             style={{ background: current.color }}
           />
-          <h3 className="font-display text-2xl font-bold">{current.label}</h3>
-          <p className="text-muted mt-2">{current.description}</p>
+          <h3 className="font-display text-lg font-bold">{current.label}</h3>
+          <p className="text-muted mt-1 text-sm">{current.description}</p>
         </motion.div>
 
-        <div className="flex gap-2 overflow-x-auto pb-2">
+        <div className="mt-4 flex flex-wrap gap-2">
           {INDUSTRIES.map((ind, i) => (
             <button
               key={ind.id}
-              className={`shrink-0 rounded-full px-4 py-2 text-sm transition-all duration-300 ${
+              type="button"
+              onClick={() => setIndustryIndex(i)}
+              className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-all duration-300 ${
                 i === industryIndex
-                  ? "bg-accent text-white glow-accent"
-                  : "glass text-muted"
+                  ? "bg-accent text-white shadow-[0_4px_16px_rgba(37,99,235,0.3)]"
+                  : "bg-surface text-muted ring-1 ring-border hover:text-accent"
               }`}
             >
               {ind.label}
             </button>
           ))}
         </div>
-      </div>
-    </section>
+      </SectionLayout>
+    </div>
   );
 }
