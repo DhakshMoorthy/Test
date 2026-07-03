@@ -1,52 +1,86 @@
 "use client";
 
-import { GOLD, SapScreen, Person, Forklift, Truck, DataFlow } from "./shared";
+import { GOLD, SapScreen, Person, Forklift, Truck, DataFlow, WarehouseRack, FactoryBuilding } from "./shared";
 
 export default function ERPIllustration({ progress = 1 }: { progress?: number }) {
-  const opacity = (connected: boolean) => (connected ? 1 : 0.35);
+  const conn = (threshold: number) => progress >= threshold;
+  const op = (t: number) => (conn(t) ? 1 : 0.28);
 
-  const depts = [
-    { label: "Finance", x: 120, y: 160, connected: progress > 0.1 },
-    { label: "HR", x: 180, y: 120, connected: progress > 0.25 },
-    { label: "Sales", x: 380, y: 120, connected: progress > 0.4 },
-    { label: "CRM", x: 440, y: 160, connected: progress > 0.55 },
-    { label: "Mfg", x: 440, y: 260, connected: progress > 0.7 },
-    { label: "Warehouse", x: 380, y: 300, connected: progress > 0.8 },
-    { label: "Procure", x: 120, y: 260, connected: progress > 0.9 },
+  const departments = [
+    { label: "Finance / CO",  x: 160,  y: 180, screen: "FI/CO", threshold: 0.05 },
+    { label: "HR / Payroll",  x: 160,  y: 340, screen: "HCM",   threshold: 0.2  },
+    { label: "Sales / CRM",   x: 420,  y: 120, screen: "SD/CRM", threshold: 0.35 },
+    { label: "Manufacturing", x: 760,  y: 130, screen: "PP/QM",  threshold: 0.5  },
+    { label: "Warehouse",     x: 980,  y: 240, screen: "WM/EWM", threshold: 0.65 },
+    { label: "Procurement",   x: 980,  y: 380, screen: "MM/SRM", threshold: 0.78 },
+    { label: "Analytics/BI",  x: 580,  y: 460, screen: "SAC",    threshold: 0.9  },
   ];
 
   return (
-    <svg viewBox="0 0 560 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-      <ellipse cx="280" cy="220" rx="200" ry="90" fill={GOLD.pale} stroke={GOLD.light} strokeWidth="1" />
+    <svg viewBox="0 0 1200 560" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <radialGradient id="erpGlow" cx="50%" cy="50%" r="42%">
+          <stop offset="0%" stopColor={GOLD.primary} stopOpacity="0.22" />
+          <stop offset="100%" stopColor={GOLD.primary} stopOpacity="0" />
+        </radialGradient>
+      </defs>
 
-      {depts.map((d) => (
-        <g key={d.label} opacity={opacity(d.connected)}>
-          <rect x={d.x - 30} y={d.y - 20} width="60" height="40" rx="6" fill="#fff" stroke={d.connected ? GOLD.primary : "#D1D5DB"} strokeWidth="1.5" />
-          <SapScreen x={d.x - 20} y={d.y - 14} w={40} h={24} label={d.label.slice(0, 3).toUpperCase()} />
-          <text x={d.x} y={d.y + 28} textAnchor="middle" fill="#64748B" fontSize="6" fontWeight="600">{d.label}</text>
-          {d.connected && <DataFlow x1={d.x} y1={d.y} x2={280} y2={210} />}
+      <ellipse cx="560" cy="280" rx="440" ry="190" fill="url(#erpGlow)" />
+      <ellipse cx="560" cy="380" rx="420" ry="90" fill="#FFF8EB" stroke={GOLD.light} strokeWidth="1" opacity="0.6" />
+
+      {/* Department nodes */}
+      {departments.map((d) => (
+        <g key={d.label} opacity={op(d.threshold)}>
+          <rect x={d.x - 65} y={d.y - 30} width="130" height="60" rx="8" fill="#fff"
+            stroke={conn(d.threshold) ? GOLD.primary : "#E5E7EB"} strokeWidth={conn(d.threshold) ? 2 : 1} />
+          <SapScreen x={d.x - 55} y={d.y - 24} w={75} h={40} label={d.screen} />
+          <text x={d.x} y={d.y + 42} textAnchor="middle" fill="#64748B" fontSize="7" fontWeight="700">{d.label}</text>
+          {conn(d.threshold) && <DataFlow x1={d.x} y1={d.y} x2={560} y2={280} />}
         </g>
       ))}
 
+      {/* Central hub */}
       <g className="animate-float">
-        <rect x="240" y="175" width="80" height="70" rx="10" fill={GOLD.primary} />
-        <rect x="248" y="183" width="64" height="54" rx="8" fill={GOLD.dark} />
-        <text x="280" y="205" textAnchor="middle" fill="#fff" fontSize="9" fontWeight="800">KANNANWARE</text>
-        <text x="280" y="220" textAnchor="middle" fill={GOLD.pale} fontSize="7" fontWeight="600">SAP S/4HANA</text>
-        <text x="280" y="235" textAnchor="middle" fill="#fff" fontSize="5" opacity="0.8">Unified Core</text>
+        <circle cx="560" cy="280" r="88" fill={GOLD.primary} opacity="0.15" />
+        <rect x="490" y="228" width="140" height="104" rx="16" fill={GOLD.primary} />
+        <rect x="500" y="238" width="120" height="84" rx="12" fill={GOLD.dark} />
+        <text x="560" y="268" textAnchor="middle" fill="#fff" fontSize="14" fontWeight="900">KANNANWARE</text>
+        <text x="560" y="286" textAnchor="middle" fill={GOLD.pale} fontSize="9" fontWeight="700">SAP S/4HANA Cloud</text>
+        <text x="560" y="302" textAnchor="middle" fill={GOLD.glow} fontSize="7">● Real-time · Unified · AI-First</text>
       </g>
 
-      <Person x={200} y={320} variant="office" />
-      <Person x={320} y={318} variant="manager" facing="left" />
-      <Forklift x={250} y={300} />
-      <Truck x={350} y={310} />
+      {/* Joule AI */}
+      {conn(0.5) && (
+        <g>
+          <circle cx="560" cy="175" r="36" fill="#0F0F0F" stroke={GOLD.primary} strokeWidth="2.5" />
+          <text x="560" y="171" textAnchor="middle" fill={GOLD.primary} fontSize="9" fontWeight="800">SAP JOULE</text>
+          <text x="560" y="184" textAnchor="middle" fill="#fff" fontSize="7">AI Copilot</text>
+          <line x1="560" y1="211" x2="560" y2="228" stroke={GOLD.primary} strokeWidth="2" strokeDasharray="4 3" />
+        </g>
+      )}
 
-      {progress > 0.5 && (
+      {/* Ground scene characters */}
+      <Person x={300}  y={450} variant="manager" />
+      <Person x={380}  y={452} variant="office" facing="left" />
+      <Person x={680}  y={450} variant="worker" />
+      <Person x={750}  y={450} variant="worker" facing="left" />
+      <Forklift x={500} y={440} />
+      <Truck x={600} y={440} />
+
+      {/* Warehouse on right */}
+      {conn(0.65) && (
         <>
-          <circle cx="280" cy="140" r="16" fill="#090909" stroke={GOLD.primary} strokeWidth="2" />
-          <text x="280" y="144" textAnchor="middle" fill={GOLD.primary} fontSize="5" fontWeight="700">AI</text>
+          <WarehouseRack x={1050} y={260} />
+          <WarehouseRack x={1110} y={260} />
         </>
       )}
+      {/* Factory on right top */}
+      {conn(0.5) && <FactoryBuilding x={840} y={90} w={120} h={80} />}
+
+      {/* Progress glow ring */}
+      <circle cx="560" cy="280" r="115" fill="none" stroke={GOLD.primary} strokeWidth="1.5" strokeDasharray="720"
+        strokeDashoffset={720 - 720 * progress} strokeLinecap="round"
+        style={{ transformOrigin: "560px 280px", transform: "rotate(-90deg)" }} opacity="0.6" />
     </svg>
   );
 }
