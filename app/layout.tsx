@@ -1,52 +1,47 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import { Bebas_Neue, Inter } from "next/font/google";
+import Providers from "@/components/providers/Providers";
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const bebas = Bebas_Neue({
+  weight: "400",
   subsets: ["latin"],
+  variable: "--font-bebas",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Wrightfully Fit | Fitness Beyond the Gym",
   description:
-    "Personal training, luxury wellness retreats, and premium wellness products in Turks & Caicos. Train at our Grace Bay gym or immerse yourself in a 4-day fitness retreat.",
+    "Personal training, luxury wellness retreats, and premium wellness products in Turks & Caicos. Grace Bay gym at Saltmills Plaza.",
   keywords: [
     "Wrightfully Fit",
-    "personal training",
-    "wellness retreats",
     "Grace Bay gym",
-    "Turks and Caicos fitness",
-    "luxury wellness",
+    "wellness retreats",
+    "personal training Turks and Caicos",
   ],
   openGraph: {
     title: "Wrightfully Fit | Fitness Beyond the Gym",
     description:
       "Personal training, luxury wellness retreats, and premium wellness products in Turks & Caicos.",
     type: "website",
-    locale: "en_US",
     siteName: "Wrightfully Fit",
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body
-        className={`${playfair.variable} ${dmSans.variable} font-sans antialiased`}
-      >
-        {children}
+    <html lang="en" className={`${bebas.variable} ${inter.variable}`}>
+      <body className="font-body antialiased">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
