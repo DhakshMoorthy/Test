@@ -1,39 +1,39 @@
 "use client";
 
-import { motion, useInView, useSpring, useTransform } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface AnimatedCounterProps {
   value: number;
   suffix?: string;
-  prefix?: string;
   className?: string;
 }
 
 export default function AnimatedCounter({
   value,
   suffix = "",
-  prefix = "",
   className,
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const spring = useSpring(0, { duration: 2000, bounce: 0 });
-  const display = useTransform(spring, (current) =>
-    Math.round(current).toString()
-  );
 
   useEffect(() => {
-    if (isInView) {
-      spring.set(value);
-    }
-  }, [isInView, spring, value]);
+    const el = ref.current;
+    if (!el) return;
 
-  return (
-    <span ref={ref} className={className}>
-      {prefix}
-      <motion.span>{display}</motion.span>
-      {suffix}
-    </span>
-  );
+    const obj = { val: 0 };
+    gsap.to(obj, {
+      val: value,
+      duration: 2,
+      ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 85%" },
+      onUpdate: () => {
+        el.textContent = Math.round(obj.val) + suffix;
+      },
+    });
+  }, [value, suffix]);
+
+  return <span ref={ref} className={className}>0{suffix}</span>;
 }
