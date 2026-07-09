@@ -194,3 +194,13 @@ body {
   white-space: nowrap;
   border: 0;
 }
+
+.hero-topo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900' viewBox='0 0 900 900'%3E%3Cg fill='none' stroke='%23f5c518' stroke-width='1' opacity='0.22'%3E%3Cpath d='M0 120 Q220 80 420 140 T900 100'/%3E%3Cpath d='M0 220 Q240 180 460 240 T900 200'/%3E%3Cpath d='M0 320 Q200 280 440 340 T900 300'/%3E%3Cpath d='M0 420 Q260 380 500 440 T900 400'/%3E%3Cpath d='M0 520 Q220 480 480 540 T900 500'/%3E%3Cpath d='M0 620 Q280 580 520 640 T900 600'/%3E%3Cpath d='M0 720 Q240 680 460 740 T900 700'/%3E%3Cpath d='M0 820 Q200 780 420 840 T900 800'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover;
+  pointer-events: none;
+}

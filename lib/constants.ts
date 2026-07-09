@@ -23,34 +23,34 @@ export const NAV = [
   { label: "Contact", href: "#contact" },
 ] as const;
 
-export const PILLARS = [
+export const HERO_SLIDES = [
   {
     id: "gym",
-    label: "01 — Gym",
-    title: "POWER.\nPERFORMANCE.\nPRECISION.",
+    label: "The Gym",
+    title: "GET FIT IN PARADISE.",
     description:
-      "Personal training, group classes, functional fitness, strength training, and nutrition coaching at our state-of-the-art Grace Bay gym.",
-    cta: "Explore Gym",
+      "Personal training, group fitness, and a premium workout experience in the heart of Grace Bay.",
+    cta: "Explore the Gym",
     href: "#programs",
-    image: "/assets/hero/trainer.jpg",
+    image: "/assets/hero/gym.jpg",
   },
   {
     id: "retreat",
-    label: "02 — Wellness Retreat",
-    title: "RETREAT.\nRELAX.\nRESULTS.",
+    label: "Wellness Retreats",
+    title: "RETREAT. RELAX. RESULTS.",
     description:
-      "Immersive 4-day experiences — beach workouts, yoga, recovery, healthy cuisine, island adventures, and luxury accommodations.",
-    cta: "Discover Retreat",
+      "Immersive wellness retreats to reset your body, mind, and spirit in a beautiful island setting.",
+    cta: "Explore Retreats",
     href: "#retreats",
-    image: "/assets/hero/wellness.jpg",
+    image: "/assets/hero/retreats.jpg",
   },
   {
     id: "shop",
-    label: "03 — Shop",
-    title: "GEAR UP.\nSHOW UP.\nLEVEL UP.",
+    label: "Store & Merch",
+    title: "WEAR THE LIFESTYLE. LIVE FIT.",
     description:
-      "Premium apparel, accessories, supplements, and branded wellness products for those who demand excellence.",
-    cta: "Visit Shop",
+      "Premium apparel, essentials, and Wrightfully gear built for your fitness journey.",
+    cta: "Shop Merch",
     href: "#shop",
     image: "/assets/hero/shop.jpg",
   },

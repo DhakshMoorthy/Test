@@ -34,7 +34,13 @@ export default function Header() {
         )}
       >
         <div className="container-xl flex items-center justify-between">
-          <Link href="#home" className="relative z-10 shrink-0">
+          <Link
+            href="#home"
+            className={cn(
+              "relative z-10 shrink-0 transition-opacity duration-300",
+              scrolled ? "opacity-100" : "pointer-events-none opacity-0 lg:opacity-0"
+            )}
+          >
             <Image
               src={SITE.logo}
               alt={SITE.name}
@@ -45,7 +51,13 @@ export default function Header() {
             />
           </Link>
 
-          <nav className="hidden items-center gap-10 lg:flex" aria-label="Main">
+          <nav
+            className={cn(
+              "hidden items-center gap-10 lg:flex",
+              !scrolled && "ml-auto"
+            )}
+            aria-label="Main"
+          >
             {NAV.map((item) => (
               <Link
                 key={item.href}

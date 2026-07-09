@@ -3,8 +3,7 @@ import Footer from "@/components/layout/Footer";
 import MobileCTA from "@/components/layout/MobileCTA";
 import InstagramTab from "@/components/layout/InstagramTab";
 import LoadingScreen from "@/components/layout/LoadingScreen";
-import CinematicHero from "@/components/sections/CinematicHero";
-import PillarsShowcase from "@/components/sections/PillarsShowcase";
+import SplitHero from "@/components/sections/SplitHero";
 import WhyWrightfully from "@/components/sections/WhyWrightfully";
 import Programs from "@/components/sections/Programs";
 import Transformations from "@/components/sections/Transformations";
@@ -24,8 +23,7 @@ export default function Home() {
       <LoadingScreen />
       <Header />
       <main className="pb-20 lg:pb-0">
-        <CinematicHero />
-        <PillarsShowcase />
+        <SplitHero />
         <WhyWrightfully />
         <Programs />
         <Transformations />
