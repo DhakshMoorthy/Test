@@ -1,37 +1,45 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import Founder from "@/components/Founder";
-import Programs from "@/components/Programs";
-import ShopMerch from "@/components/ShopMerch";
-import Transformations from "@/components/Transformations";
-import Testimonials from "@/components/Testimonials";
-import InstagramFeed from "@/components/InstagramFeed";
-import BlogPreview from "@/components/BlogPreview";
-import Newsletter from "@/components/Newsletter";
-import ContactBanner from "@/components/ContactBanner";
-import Footer from "@/components/Footer";
-import FloatingInstagramButton from "@/components/FloatingInstagramButton";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import MobileCTA from "@/components/layout/MobileCTA";
+import InstagramTab from "@/components/layout/InstagramTab";
+import LoadingScreen from "@/components/layout/LoadingScreen";
+import SplitHero from "@/components/sections/SplitHero";
+import WhyWrightfully from "@/components/sections/WhyWrightfully";
+import Programs from "@/components/sections/Programs";
+import Transformations from "@/components/sections/Transformations";
+import Coach from "@/components/sections/Coach";
+import Method from "@/components/sections/Method";
+import Blog from "@/components/sections/Blog";
+import Nutrition from "@/components/sections/Nutrition";
+import Retreat from "@/components/sections/Retreat";
+import Shop from "@/components/sections/Shop";
+import InstagramFeed from "@/components/sections/InstagramFeed";
+import FAQ from "@/components/sections/FAQ";
+import FinalCTA from "@/components/sections/FinalCTA";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
-      <main>
-        <Hero />
-        <WhyChooseUs />
-        <Founder />
+      <LoadingScreen />
+      <Header />
+      <main className="pb-20 lg:pb-0">
+        <SplitHero />
+        <WhyWrightfully />
         <Programs />
-        <ShopMerch />
         <Transformations />
-        <Testimonials />
+        <Coach />
+        <Method />
+        <Blog />
+        <Nutrition />
+        <Retreat />
+        <Shop />
         <InstagramFeed />
-        <BlogPreview />
-        <Newsletter />
-        <ContactBanner />
+        <FAQ />
+        <FinalCTA />
       </main>
       <Footer />
-      <FloatingInstagramButton />
+      <InstagramTab />
+      <MobileCTA />
     </>
   );
 }
