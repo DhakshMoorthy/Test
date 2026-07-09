@@ -11,7 +11,6 @@ import { HiArrowRight } from "react-icons/hi";
 
 import "swiper/css";
 import "swiper/css/effect-fade";
-import "swiper/css/pagination";
 
 const Swiper = dynamic(
   () => import("swiper/react").then((mod) => mod.Swiper),
@@ -76,12 +75,8 @@ export default function SplitHero() {
         {HERO_SLIDES.map((item, i) => (
           <SwiperSlide key={item.id}>
             <div className="relative h-full w-full">
-              <div
-                className="absolute inset-y-0 right-0 w-full lg:w-[62%]"
-                style={{
-                  clipPath: "polygon(18% 0, 100% 0, 100% 100%, 0 100%)",
-                }}
-              >
+              {/* Full-bleed background image */}
+              <div className="absolute inset-0">
                 <Image
                   src={item.image}
                   alt={item.title}
@@ -89,16 +84,17 @@ export default function SplitHero() {
                   priority={i === 0}
                   quality={90}
                   className="object-cover object-center"
-                  sizes="(max-width: 1024px) 100vw, 62vw"
+                  sizes="100vw"
                 />
-                <div className="absolute inset-0 bg-black/20 lg:bg-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/35 to-transparent lg:from-black/45 lg:via-transparent" />
+                <div className="absolute inset-0 bg-black/25" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/55 to-black/10 lg:from-black/92 lg:via-black/45 lg:to-transparent" />
               </div>
 
+              {/* Desktop diagonal accent */}
               <div
                 className="pointer-events-none absolute z-20 hidden h-[130%] w-[3px] bg-gold shadow-[0_0_20px_rgba(245,197,24,0.6)] lg:block"
                 style={{
-                  left: "38%",
+                  left: "42%",
                   top: "-15%",
                   transform: "rotate(7deg)",
                   transformOrigin: "top center",
@@ -106,9 +102,8 @@ export default function SplitHero() {
                 aria-hidden
               />
 
-              <div className="hero-topo relative z-10 flex h-full w-full flex-col lg:w-[48%]">
-                <div className="absolute inset-0 bg-black/90 lg:bg-black/95" />
-
+              {/* Left content panel */}
+              <div className="hero-topo relative z-10 flex h-full w-full max-w-xl flex-col sm:max-w-2xl lg:max-w-[46%]">
                 <Link
                   href="#home"
                   className="relative z-10 px-6 pt-24 sm:px-10 sm:pt-28 lg:px-14 lg:pt-10"
@@ -139,7 +134,7 @@ export default function SplitHero() {
                         {slide.title}
                       </h1>
                       <div className="mt-5 h-px w-16 bg-gold" />
-                      <p className="mt-6 max-w-md text-base leading-relaxed text-white/75 sm:text-lg">
+                      <p className="mt-6 max-w-md text-base leading-relaxed text-white/80 sm:text-lg">
                         {slide.description}
                       </p>
                       <Link

@@ -9,7 +9,7 @@ import Programs from "@/components/sections/Programs";
 import Transformations from "@/components/sections/Transformations";
 import Coach from "@/components/sections/Coach";
 import Method from "@/components/sections/Method";
-import Gallery from "@/components/sections/Gallery";
+import Blog from "@/components/sections/Blog";
 import Nutrition from "@/components/sections/Nutrition";
 import Retreat from "@/components/sections/Retreat";
 import Shop from "@/components/sections/Shop";
@@ -29,7 +29,7 @@ export default function Home() {
         <Transformations />
         <Coach />
         <Method />
-        <Gallery />
+        <Blog />
         <Nutrition />
         <Retreat />
         <Shop />

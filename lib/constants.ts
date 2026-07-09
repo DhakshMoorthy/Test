@@ -19,6 +19,7 @@ export const NAV = [
   { label: "Programs", href: "#programs" },
   { label: "Method", href: "#method" },
   { label: "Retreats", href: "#retreats" },
+  { label: "Blog", href: "#blog" },
   { label: "Shop", href: "#shop" },
   { label: "Contact", href: "#contact" },
 ] as const;
@@ -52,7 +53,40 @@ export const HERO_SLIDES = [
       "Premium apparel, essentials, and Wrightfully gear built for your fitness journey.",
     cta: "Shop Merch",
     href: "#shop",
-    image: "/assets/hero/shop.jpg",
+    image: "/assets/merch/group.jpg",
+  },
+] as const;
+
+export const BLOG_POSTS = [
+  {
+    slug: "train-in-paradise",
+    title: "Why Grace Bay Is the Ultimate Fitness Destination",
+    excerpt:
+      "From ocean-view workouts to world-class coaching, discover why training in Turks & Caicos elevates every rep.",
+    date: "June 12, 2026",
+    category: "Training",
+    image: `${CDN}/0280f3e4-d5c3-4c20-956a-055a2b839aec/group2.jpg?format=1200w`,
+    href: "https://www.wrightfullyfit.com/blog",
+  },
+  {
+    slug: "wellness-retreat-guide",
+    title: "What to Expect at a Wrightfully Fit Retreat",
+    excerpt:
+      "Four days of beach workouts, yoga, recovery, and island adventures — a complete guide to your reset.",
+    date: "May 28, 2026",
+    category: "Retreats",
+    image: `${CDN}/1724156555197-FZXT0RBYNRL4XVMYFGT9/unsplash-image-li4dxZ0KYRw.jpg?format=1200w`,
+    href: "https://www.wrightfullyfit.com/blog",
+  },
+  {
+    slug: "nutrition-island-living",
+    title: "Nutrition Tips for Active Island Living",
+    excerpt:
+      "How our nutrition counsellors help clients fuel performance while enjoying the best of Turks & Caicos.",
+    date: "May 10, 2026",
+    category: "Nutrition",
+    image: `${CDN}/81b3d0cb-d4e9-4af5-856d-83cdb435f9e6/_MG_6124-Edit.jpg?format=1200w`,
+    href: "https://www.wrightfullyfit.com/blog",
   },
 ] as const;
 
@@ -178,15 +212,6 @@ export const COACH = {
     { year: "Today", event: "Training locals & visitors daily" },
   ],
 } as const;
-
-export const GALLERY = [
-  { src: "/assets/gallery/gym-1.jpg", alt: "Personal training session" },
-  { src: "/assets/gallery/gym-2.jpg", alt: "Strength training at gym" },
-  { src: "/assets/gallery/retreat-1.jpg", alt: "Beach wellness" },
-  { src: "/assets/gallery/retreat-2.jpg", alt: "Outdoor recovery" },
-  { src: `${CDN}/0280f3e4-d5c3-4c20-956a-055a2b839aec/group2.jpg?format=1200w`, alt: "Group fitness" },
-  { src: `${CDN}/81b3d0cb-d4e9-4af5-856d-83cdb435f9e6/_MG_6124-Edit.jpg?format=1200w`, alt: "Coaching session" },
-] as const;
 
 export const NUTRITION = {
   title: "Fuel Your Performance",
